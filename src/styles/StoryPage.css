@@ -61,8 +61,16 @@
 .story__section--reverse .story__img-wrap{ order:2 }
 .story__section--reverse .story__text{ order:1 }
 .story__section:last-of-type{ border-bottom:none }
-.story__img-wrap{ border-radius:20px; overflow:hidden; box-shadow:0 16px 48px rgba(14,26,22,.1) }
-.story__img{ width:100%; display:block; transition:transform .5s ease }
+.story__img-wrap{
+  border-radius:20px; overflow:hidden;
+  box-shadow:0 16px 48px rgba(14,26,22,.1);
+  aspect-ratio: 4 / 3;
+}
+.story__img{
+  width:100%; height:100%; display:block;
+  object-fit:cover; object-position:center;
+  transition:transform .5s ease;
+}
 .story__img-wrap:hover .story__img{ transform:scale(1.03) }
 .story__title{
   font-family:var(--serif); font-size:clamp(1.4rem,3vw,2rem);
