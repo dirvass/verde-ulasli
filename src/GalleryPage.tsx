@@ -76,8 +76,8 @@ const MEDIA: Media[] = [
   { id: "con-izolasyon-sonra", type: "image", src: "/media/insaat-sureci/izolasyon_sonrasi.jpg", alt: "After insulation", category: "construction" },
 
   // ─── VIDEOS ───
-  { id: "vid-1", type: "video", src: "/media/videolar/villa-video-1.mp4", alt: "Villa site tour 1", category: "construction" },
-  { id: "vid-2", type: "video", src: "/media/videolar/villa-video-2.mp4", alt: "Villa site tour 2", category: "construction" },
+  { id: "vid-1", type: "video", src: "/media/videolar/villa-video-1.mp4", poster: "/media/videolar/villa-video-1-poster.jpg", alt: "Villa site tour 1", category: "construction" },
+  { id: "vid-2", type: "video", src: "/media/videolar/villa-video-2.mp4", poster: "/media/videolar/villa-video-2-poster.jpg", alt: "Villa site tour 2", category: "construction" },
   { id: "vid-3", type: "video", src: "/media/videolar/villa-video-3.mp4", poster: "/media/videolar/villa-video-3-poster.jpg", alt: "Villa interior walkthrough", category: "interior" },
   { id: "vid-4", type: "video", src: "/media/videolar/villa-video-4.mp4", poster: "/media/videolar/villa-video-4-poster.jpg", alt: "Construction progress walkthrough", category: "construction" },
 ];
@@ -94,11 +94,17 @@ function MediaThumb({ item }: { item: Media }) {
   if (item.type === "image") {
     return <img className="gallery-card__img" src={item.src} alt={item.alt} loading="lazy" onError={() => setErrored(true)} />;
   }
+  // For videos with a poster, render a lightweight <img> thumbnail instead
+  // of a <video> element. iOS Safari is unreliable about painting the poster
+  // on a muted preload=metadata <video>, which made mobile cards look empty.
+  const poster = "poster" in item ? item.poster : undefined;
+  if (poster) {
+    return <img className="gallery-card__img" src={poster} alt={item.alt} loading="lazy" onError={() => setErrored(true)} />;
+  }
   return (
     <video
       className="gallery-card__img"
       src={item.src}
-      poster={"poster" in item ? item.poster : undefined}
       muted
       preload="metadata"
       playsInline
