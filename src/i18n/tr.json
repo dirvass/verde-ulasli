@@ -352,7 +352,9 @@
     "catalogueTitle": "Kataloğumuzu Keşfedin",
     "catalogueDesc": "Verde Ulaşlı'nın hikâyesini, mekânlarını ve deneyimlerini detaylıca anlatan lüks kataloğumuzu indirin.",
     "catalogueTR": "Türkçe Katalog",
-    "catalogueEN": "English Catalogue"
+    "catalogueEN": "English Catalogue",
+    "mute": "Sesi kapat",
+    "unmute": "Sesi aç"
   },
   "investor": {
     "heroBadge": "Yatırımcı Portalı",

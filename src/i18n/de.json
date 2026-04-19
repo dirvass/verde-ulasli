@@ -352,7 +352,9 @@
     "catalogueTitle": "Entdecken Sie unseren Katalog",
     "catalogueDesc": "Laden Sie unseren Luxuskatalog herunter — mit der Geschichte, den Räumen und Erlebnissen von Verde Ulaşlı.",
     "catalogueTR": "Türkçe Katalog",
-    "catalogueEN": "English Catalogue"
+    "catalogueEN": "English Catalogue",
+    "mute": "Stumm schalten",
+    "unmute": "Ton einschalten"
   },
   "investor": {
     "heroBadge": "Investorenportal",

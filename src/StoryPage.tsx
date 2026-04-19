@@ -23,7 +23,9 @@ export default function StoryPage() {
   usePageMeta("meta.storyTitle", "meta.storyDesc");
   const [vis, setVis] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
+  const [muted, setMuted] = useState(true);
   const videoRef = React.useRef<HTMLDivElement | null>(null);
+  const videoElRef = React.useRef<HTMLVideoElement | null>(null);
   const { t, locale } = useLanguage();
   useEffect(() => { const tm = setTimeout(() => setVis(true), 100); return () => clearTimeout(tm); }, []);
 
@@ -73,10 +75,11 @@ export default function StoryPage() {
           <div className="story__video-wrap">
             {videoReady ? (
               <video
+                ref={videoElRef}
                 className="story__video"
-                src="/media/videolar/insaat-villa-zeytin-deniz.mp4"
+                src="/media/videolar/insaat-villa-zeytin-deniz-v2.mp4"
                 autoPlay
-                muted
+                muted={muted}
                 loop
                 playsInline
                 preload="metadata"
@@ -94,6 +97,35 @@ export default function StoryPage() {
               <span className="story__video-label">{t("story.s9Title")}</span>
               <p className="story__video-quote">{t("story.heroSub")}</p>
             </div>
+            {videoReady && (
+              <button
+                type="button"
+                className="story__video-sound"
+                aria-label={muted ? t("story.unmute") : t("story.mute")}
+                onClick={() => {
+                  const v = videoElRef.current;
+                  if (!v) return;
+                  const next = !muted;
+                  setMuted(next);
+                  v.muted = next;
+                  if (!next) { v.play().catch(() => {}); }
+                }}
+              >
+                {muted ? (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                    <line x1="23" y1="9" x2="17" y2="15" />
+                    <line x1="17" y1="9" x2="23" y2="15" />
+                  </svg>
+                ) : (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                  </svg>
+                )}
+              </button>
+            )}
           </div>
         </section>
 

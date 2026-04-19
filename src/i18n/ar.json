@@ -354,7 +354,9 @@
     "catalogueTitle": "استكشف كتالوجنا",
     "catalogueDesc": "حمّل كتالوجنا الفاخر الذي يفصّل قصة وأماكن وتجارب فيردي أولاشلي.",
     "catalogueTR": "Türkçe Katalog",
-    "catalogueEN": "English Catalogue"
+    "catalogueEN": "English Catalogue",
+    "mute": "كتم الصوت",
+    "unmute": "تشغيل الصوت"
   },
   "experience": {
     "badge": "التجارب",

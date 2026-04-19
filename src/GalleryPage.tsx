@@ -60,8 +60,8 @@ const MEDIA: Media[] = [
 
   // ─── CONSTRUCTION PROCESS (insaat-sureci) ───
   // New site-visit videos lead the section for prominence.
-  { id: "vid-villa-zeytin-deniz", type: "video", src: "/media/videolar/insaat-villa-zeytin-deniz.mp4", poster: "/media/videolar/insaat-villa-zeytin-deniz-poster.jpg", alt: "Villa shell with olive tree and sea view", category: "construction" },
-  { id: "vid-arazi-zeytin", type: "video", src: "/media/videolar/insaat-arazi-zeytin.mp4", poster: "/media/videolar/insaat-arazi-zeytin-poster.jpg", alt: "Walking the land — olive trees and terraced grounds", category: "construction" },
+  { id: "vid-villa-zeytin-deniz", type: "video", src: "/media/videolar/insaat-villa-zeytin-deniz-v2.mp4", poster: "/media/videolar/insaat-villa-zeytin-deniz-poster.jpg", alt: "Villa shell with olive tree and sea view", category: "construction" },
+  { id: "vid-arazi-zeytin", type: "video", src: "/media/videolar/insaat-arazi-zeytin-v2.mp4", poster: "/media/videolar/insaat-arazi-zeytin-poster.jpg", alt: "Walking the land — olive trees and terraced grounds", category: "construction" },
   { id: "vid-cevre-manzara", type: "video", src: "/media/videolar/insaat-cevre-manzara.mp4", poster: "/media/videolar/insaat-cevre-manzara-poster.jpg", alt: "Forested slopes and Marmara panorama from the site", category: "construction" },
   { id: "con-on-cephe-deniz", type: "image", src: "/media/insaat-sureci/insaat-on-cephe-deniz-manzarasi.jpg", alt: "Twin villa shells facing the sea — golden hour", category: "construction", featured: true },
   { id: "con-foto3", type: "image", src: "/media/insaat-sureci/insaat-fotograf-3.jpg", alt: "Foundation formwork with sea panorama", category: "construction", featured: true },
