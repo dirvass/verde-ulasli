@@ -29,6 +29,7 @@ const MEDIA: Media[] = [
   { id: "ext2-bahce-patika", type: "image", src: "/media/dis-mekan/bahce-peyzaj-patika-gunduz-render.jpg", alt: "Garden landscape with pathways", category: "exterior", featured: true },
   { id: "ext2-havuz-satranc-sauna", type: "image", src: "/media/dis-mekan/havuz-satranc-sauna-gunduz-render.jpg", alt: "Pool, chess garden & sauna pavilion", category: "exterior", featured: true },
   { id: "ext2-on-cephe-mangal", type: "image", src: "/media/dis-mekan/on-cephe-havuz-mangal-gunduz-render.jpg", alt: "Front facade with pool & outdoor kitchen", category: "exterior" },
+  { id: "ext2-sauna-jakuzi-gece", type: "image", src: "/media/dis-mekan/sauna-jakuzi-gece-render-v2.jpg", alt: "Sauna cabin & jacuzzi terrace — night", category: "exterior" },
   { id: "ext2-kus-bakisi-otopark", type: "image", src: "/media/dis-mekan/kus-bakisi-otopark-gunduz-render.jpg", alt: "Bird's eye — parking & entrance", category: "exterior" },
   { id: "ext2-kus-bakisi-deniz", type: "image", src: "/media/dis-mekan/kus-bakisi-deniz-gunduz-render.jpg", alt: "Bird's eye with sea view", category: "exterior" },
   { id: "ext2-giris-deniz-golden", type: "image", src: "/media/dis-mekan/giris-avlusu-deniz-golden-hour-render.jpg", alt: "Entrance courtyard — golden hour, sea view", category: "exterior" },
