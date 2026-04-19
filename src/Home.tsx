@@ -24,12 +24,27 @@ const DISTANCES = [
 export default function Home() {
   usePageMeta("meta.homeTitle", "meta.homeDesc");
   const [visible, setVisible] = useState(false);
+  const [showStickyCta, setShowStickyCta] = useState(false);
   const { t } = useLanguage();
 
   useEffect(() => {
     const timer = setTimeout(() => setVisible(true), 100);
-    return () => clearTimeout(timer);
+    const onScroll = () => {
+      const y = window.scrollY;
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      setShowStickyCta(h > 0 && y / h > 0.4);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
+
+  const scrollToAgro = () => {
+    document.getElementById("home-agro")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   return (
     <>
@@ -44,41 +59,53 @@ export default function Home() {
           <p className="home-hero__tagline">{t("home.tagline")}</p>
           <div className="home-hero__divider" />
           <p className="home-hero__subtitle">{t("home.subtitle")}</p>
-          {/* CTA buttons hidden on initial view — reserve available in nav + closing section */}
+          <div className="home-hero__actions">
+            <Link to="/book" className="home-hero__cta home-hero__cta--primary">
+              {t("home.ctaReserve")}
+            </Link>
+            <Link to="/story" className="home-hero__cta home-hero__cta--ghost">
+              {t("home.ctaStory")}
+            </Link>
+          </div>
         </div>
-        <div className="home-hero__scroll" aria-hidden="true">
+        <button
+          type="button"
+          className="home-hero__scroll"
+          onClick={scrollToAgro}
+          aria-label={t("home.scroll")}
+        >
           <span>{t("home.scroll")}</span>
-          <div className="home-hero__scroll-line" />
-        </div>
+          <div className="home-hero__scroll-line" aria-hidden="true" />
+        </button>
       </header>
 
       {/* ═══ FEATURES STRIP ═══ */}
       <section className={`home-features ${visible ? "home-features--visible" : ""}`}>
         <div className="home-features__grid">
           <div className="home-features__item">
-            <span className="home-features__number">5,500m&sup2;</span>
+            <span className="home-features__number tnum">5 500&nbsp;m&sup2;</span>
             <span className="home-features__label">{t("home.garden")}</span>
           </div>
           <div className="home-features__divider" />
           <div className="home-features__item">
-            <span className="home-features__number">10&times;5m</span>
+            <span className="home-features__number tnum">10 × 5&nbsp;m</span>
             <span className="home-features__label">{t("home.pool")}</span>
           </div>
           <div className="home-features__divider" />
           <div className="home-features__item">
-            <span className="home-features__number">3</span>
+            <span className="home-features__number tnum">3</span>
             <span className="home-features__label">{t("home.bedrooms")}</span>
           </div>
           <div className="home-features__divider" />
           <div className="home-features__item">
-            <span className="home-features__number">12</span>
+            <span className="home-features__number tnum">12</span>
             <span className="home-features__label">{t("home.guests")}</span>
           </div>
         </div>
       </section>
 
       {/* ═══ AGRO-LUXURY ═══ */}
-      <section className="home-agro">
+      <section className="home-agro" id="home-agro">
         <div className="home-agro__inner">
           <div className="home-agro__img-wrap">
             <img
@@ -111,6 +138,7 @@ export default function Home() {
             <div className="home-villa-card__content">
               <h3 className="home-villa-card__name">{t("home.alyaName")}</h3>
               <p className="home-villa-card__desc">{t("home.alyaDesc")}</p>
+              <span className="home-villa-card__meta tnum">{t("booking.sleeps", { n: 8 })}</span>
             </div>
           </Link>
           <Link to="/book" className="home-villa-card">
@@ -119,6 +147,7 @@ export default function Home() {
             <div className="home-villa-card__content">
               <h3 className="home-villa-card__name">{t("home.zehraName")}</h3>
               <p className="home-villa-card__desc">{t("home.zehraDesc")}</p>
+              <span className="home-villa-card__meta tnum">{t("booking.sleeps", { n: 6 })}</span>
             </div>
           </Link>
         </div>
@@ -177,6 +206,15 @@ export default function Home() {
       </section>
 
       <Footer />
+
+      <Link
+        to="/book"
+        className={`home-sticky-cta ${showStickyCta ? "home-sticky-cta--show" : ""}`}
+        aria-hidden={!showStickyCta}
+        tabIndex={showStickyCta ? 0 : -1}
+      >
+        {t("home.ctaReserve")}
+      </Link>
     </>
   );
 }

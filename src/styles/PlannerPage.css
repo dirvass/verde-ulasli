@@ -79,8 +79,10 @@
 }
 .pl-kpi--accent .pl-kpi__label{ color:rgba(195,165,100,.7) }
 .pl-kpi__value{
-  font-family:var(--serif); font-size:clamp(1.3rem,2.5vw,1.7rem); font-weight:600;
+  font-family:var(--sans); font-size:clamp(1.3rem,2.5vw,1.7rem); font-weight:700;
   color:var(--mist, #EBE8E1);
+  font-variant-numeric:tabular-nums;
+  letter-spacing:-.01em;
 }
 
 /* ── Controls ── */
@@ -112,11 +114,18 @@
   background:#fff; font-weight:600; color:var(--ink); font-size:.85rem;
 }
 .pl-add{
-  padding:9px 18px; border-radius:999px; border:1px solid var(--brand);
+  padding:9px 18px; border-radius:var(--radius-pill); border:1px solid var(--brand);
   background:transparent; color:var(--brand); font-weight:700; font-size:.85rem;
-  cursor:pointer; transition:all .2s ease;
+  cursor:pointer; transition:background var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out);
 }
 .pl-add:hover{ background:var(--brand); color:#fff }
+.pl-controls__actions{ display:flex; gap:10px; flex-wrap:wrap }
+.pl-reset{
+  padding:9px 14px; border-radius:var(--radius-pill); border:1px solid var(--border);
+  background:transparent; color:var(--muted); font-weight:600; font-size:.82rem;
+  cursor:pointer; transition:background var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
+}
+.pl-reset:hover{ background:rgba(14,26,22,.04); color:var(--ink); border-color:var(--ink) }
 
 /* ── Section titles ── */
 .pl-section-title{

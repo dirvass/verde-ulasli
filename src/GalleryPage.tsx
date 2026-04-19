@@ -1,4 +1,5 @@
-import React, { useMemo, useState, useEffect, useCallback } from "react";
+import React, { useMemo, useState, useEffect, useCallback, useRef } from "react";
+import { useSearchParams } from "react-router-dom";
 import TopNav from "./components/TopNav";
 import { useLanguage } from "./i18n/LanguageContext";
 import { usePageMeta } from "./hooks/usePageMeta";
@@ -82,6 +83,31 @@ const MEDIA: Media[] = [
   { id: "vid-4", type: "video", src: "/media/videolar/villa-video-4.mp4", alt: "Construction progress walkthrough", category: "construction" },
 ];
 
+function MediaThumb({ item }: { item: Media }) {
+  const [errored, setErrored] = useState(false);
+  if (errored) {
+    return (
+      <div className="gallery-card__err" aria-hidden="true">
+        <span>—</span>
+      </div>
+    );
+  }
+  if (item.type === "image") {
+    return <img className="gallery-card__img" src={item.src} alt={item.alt} loading="lazy" onError={() => setErrored(true)} />;
+  }
+  return (
+    <video
+      className="gallery-card__img"
+      src={item.src}
+      poster={"poster" in item ? item.poster : undefined}
+      muted
+      preload="metadata"
+      playsInline
+      onError={() => setErrored(true)}
+    />
+  );
+}
+
 function GalleryCard({ item, idx, onOpen }: { item: Media; idx: number; onOpen: (id: string) => void }) {
   const isFeatured = item.type === "image" && "featured" in item && item.featured;
   return (
@@ -89,17 +115,17 @@ function GalleryCard({ item, idx, onOpen }: { item: Media; idx: number; onOpen: 
       className={`gallery-card ${isFeatured ? "gallery-card--featured" : ""}`}
       onClick={() => onOpen(item.id)}
       tabIndex={0}
-      onKeyDown={(e) => { if (e.key === "Enter") onOpen(item.id); }}
+      role="button"
+      aria-label={item.alt}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onOpen(item.id); }
+      }}
       style={{ animationDelay: `${idx * 0.06}s` }}
     >
-      {item.type === "image" ? (
-        <img className="gallery-card__img" src={item.src} alt={item.alt} loading="lazy" />
-      ) : (
-        <video className="gallery-card__img" src={item.src} poster={"poster" in item ? item.poster : undefined} muted preload="metadata" playsInline />
-      )}
+      <MediaThumb item={item} />
       <div className="gallery-card__overlay">
         <span className="gallery-card__alt">
-          {item.type === "video" && <span className="gallery-card__play">&#9654;</span>}
+          {item.type === "video" && <span className="gallery-card__play" aria-hidden="true">&#9654;</span>}
           {item.alt}
         </span>
       </div>
@@ -112,9 +138,36 @@ type FilterTab = "all" | Category;
 export default function GalleryPage() {
   usePageMeta("meta.galleryTitle", "meta.galleryDesc");
   const { t } = useLanguage();
-  const [activeTab, setActiveTab] = useState<FilterTab>("all");
-  const [activeId, setActiveId] = useState<string | null>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const urlCat = (searchParams.get("cat") ?? "all") as FilterTab;
+  const urlId = searchParams.get("i");
+
+  const [activeTab, setActiveTabState] = useState<FilterTab>(
+    (["all", "exterior", "interior", "construction"] as FilterTab[]).includes(urlCat) ? urlCat : "all"
+  );
+  const [activeId, setActiveIdState] = useState<string | null>(
+    urlId && MEDIA.some(m => m.id === urlId) ? urlId : null
+  );
   const [heroVisible, setHeroVisible] = useState(false);
+  const [showHint, setShowHint] = useState(false);
+  const openerRef = useRef<HTMLElement | null>(null);
+  const lightboxRef = useRef<HTMLDivElement | null>(null);
+
+  // Sync URL <-> state without clobbering other params
+  const setActiveTab = useCallback((tab: FilterTab) => {
+    setActiveTabState(tab);
+    const next = new URLSearchParams(searchParams);
+    if (tab === "all") next.delete("cat"); else next.set("cat", tab);
+    setSearchParams(next, { replace: true });
+  }, [searchParams, setSearchParams]);
+
+  const setActiveId = useCallback((id: string | null) => {
+    setActiveIdState(id);
+    const next = new URLSearchParams(searchParams);
+    if (id) next.set("i", id); else next.delete("i");
+    setSearchParams(next, { replace: true });
+  }, [searchParams, setSearchParams]);
 
   useEffect(() => {
     const tm = setTimeout(() => setHeroVisible(true), 100);
@@ -131,8 +184,24 @@ export default function GalleryPage() {
     [activeId, filteredItems],
   );
 
-  const open = (id: string) => setActiveId(id);
-  const close = () => setActiveId(null);
+  const open = (id: string) => {
+    openerRef.current = document.activeElement as HTMLElement;
+    setActiveId(id);
+    // Show the keyboard hint once per session
+    try {
+      if (!sessionStorage.getItem("verde-gal-hint")) {
+        setShowHint(true);
+        sessionStorage.setItem("verde-gal-hint", "1");
+        setTimeout(() => setShowHint(false), 4000);
+      }
+    } catch { /* swallow */ }
+  };
+
+  const close = useCallback(() => {
+    setActiveId(null);
+    // Restore focus to the opener
+    setTimeout(() => openerRef.current?.focus?.(), 0);
+  }, [setActiveId]);
 
   const go = useCallback(
     (dir: 1 | -1) => {
@@ -140,22 +209,75 @@ export default function GalleryPage() {
       const next = (activeIndex + dir + filteredItems.length) % filteredItems.length;
       setActiveId(filteredItems[next].id);
     },
-    [activeIndex, filteredItems],
+    [activeIndex, filteredItems, setActiveId],
   );
 
+  // Keyboard nav + focus trap inside lightbox
   useEffect(() => {
     if (!activeId) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") close();
-      if (e.key === "ArrowRight") go(1);
-      if (e.key === "ArrowLeft") go(-1);
+      if (e.key === "Escape") { e.preventDefault(); close(); return; }
+      if (e.key === "ArrowRight") { e.preventDefault(); go(1); return; }
+      if (e.key === "ArrowLeft") { e.preventDefault(); go(-1); return; }
+      if (e.key === "Tab") {
+        // Trap focus in the lightbox
+        const root = lightboxRef.current;
+        if (!root) return;
+        const focusables = root.querySelectorAll<HTMLElement>(
+          'button, [href], input, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault(); last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault(); first.focus();
+        }
+      }
     };
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [activeId, go]);
+    // Prevent body scroll while lightbox open
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    // Initial focus into the lightbox close button
+    setTimeout(() => {
+      lightboxRef.current?.querySelector<HTMLButtonElement>(".gal-lightbox__close")?.focus();
+    }, 30);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [activeId, go, close]);
+
+  // Touch swipe
+  const touchRef = useRef<{ x: number; y: number } | null>(null);
+  const onTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0];
+    touchRef.current = { x: t.clientX, y: t.clientY };
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    const start = touchRef.current;
+    if (!start) return;
+    touchRef.current = null;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - start.x;
+    const dy = t.clientY - start.y;
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
+      go(dx < 0 ? 1 : -1);
+    }
+  };
 
   // Group items by category for the "all" view
   const categories: Category[] = ["exterior", "interior", "construction"];
+
+  // "View all" should also scroll to top so the tab-change lands visually
+  const viewAll = (cat: Category) => {
+    setActiveTab(cat);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const currentMedia = activeIndex >= 0 ? filteredItems[activeIndex] : null;
 
   return (
     <>
@@ -178,8 +300,10 @@ export default function GalleryPage() {
           {(["all", ...categories] as FilterTab[]).map((tab) => (
             <button
               key={tab}
+              type="button"
               className={`gallery-tab ${activeTab === tab ? "gallery-tab--active" : ""}`}
               onClick={() => setActiveTab(tab)}
+              aria-pressed={activeTab === tab}
             >
               {tab === "all" ? t("gallery.all") : t(CAT_LABEL_KEYS[tab])}
               <span className="gallery-tab__count">
@@ -193,7 +317,6 @@ export default function GalleryPage() {
       {/* ── CONTENT ── */}
       <main className="gallery-main">
         {activeTab === "all" ? (
-          // Sectioned view when showing all
           categories.map((cat) => {
             const items = MEDIA.filter((m) => m.category === cat);
             if (items.length === 0) return null;
@@ -205,8 +328,9 @@ export default function GalleryPage() {
                     <p className="gallery-section__desc">{t(CAT_DESC_KEYS[cat])}</p>
                   </div>
                   <button
+                    type="button"
                     className="gallery-section__link"
-                    onClick={() => setActiveTab(cat)}
+                    onClick={() => viewAll(cat)}
                   >
                     {t("gallery.viewAll", { n: items.length })}
                   </button>
@@ -220,7 +344,6 @@ export default function GalleryPage() {
             );
           })
         ) : (
-          // Flat grid for single category
           <section className="gallery-section">
             <div className="gallery-section__header">
               <div>
@@ -238,53 +361,73 @@ export default function GalleryPage() {
       </main>
 
       {/* ── LIGHTBOX ── */}
-      {activeIndex >= 0 && (
-        <div className="gal-lightbox" role="dialog" aria-modal="true" onClick={close}>
-          <button className="gal-lightbox__close" aria-label="Close" onClick={close}>
+      {currentMedia && (
+        <div
+          className="gal-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label={currentMedia.alt}
+          onClick={close}
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+          ref={lightboxRef}
+        >
+          <button type="button" className="gal-lightbox__close" aria-label={t("gallery.close")} onClick={close}>
             &times;
           </button>
           <button
+            type="button"
             className="gal-lightbox__nav gal-lightbox__nav--prev"
-            aria-label="Previous"
+            aria-label={t("gallery.prev")}
             onClick={(e) => { e.stopPropagation(); go(-1); }}
           >
             &#8249;
           </button>
           <button
+            type="button"
             className="gal-lightbox__nav gal-lightbox__nav--next"
-            aria-label="Next"
+            aria-label={t("gallery.next")}
             onClick={(e) => { e.stopPropagation(); go(1); }}
           >
             &#8250;
           </button>
 
           <div className="gal-lightbox__inner" onClick={(e) => e.stopPropagation()}>
-            {filteredItems[activeIndex].type === "image" ? (
+            {currentMedia.type === "image" ? (
               <img
+                key={currentMedia.id}
                 className="gal-lightbox__media"
-                src={filteredItems[activeIndex].src}
-                alt={filteredItems[activeIndex].alt}
+                src={currentMedia.src}
+                alt={currentMedia.alt}
               />
             ) : (
               <video
+                key={currentMedia.id}
                 className="gal-lightbox__media"
-                src={filteredItems[activeIndex].src}
+                src={currentMedia.src}
                 controls
                 autoPlay
+                muted
                 playsInline
                 preload="metadata"
               />
             )}
             <div className="gal-lightbox__caption">
               <span className="gal-lightbox__caption-cat">
-                {t(CAT_LABEL_KEYS[filteredItems[activeIndex].category])}
+                {t(CAT_LABEL_KEYS[currentMedia.category])}
               </span>
-              <span>{filteredItems[activeIndex].alt}</span>
+              <span>{currentMedia.alt}</span>
             </div>
-            <div className="gal-lightbox__counter">
+            <div className="gal-lightbox__counter tnum">
               {activeIndex + 1} / {filteredItems.length}
             </div>
           </div>
+
+          {showHint && (
+            <div className="gal-lightbox__hint" role="status" aria-live="polite">
+              {t("gallery.hint")}
+            </div>
+          )}
         </div>
       )}
     </>

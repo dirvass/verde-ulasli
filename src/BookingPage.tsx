@@ -54,6 +54,48 @@ const euro = (v: number) => `\u20AC\u00A0${v.toLocaleString("de-DE", { minimumFr
 const euro0 = (v: number) => `\u20AC\u00A0${v.toLocaleString("de-DE", { maximumFractionDigits: 0 })}`;
 const opt = (a: number, b: number) => Array.from({ length: b - a + 1 }, (_, i) => a + i);
 
+/* ── Guest stepper ── */
+function GuestStepper({
+  id, label, sub, value, min, max, onChange, decLabel, incLabel,
+}: {
+  id: string;
+  label: string;
+  sub?: string;
+  value: number;
+  min: number;
+  max: number;
+  onChange: (n: number) => void;
+  decLabel: string;
+  incLabel: string;
+}) {
+  const dec = () => onChange(Math.max(min, value - 1));
+  const inc = () => onChange(Math.min(max, value + 1));
+  return (
+    <div className="bk-counter">
+      <label htmlFor={id} className="bk-counter__label">
+        {label}{sub && <small>{sub}</small>}
+      </label>
+      <div className="bk-stepper" role="group" aria-label={label}>
+        <button
+          type="button"
+          className="bk-stepper__btn"
+          onClick={dec}
+          disabled={value <= min}
+          aria-label={decLabel}
+        >−</button>
+        <output id={id} className="bk-stepper__value tnum" aria-live="polite">{value}</output>
+        <button
+          type="button"
+          className="bk-stepper__btn"
+          onClick={inc}
+          disabled={value >= max}
+          aria-label={incLabel}
+        >+</button>
+      </div>
+    </div>
+  );
+}
+
 /* ══════════════════════════════════════════════ */
 export default function BookingPage() {
   usePageMeta("meta.bookingTitle", "meta.bookingDesc");
@@ -119,11 +161,18 @@ export default function BookingPage() {
   };
 
   useEffect(() => {
-    const up = () => setCalMonths(window.innerWidth >= 1440 ? 3 : window.innerWidth >= 1024 ? 2 : 1);
+    const up = () => setCalMonths(window.innerWidth >= 1440 ? 3 : window.innerWidth >= 768 ? 2 : 1);
     up(); window.addEventListener("resize", up); return () => window.removeEventListener("resize", up);
   }, []);
-  useEffect(() => { if (xferInc) setTransfers(0); }, [nights]);
+  useEffect(() => { if (xferInc) setTransfers(0); }, [nights, xferInc]);
   useEffect(() => { if (ok && showVal) setShowVal(false); }, [ok, showVal]);
+
+  // Derived step-validity flags for the step-error highlight
+  const datesMissing = !range?.from || !range?.to;
+  const stepError = {
+    dates: showVal && (datesMissing || underMin),
+    guests: showVal && overCap,
+  };
 
   const rangeOk = Boolean(range?.from && range?.to);
   const checkIn  = range?.from ? format(range.from, "EEE, dd MMM") : t("booking.select");
@@ -186,7 +235,7 @@ export default function BookingPage() {
         {/* ═══ 2 · DATES ═══ */}
         <section className="bk__section">
           <div className="bk__section-head">
-            <span className="bk__step">02</span>
+            <span className={`bk__step ${stepError.dates ? "bk__step--error" : ""}`}>02</span>
             <div>
               <h2 className="bk__section-title">{t("booking.s2Title")}</h2>
               <p className="bk__section-desc">{t("booking.s2Desc", { min: MIN_NIGHTS })}</p>
@@ -250,7 +299,7 @@ export default function BookingPage() {
         {/* ═══ 3 · GUESTS ═══ */}
         <section className="bk__section">
           <div className="bk__section-head">
-            <span className="bk__step">03</span>
+            <span className={`bk__step ${stepError.guests ? "bk__step--error" : ""}`}>03</span>
             <div>
               <h2 className="bk__section-title">{t("booking.s3Title")}</h2>
               <p className="bk__section-desc">{t("booking.s3Desc", { villa: vi.name, max: vi.sleeps, fee: euro0(EXTRA_GUEST_FEE_EUR) })}</p>
@@ -258,24 +307,35 @@ export default function BookingPage() {
           </div>
 
           <div className="bk-guests">
-            <label className="bk-counter">
-              <span className="bk-counter__label">{t("booking.adults")}</span>
-              <select value={adults} onChange={(e) => setAdults(+e.target.value)}>
-                {opt(1, 12).map((n) => <option key={n} value={n}>{n}</option>)}
-              </select>
-            </label>
-            <label className="bk-counter">
-              <span className="bk-counter__label">{t("booking.children")} <small>{t("booking.childAge")}</small></span>
-              <select value={children} onChange={(e) => setChildren(+e.target.value)}>
-                {opt(0, 12).map((n) => <option key={n} value={n}>{n}</option>)}
-              </select>
-            </label>
-            <label className="bk-counter">
-              <span className="bk-counter__label">{t("booking.infants")} <small>{t("booking.infantAge")}</small></span>
-              <select value={infants} onChange={(e) => setInfants(+e.target.value)}>
-                {opt(0, 6).map((n) => <option key={n} value={n}>{n}</option>)}
-              </select>
-            </label>
+            <GuestStepper
+              id="bk-adults"
+              label={t("booking.adults")}
+              value={adults}
+              min={1} max={12}
+              onChange={setAdults}
+              decLabel={t("booking.stepperDec", { label: t("booking.adults") })}
+              incLabel={t("booking.stepperInc", { label: t("booking.adults") })}
+            />
+            <GuestStepper
+              id="bk-children"
+              label={t("booking.children")}
+              sub={t("booking.childAge")}
+              value={children}
+              min={0} max={12}
+              onChange={setChildren}
+              decLabel={t("booking.stepperDec", { label: t("booking.children") })}
+              incLabel={t("booking.stepperInc", { label: t("booking.children") })}
+            />
+            <GuestStepper
+              id="bk-infants"
+              label={t("booking.infants")}
+              sub={t("booking.infantAge")}
+              value={infants}
+              min={0} max={6}
+              onChange={setInfants}
+              decLabel={t("booking.stepperDec", { label: t("booking.infants") })}
+              incLabel={t("booking.stepperInc", { label: t("booking.infants") })}
+            />
           </div>
 
           {showVal && overCap && (
@@ -362,13 +422,21 @@ export default function BookingPage() {
             </div>
           </div>
           <textarea
+            id="bk-note"
             className="bk-textarea"
             value={note}
             onChange={(e) => setNote(e.target.value.slice(0, 2000))}
             placeholder={t("booking.placeholder")}
             rows={4}
             maxLength={2000}
+            aria-describedby="bk-note-count"
           />
+          <div
+            id="bk-note-count"
+            className={`bk-textarea__count tnum ${note.length > 1800 ? "bk-textarea__count--warn" : ""}`}
+          >
+            {note.length} / 2000
+          </div>
         </section>
 
         {/* ═══ SUMMARY & CTA ═══ */}
@@ -454,6 +522,26 @@ export default function BookingPage() {
                     ? t("booking.nightsIn", { n: nights, villa: vi.name })
                     : t("booking.summaryDesc")}
                 </p>
+                <div className="bk-summary__chips" aria-label={t("booking.summaryAria")}>
+                  <span className="bk-chip">
+                    <span className="bk-chip__label">{t("booking.chipVilla")}</span>
+                    <strong>{vi.name}</strong>
+                  </span>
+                  <span className="bk-chip">
+                    <span className="bk-chip__label">{t("booking.chipDates")}</span>
+                    <strong>{rangeOk ? `${checkIn} → ${checkOut}` : t("booking.chipDatesEmpty")}</strong>
+                  </span>
+                  <span className="bk-chip">
+                    <span className="bk-chip__label">{t("booking.chipGuests")}</span>
+                    <strong className="tnum">{adults + children}{infants ? ` + ${infants}` : ""}</strong>
+                  </span>
+                  {nights > 0 && (
+                    <span className="bk-chip bk-chip--accent">
+                      <span className="bk-chip__label">{t("booking.duration")}</span>
+                      <strong className="tnum">{nightLabel(nights)}</strong>
+                    </span>
+                  )}
+                </div>
               </div>
             )}
 

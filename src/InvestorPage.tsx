@@ -24,6 +24,14 @@ export default function InvestorPage() {
   const [heroVis, setHeroVis] = useState(false);
   useEffect(() => { const tm = setTimeout(() => setHeroVis(true), 100); return () => clearTimeout(tm); }, []);
 
+  const goTab = (next: Tab) => {
+    setTab(next);
+    // Reset scroll so the user lands at the top of the tab content
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       {/* HERO */}
@@ -40,14 +48,32 @@ export default function InvestorPage() {
       </header>
 
       {/* TABS */}
-      <nav className="inv-tabs">
-        <button className={`inv-tab ${tab === "financials" ? "inv-tab--active" : ""}`} onClick={() => setTab("financials")}>
+      <nav className="inv-tabs" role="tablist" aria-label={t("investor.tabsAria")}>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={tab === "financials"}
+          className={`inv-tab ${tab === "financials" ? "inv-tab--active" : ""}`}
+          onClick={() => goTab("financials")}
+        >
           {t("investor.tabFinancials")}
         </button>
-        <button className={`inv-tab ${tab === "brand" ? "inv-tab--active" : ""}`} onClick={() => setTab("brand")}>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={tab === "brand"}
+          className={`inv-tab ${tab === "brand" ? "inv-tab--active" : ""}`}
+          onClick={() => goTab("brand")}
+        >
           {t("investor.tabBrand")}
         </button>
-        <button className={`inv-tab ${tab === "capex" ? "inv-tab--active" : ""}`} onClick={() => setTab("capex")}>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={tab === "capex"}
+          className={`inv-tab ${tab === "capex" ? "inv-tab--active" : ""}`}
+          onClick={() => goTab("capex")}
+        >
           {t("investor.tabCapex")}
         </button>
       </nav>
@@ -63,12 +89,14 @@ export default function InvestorPage() {
 /* ══════════════════════════════════════════════════════════ */
 /* FINANCIALS TAB                                            */
 /* ══════════════════════════════════════════════════════════ */
+const DEFAULT_VILLAS: () => Villa[] = () => [
+  { id: crypto.randomUUID(), name: "ALYA",  dailyFee: 750, occupancy: 0.60, costPct: 0.35 },
+  { id: crypto.randomUUID(), name: "ZEHRA", dailyFee: 750, occupancy: 0.60, costPct: 0.35 },
+];
+
 function FinancialsTab() {
   const { t } = useLanguage();
-  const [villas, setVillas] = useState<Villa[]>([
-    { id: crypto.randomUUID(), name: "ALYA",  dailyFee: 750, occupancy: 0.60, costPct: 0.35 },
-    { id: crypto.randomUUID(), name: "ZEHRA", dailyFee: 750, occupancy: 0.60, costPct: 0.35 },
-  ]);
+  const [villas, setVillas] = useState<Villa[]>(DEFAULT_VILLAS);
   const [currency, setCurrency] = useState<Currency>("EUR");
   const [activeScn, setActiveScn] = useState<Scenario>("base");
 
@@ -207,7 +235,12 @@ function FinancialsTab() {
             <option value="GBP">£ GBP</option>
           </select>
         </div>
-        <button className="pl-add" onClick={addVilla}>{t("planner.addVilla")}</button>
+        <div className="pl-controls__actions">
+          <button type="button" className="pl-reset" onClick={() => setVillas(DEFAULT_VILLAS())}>
+            {t("planner.resetDefaults")}
+          </button>
+          <button type="button" className="pl-add" onClick={addVilla}>{t("planner.addVilla")}</button>
+        </div>
       </section>
 
       {/* CHART */}

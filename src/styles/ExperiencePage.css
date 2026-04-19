@@ -54,6 +54,27 @@
 
 /* Experience grid */
 .exp-page{ max-width:1100px; margin:0 auto; padding:0 24px 60px }
+
+/* Seasonal filter */
+.exp-filter{
+  display:flex; justify-content:center; flex-wrap:wrap;
+  gap:8px; padding:32px 0 8px;
+}
+.exp-filter__tab{
+  padding:9px 18px; border-radius:var(--radius-pill);
+  font-size:.78rem; font-weight:600; letter-spacing:.05em;
+  background:transparent; border:1px solid var(--border);
+  color:var(--muted); cursor:pointer;
+  transition:background var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out);
+}
+.exp-filter__tab:hover{ background:var(--brand-tint); color:var(--brand-dark) }
+.exp-filter__tab--active{
+  background:var(--brand); color:#fff; border-color:var(--brand);
+}
+.exp-empty{
+  grid-column:1/-1; text-align:center;
+  color:var(--muted); font-style:italic; padding:40px 0;
+}
 .exp-page__grid-section{
   display:grid; grid-template-columns:1fr 1fr; gap:32px;
   padding:60px 0;
@@ -74,8 +95,18 @@
 .exp-card:hover .exp-card__img{ transform:scale(1.05) }
 .exp-card__body{ padding:28px; display:flex; flex-direction:column; justify-content:center }
 .exp-card__season{
-  font-size:.65rem; font-weight:700; letter-spacing:2px; text-transform:uppercase;
-  color:var(--brand); margin-bottom:8px;
+  display:inline-block; align-self:flex-start;
+  padding:4px 10px; border-radius:var(--radius-pill);
+  font-size:.68rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase;
+  margin-bottom:10px;
+  background:var(--brand-light); color:var(--brand);
+  border:1px solid var(--brand-border);
+}
+.exp-card__season--springSummer{
+  background:rgba(195,165,100,.12); color:#9a7a1a; border-color:rgba(195,165,100,.4);
+}
+.exp-card__season--summerOnly{
+  background:rgba(179,99,28,.12); color:#9a4d17; border-color:rgba(179,99,28,.3);
 }
 .exp-card__title{
   font-family:var(--serif); font-size:1.2rem; font-weight:400;

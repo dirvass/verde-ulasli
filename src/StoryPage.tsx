@@ -22,8 +22,22 @@ const SECTIONS = [
 export default function StoryPage() {
   usePageMeta("meta.storyTitle", "meta.storyDesc");
   const [vis, setVis] = useState(false);
-  const { t } = useLanguage();
+  const [videoReady, setVideoReady] = useState(false);
+  const videoRef = React.useRef<HTMLDivElement | null>(null);
+  const { t, locale } = useLanguage();
   useEffect(() => { const tm = setTimeout(() => setVis(true), 100); return () => clearTimeout(tm); }, []);
+
+  // Load the heavy Kuzu-Yayla video only when the user approaches it
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el || videoReady) return;
+    const io = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVideoReady(true); io.disconnect(); } },
+      { rootMargin: "400px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [videoReady]);
 
   return (
     <>
@@ -54,18 +68,27 @@ export default function StoryPage() {
           </section>
         ))}
 
-        {/* ═══ CINEMATIC VIDEO — Kuzu Yayla ═══ */}
-        <section className="story__video-section">
+        {/* ═══ CINEMATIC VIDEO — Kuzu Yayla (lazy-loaded) ═══ */}
+        <section className="story__video-section" ref={videoRef}>
           <div className="story__video-wrap">
-            <video
-              className="story__video"
-              src="/media/videolar/kuzu-yayla.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              poster="/media/dis-mekan/yan-cephe-genel-gorunum-render.jpg"
-            />
+            {videoReady ? (
+              <video
+                className="story__video"
+                src="/media/videolar/kuzu-yayla.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                poster="/media/dis-mekan/yan-cephe-genel-gorunum-render.jpg"
+              />
+            ) : (
+              <div
+                className="story__video story__video--poster"
+                aria-hidden="true"
+                style={{ backgroundImage: "url('/media/dis-mekan/yan-cephe-genel-gorunum-render.jpg')" }}
+              />
+            )}
             <div className="story__video-overlay" />
             <div className="story__video-content">
               <span className="story__video-label">{t("story.s9Title")}</span>
@@ -96,7 +119,7 @@ export default function StoryPage() {
               href="/media/VERDE-ULASLI-Katalog.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="story__catalogue-btn"
+              className={`story__catalogue-btn ${locale === "tr" ? "story__catalogue-btn--primary" : ""}`}
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
               {t("story.catalogueTR")}
@@ -105,7 +128,7 @@ export default function StoryPage() {
               href="/media/VERDE-ULASLI-Catalogue-EN.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="story__catalogue-btn"
+              className={`story__catalogue-btn ${locale !== "tr" ? "story__catalogue-btn--primary" : ""}`}
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
               {t("story.catalogueEN")}

@@ -1,40 +1,139 @@
 /* =========================================================
-   Base tokens (safe globals)
+   Design tokens
    =======================================================*/
 :root{
-  /* VERDE brand palette — from marka-vizyon-brainstorm.md */
-  --verde-deep:#0E1A16;       /* koyu yeşil — hero, footer, dark sections */
-  --brand:#2D5040;             /* orman yeşili — buttons, accents, links */
+  /* Brand palette — from marka-vizyon-brainstorm.md */
+  --verde-deep:#0E1A16;
+  --brand:#2D5040;
   --brand-dark:#1e4a2e;
   --brand-light:rgba(45,80,64,.08);
+  --brand-tint:rgba(45,80,64,.04);
   --brand-border:rgba(45,80,64,.2);
   --brand-glow:rgba(45,80,64,.15);
-  --sand:#C9B99A;              /* kumtaşı — warm accents, secondary text */
-  --gold:#C3A564;              /* soluk altın — luxury accents, dividers */
+  --sand:#C9B99A;
+  --gold:#C3A564;
+  --gold-soft:rgba(195,165,100,.5);
   --ink:#1a1f16;
   --muted:#5e6b58;
   --bg:#f4f5f0;
-  --mist:#EBE8E1;              /* sis beyazı — light text on dark bg */
+  --surface:#ffffff;
+  --surface-subtle:#faf9f5;
+  --mist:#EBE8E1;
   --card:rgba(255,255,255,.94);
   --border:rgba(148,163,140,.28);
-  --shadow:0 24px 48px rgba(14,26,22,.14);
+  --border-soft:rgba(226,232,240,.6);
+
+  /* Spacing scale — 4px base */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+
+  /* Radius scale */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-pill: 999px;
+
+  /* Elevation */
+  --shadow-1: 0 4px 12px rgba(14,26,22,.06);
+  --shadow-2: 0 8px 24px rgba(14,26,22,.08);
+  --shadow-3: 0 16px 40px rgba(14,26,22,.12);
+  --shadow-4: 0 24px 64px rgba(14,26,22,.18);
+  --shadow: var(--shadow-3); /* legacy alias */
+
+  /* Motion */
+  --dur-fast: 150ms;
+  --dur-base: 250ms;
+  --dur-slow: 400ms;
+  --dur-hero: 800ms;
+  --dur-cinematic: 10000ms;
+  --ease-out: cubic-bezier(.25,.46,.45,.94);
+  --ease-in-out: cubic-bezier(.45,0,.55,1);
+  --lift-y: -2px;
+
+  /* Typography */
   --serif:"Playfair Display", Georgia, "Times New Roman", serif;
+  --sans:Inter, "Noto Sans Arabic", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  /* Breakpoints (for reference — used in @media, not var() directly) */
+  --bp-sm: 640px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1440px;
+
+  /* Focus */
+  --focus-ring: 0 0 0 3px rgba(195,165,100,.45);
+  --focus-ring-ink: 0 0 0 3px rgba(45,80,64,.25);
 }
 *{ box-sizing:border-box }
 html,body,#root{ height:100% }
 body{
   margin:0;
-  font-family:Inter, "Noto Sans Arabic", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-family:var(--sans);
   background:var(--bg);
   color:var(--ink);
   line-height:1.5;
 }
-/* Keep headings and paragraphs tidy without touching other pages */
 h1,h2,h3,h4,h5,h6,p{ margin:0 }
-button,select,textarea{ font-family:inherit }
+button,select,textarea,input{ font-family:inherit }
+
+/* Tabular numerals for data rendering */
+.tnum{ font-variant-numeric:tabular-nums }
 
 /* =========================================================
-   Shared hero (legacy — kept for planner page)
+   Focus visibility (global)
+   =======================================================*/
+*:focus{ outline:none }
+*:focus-visible{
+  outline:none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-sm);
+}
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible{
+  outline:none;
+  box-shadow: var(--focus-ring);
+}
+
+/* =========================================================
+   Reduced motion — respect user preference site-wide
+   =======================================================*/
+@media (prefers-reduced-motion: reduce){
+  *,
+  *::before,
+  *::after{
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .home-hero__bg,
+  .gallery-hero__bg,
+  .story-hero__bg,
+  .exp-hero__bg,
+  .inv-hero__bg,
+  .admin-hero__bg,
+  .bk-hero__bg{
+    transform:none !important;
+  }
+}
+
+/* =========================================================
+   Legacy shared hero (kept for planner page)
    =======================================================*/
 header.hero{
   position:relative; min-height:78vh; display:flex; align-items:flex-end; justify-content:center;
@@ -48,7 +147,7 @@ header.hero .hero__inner{ max-width:960px; text-align:center }
 header.hero .hero__title{ font-family:var(--serif); font-size:clamp(2.5rem,6vw,4rem); font-weight:400; letter-spacing:.08em; margin:20px 0 12px }
 header.hero .hero__subtitle{ max-width:680px; margin:0 auto; color:rgba(226,232,240,.95); font-size:1rem }
 header.hero .badge{
-  display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:999px;
+  display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:var(--radius-pill);
   font-size:13px; font-weight:600; color:#fff; background:rgba(14,26,22,.45);
   border:1px solid rgba(255,255,255,.45); backdrop-filter:blur(8px);
 }
@@ -56,7 +155,6 @@ header.hero .badge{
 /* =========================================================
    RTL Support
    =======================================================*/
-/* (nav-buttons RTL removed — see nav-desktop RTL above) */
 [dir="rtl"] .bk-dates__arrow{ transform:scaleX(-1) }
 [dir="rtl"] .bk__reset{ margin-left:0; margin-right:auto }
 [dir="rtl"] .bk-summary__row strong{ text-align:left }
@@ -64,6 +162,5 @@ header.hero .badge{
 [dir="rtl"] .bk-enh__toggle input:checked + .bk-enh__switch::after{ transform:translateX(-18px) }
 [dir="rtl"] .gal-lightbox__nav--prev{ left:auto; right:20px }
 [dir="rtl"] .gal-lightbox__nav--next{ right:auto; left:20px }
-@media (max-width:640px){
-  /* (nav-buttons mobile RTL removed) */
-}
+[dir="rtl"] .home-villa-card__content{ text-align:right }
+[dir="rtl"] .home-exp-card__content{ text-align:right }

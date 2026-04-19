@@ -1,9 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import TopNav from "./components/TopNav";
 import { getBooked, setBooked, VillaKey, BookedRange } from "./availability";
 import "./styles/AdminPage.css";
 
 const VILLAS: VillaKey[] = ["ALYA", "ZEHRA"];
+
+function todayIso(): string {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
+type RangeIssue = "empty" | "past" | "reversed" | "overlap" | "ok";
+
+function rangeIssue(r: BookedRange, others: BookedRange[]): RangeIssue {
+  if (!r.from || !r.to) return "empty";
+  const today = todayIso();
+  if (r.to < today) return "past";
+  if (r.from > r.to) return "reversed";
+  // Overlap check — two ranges overlap if neither ends before the other starts
+  for (const o of others) {
+    if (!o.from || !o.to) continue;
+    if (!(r.to < o.from || o.to < r.from)) return "overlap";
+  }
+  return "ok";
+}
 
 export default function AdminPage() {
   const [data, setData] = useState(() => getBooked());
@@ -11,6 +31,16 @@ export default function AdminPage() {
   const [saved, setSaved] = useState(false);
 
   useEffect(() => { const t = setTimeout(() => setHeroVis(true), 100); return () => clearTimeout(t); }, []);
+
+  const issues = useMemo(() => {
+    const out: Record<VillaKey, RangeIssue[]> = { ALYA: [], ZEHRA: [] };
+    for (const v of VILLAS) {
+      out[v] = data[v].map((r, i) => rangeIssue(r, data[v].filter((_, j) => j !== i)));
+    }
+    return out;
+  }, [data]);
+
+  const hasBlocking = VILLAS.some(v => issues[v].some(i => i === "past" || i === "reversed" || i === "overlap"));
 
   function addRange(villa: VillaKey) {
     setData(prev => ({
@@ -92,40 +122,65 @@ export default function AdminPage() {
             )}
 
             <div className="admin-ranges">
-              {data[v].map((r, i) => (
-                <div key={i} className="admin-range">
-                  <label className="admin-field">
-                    <span>Check-in</span>
-                    <input
-                      type="date"
-                      value={r.from}
-                      onChange={e => updateRange(v, i, "from", e.target.value)}
-                    />
-                  </label>
-                  <span className="admin-range__arrow">&rarr;</span>
-                  <label className="admin-field">
-                    <span>Check-out</span>
-                    <input
-                      type="date"
-                      value={r.to}
-                      onChange={e => updateRange(v, i, "to", e.target.value)}
-                    />
-                  </label>
-                  <button className="admin-btn admin-btn--del" onClick={() => removeRange(v, i)} title="Remove">
-                    &#10005;
-                  </button>
-                </div>
-              ))}
+              {data[v].map((r, i) => {
+                const issue = issues[v][i];
+                const isBad = issue === "past" || issue === "reversed" || issue === "overlap";
+                return (
+                  <div key={i} className={`admin-range ${isBad ? "admin-range--error" : ""}`}>
+                    <label className="admin-field" htmlFor={`${v}-${i}-from`}>
+                      <span>Check-in</span>
+                      <input
+                        id={`${v}-${i}-from`}
+                        type="date"
+                        value={r.from}
+                        min={todayIso()}
+                        onChange={e => updateRange(v, i, "from", e.target.value)}
+                      />
+                    </label>
+                    <span className="admin-range__arrow" aria-hidden="true">&rarr;</span>
+                    <label className="admin-field" htmlFor={`${v}-${i}-to`}>
+                      <span>Check-out</span>
+                      <input
+                        id={`${v}-${i}-to`}
+                        type="date"
+                        value={r.to}
+                        min={r.from || todayIso()}
+                        onChange={e => updateRange(v, i, "to", e.target.value)}
+                      />
+                    </label>
+                    <button type="button" className="admin-btn admin-btn--del" onClick={() => removeRange(v, i)} aria-label="Remove booking">
+                      &#10005;
+                    </button>
+                    {issue !== "ok" && issue !== "empty" && (
+                      <span className="admin-range__issue" role="alert">
+                        {issue === "past" && "Range is in the past."}
+                        {issue === "reversed" && "Check-out must be after check-in."}
+                        {issue === "overlap" && "Overlaps another range for this villa."}
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </section>
         ))}
 
         {/* Save */}
         <div className="admin-save">
-          <button className="admin-btn admin-btn--save" onClick={save}>
+          <button
+            type="button"
+            className="admin-btn admin-btn--save"
+            onClick={save}
+            disabled={hasBlocking}
+            aria-disabled={hasBlocking}
+          >
             {saved ? "Saved \u2713" : "Save Changes"}
           </button>
-          <p className="admin-save__hint">Changes are stored in your browser and will apply to the booking calendar immediately.</p>
+          <p className="admin-save__hint">
+            {hasBlocking
+              ? "Resolve validation errors above before saving."
+              : "Changes are stored in your browser and will apply to the booking calendar immediately."}
+          </p>
         </div>
       </main>
     </>

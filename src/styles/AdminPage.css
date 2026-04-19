@@ -92,11 +92,27 @@
 /* Ranges */
 .admin-ranges{ display:flex; flex-direction:column; gap:12px }
 .admin-range{
-  display:flex; align-items:flex-end; gap:12px;
-  padding:16px 18px; border-radius:14px;
+  display:flex; align-items:flex-end; flex-wrap:wrap; gap:12px;
+  padding:16px 18px; border-radius:var(--radius-md);
   background:#fff; border:1px solid var(--border);
-  box-shadow:0 4px 16px rgba(26,31,22,.04);
+  box-shadow:var(--shadow-1);
+  transition:border-color var(--dur-base) var(--ease-out), background var(--dur-base) var(--ease-out);
 }
+.admin-range--error{
+  border-color:rgba(239,68,68,.5);
+  background:rgba(239,68,68,.04);
+}
+.admin-range__issue{
+  width:100%;
+  font-size:.78rem; color:#b91c1c; font-weight:600;
+  padding-top:4px;
+}
+
+.admin-btn--save:disabled{
+  opacity:.5; cursor:not-allowed;
+  transform:none; box-shadow:0 4px 12px rgba(45,80,64,.1);
+}
+.admin-btn--save:disabled:hover{ transform:none }
 .admin-range__arrow{ color:var(--muted); font-size:1.1rem; padding-bottom:8px }
 .admin-field{
   display:flex; flex-direction:column; gap:4px; flex:1;

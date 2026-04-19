@@ -143,9 +143,21 @@
 }
 .story__catalogue-btn:hover{
   color:#fff; background:var(--brand);
-  transform:translateY(-2px); box-shadow:0 8px 24px rgba(45,80,64,.25);
+  transform:translateY(var(--lift-y)); box-shadow:0 8px 24px rgba(45,80,64,.25);
+}
+.story__catalogue-btn--primary{
+  color:#fff; background:var(--brand);
+}
+.story__catalogue-btn--primary:hover{
+  background:var(--brand-dark);
+  box-shadow:0 12px 32px rgba(45,80,64,.3);
 }
 .story__catalogue-btn svg{ flex-shrink:0 }
+
+/* Poster fallback (pre-video lazy load) */
+.story__video--poster{
+  background-size:cover; background-position:center;
+}
 
 /* Story closing */
 .story__closing{

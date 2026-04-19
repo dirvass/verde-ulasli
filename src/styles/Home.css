@@ -150,14 +150,17 @@
   box-shadow:0 12px 32px rgba(0,0,0,.15);
 }
 
-/* Scroll indicator */
+/* Scroll indicator (now clickable button) */
 .home-hero__scroll{
   position:absolute; bottom:32px; left:50%; transform:translateX(-50%);
   z-index:2;
   display:flex; flex-direction:column; align-items:center; gap:8px;
   opacity:0;
   transition:opacity 1s ease 1.8s;
+  background:none; border:none; cursor:pointer;
+  padding:8px 16px;
 }
+.home-hero__scroll:hover span{ color:#fff }
 .home-hero--visible .home-hero__scroll{
   opacity:.6;
 }
@@ -315,7 +318,15 @@
   letter-spacing:.08em; margin-bottom:6px;
 }
 .home-villa-card__desc{
-  font-size:.9rem; color:rgba(235,232,225,.8); font-style:italic;
+  font-size:.9rem; color:rgba(235,232,225,.85); font-style:italic;
+}
+.home-villa-card__meta{
+  display:inline-block; margin-top:10px;
+  padding:4px 12px; border-radius:var(--radius-pill);
+  font-size:.72rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+  background:rgba(255,255,255,.14); color:rgba(235,232,225,.9);
+  border:1px solid rgba(255,255,255,.25);
+  backdrop-filter:blur(6px);
 }
 @media(max-width:640px){
   .home-villas__grid{ grid-template-columns:1fr }
@@ -436,6 +447,39 @@
   transition:transform .2s ease, box-shadow .2s ease;
 }
 .home-closing__cta:hover{
-  transform:translateY(-2px);
+  transform:translateY(var(--lift-y));
   box-shadow:0 12px 32px rgba(14,26,22,.3);
+}
+
+/* ── Sticky reserve CTA (appears after 40% scroll) ── */
+.home-sticky-cta{
+  position:fixed; right:20px; bottom:20px; z-index:90;
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:14px 28px; border-radius:var(--radius-pill);
+  font-size:.78rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
+  color:var(--ink); background:var(--gold);
+  text-decoration:none;
+  box-shadow:var(--shadow-3);
+  transform:translateY(20px); opacity:0; pointer-events:none;
+  transition:transform var(--dur-slow) var(--ease-out), opacity var(--dur-slow) var(--ease-out);
+}
+.home-sticky-cta--show{
+  transform:translateY(0); opacity:1; pointer-events:auto;
+}
+.home-sticky-cta:hover{
+  background:var(--brand); color:#fff;
+  transform:translateY(var(--lift-y));
+}
+@media(max-width:640px){
+  .home-sticky-cta{
+    right:12px; bottom:12px; padding:12px 22px; font-size:.72rem;
+  }
+}
+[dir="rtl"] .home-sticky-cta{ right:auto; left:20px }
+@media(max-width:640px){
+  [dir="rtl"] .home-sticky-cta{ left:12px }
+}
+/* Shift the sticky CTA above the cookie banner on small viewports */
+@media(max-width:560px){
+  body:has(.cookie-banner) .home-sticky-cta--show{ bottom:128px }
 }

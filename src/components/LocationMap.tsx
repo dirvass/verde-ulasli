@@ -10,6 +10,7 @@ import { useLanguage } from "../i18n/LanguageContext";
 interface Place {
   labelKey: string;
   time: string;
+  query: string;
   x: number;
   y: number;
   align: "l" | "r" | "t" | "b";
@@ -17,17 +18,21 @@ interface Place {
 }
 
 const PLACES: Place[] = [
-  { labelKey: "map.istanbul",  time: "70 min",  x: 115, y: 130, align: "l", size: "lg" },
-  { labelKey: "map.airport",   time: "50 min",  x: 275, y: 148, align: "t" },
-  { labelKey: "map.izmit",     time: "30 min",  x: 628, y: 242, align: "r" },
-  { labelKey: "map.dining",    time: "20 min",  x: 548, y: 288, align: "r" },
-  { labelKey: "map.kartepe",   time: "1 hr",    x: 740, y: 258, align: "r" },
-  { labelKey: "map.marmara",   time: "30 min",  x: 315, y: 348, align: "l" },
-  { labelKey: "map.iznik",     time: "45 min",  x: 535, y: 488, align: "r", size: "lg" },
-  { labelKey: "map.bursa",     time: "70 min",  x: 180, y: 515, align: "l", size: "lg" },
-  { labelKey: "map.uludag",    time: "2 hr",    x: 265, y: 562, align: "l" },
-  { labelKey: "map.blacksea",  time: "1 hr",    x: 650, y: 58,  align: "r" },
+  { labelKey: "map.istanbul",  time: "70 min",  query: "Istanbul, Turkey",                 x: 115, y: 130, align: "l", size: "lg" },
+  { labelKey: "map.airport",   time: "50 min",  query: "Sabiha Gokcen Airport, Istanbul",  x: 275, y: 148, align: "t" },
+  { labelKey: "map.izmit",     time: "30 min",  query: "Izmit, Kocaeli, Turkey",           x: 628, y: 242, align: "r" },
+  { labelKey: "map.dining",    time: "20 min",  query: "Golcuk Kocaeli, Turkey",           x: 548, y: 288, align: "r" },
+  { labelKey: "map.kartepe",   time: "1 hr",    query: "Kartepe Kocaeli, Turkey",          x: 740, y: 258, align: "r" },
+  { labelKey: "map.marmara",   time: "30 min",  query: "Marmara Sea",                      x: 315, y: 348, align: "l" },
+  { labelKey: "map.iznik",     time: "45 min",  query: "Iznik Bursa, Turkey",              x: 535, y: 488, align: "r", size: "lg" },
+  { labelKey: "map.bursa",     time: "70 min",  query: "Bursa, Turkey",                    x: 180, y: 515, align: "l", size: "lg" },
+  { labelKey: "map.uludag",    time: "2 hr",    query: "Uludag Bursa, Turkey",             x: 265, y: 562, align: "l" },
+  { labelKey: "map.blacksea",  time: "1 hr",    query: "Black Sea Kocaeli, Turkey",        x: 650, y: 58,  align: "r" },
 ];
+
+function mapsUrl(from: string, to: string): string {
+  return `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(from)}&destination=${encodeURIComponent(to)}&travelmode=driving`;
+}
 
 const VX = 498, VY = 322;
 
@@ -125,19 +130,27 @@ export default function LocationMap() {
           else { tx = p.x; ty = p.y + 18; anchor = "middle"; dy1 = 0; dy2 = 12; }
 
           return (
-            <g key={p.labelKey}>
-              <circle cx={p.x} cy={p.y} r={r + 4} fill="rgba(235,232,225,0.06)" />
-              <circle cx={p.x} cy={p.y} r={r} fill="#EBE8E1" />
-              <text x={tx} y={ty + dy1} textAnchor={anchor} filter="url(#txt-shadow)"
-                fill="#EBE8E1" fontSize={isLg ? "11" : "9.5"} fontFamily="Inter,sans-serif"
-                fontWeight={isLg ? "600" : "500"} letterSpacing="0.3">
-                {t(p.labelKey)}
-              </text>
-              <text x={tx} y={ty + dy2} textAnchor={anchor}
-                fill="#C3A564" fontSize="8.5" fontFamily="Inter,sans-serif" fontWeight="600" letterSpacing="0.8">
-                {p.time}
-              </text>
-            </g>
+            <a
+              key={p.labelKey}
+              href={mapsUrl("Ulaşlı, Kocaeli, Türkiye", p.query)}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${t(p.labelKey)} — directions`}
+            >
+              <g className="loc-map__marker">
+                <circle cx={p.x} cy={p.y} r={r + 4} fill="rgba(235,232,225,0.06)" />
+                <circle cx={p.x} cy={p.y} r={r} fill="#EBE8E1" />
+                <text x={tx} y={ty + dy1} textAnchor={anchor} filter="url(#txt-shadow)"
+                  fill="#EBE8E1" fontSize={isLg ? "11" : "9.5"} fontFamily="Inter,sans-serif"
+                  fontWeight={isLg ? "600" : "500"} letterSpacing="0.3">
+                  {t(p.labelKey)}
+                </text>
+                <text x={tx} y={ty + dy2} textAnchor={anchor}
+                  fill="#C3A564" fontSize="8.5" fontFamily="Inter,sans-serif" fontWeight="600" letterSpacing="0.8">
+                  {p.time}
+                </text>
+              </g>
+            </a>
           );
         })}
 

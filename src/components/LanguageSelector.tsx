@@ -12,13 +12,15 @@ export default function LanguageSelector() {
   const { locale, setLocale } = useLanguage();
 
   return (
-    <div className="lang-sel" role="radiogroup" aria-label="Language">
+    <div className="lang-sel" role="group" aria-label="Language">
       {LANGS.map((l) => (
         <button
           key={l.code}
+          type="button"
           className={`lang-btn ${locale === l.code ? "lang-btn--active" : ""}`}
           onClick={() => setLocale(l.code)}
-          aria-pressed={locale === l.code}
+          aria-label={`Switch to ${l.code.toUpperCase()}`}
+          aria-current={locale === l.code ? "true" : undefined}
         >
           {l.label}
         </button>
