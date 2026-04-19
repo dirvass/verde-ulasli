@@ -58,6 +58,14 @@
 .site-footer__tagline{
   font-size:.9rem; color:rgba(235,232,225,.5); font-style:italic;
 }
+.site-footer__social{
+  display:inline-flex; align-items:center; gap:8px;
+  margin-top:16px; text-decoration:none;
+  color:rgba(235,232,225,.45); font-size:.85rem;
+  transition:color .25s ease;
+}
+.site-footer__social:hover{ color:var(--gold, #C3A564) }
+.site-footer__social svg{ flex-shrink:0 }
 .site-footer__heading{
   font-size:.7rem; font-weight:700; letter-spacing:3px; text-transform:uppercase;
   color:var(--gold, #C3A564); margin-bottom:16px;
@@ -72,6 +80,15 @@
   border-top:1px solid rgba(235,232,225,.1);
   padding:20px 24px; text-align:center;
   font-size:.75rem; color:rgba(235,232,225,.3); letter-spacing:.5px;
+  display:flex; flex-wrap:wrap; justify-content:center; gap:8px 18px;
+}
+.site-footer__legal{
+  display:inline-flex; flex-wrap:wrap; justify-content:center; gap:4px 8px;
+  color:rgba(235,232,225,.35);
+}
+.site-footer__legal .site-footer__link{
+  display:inline; padding:0; margin:0;
+  font-size:.75rem; letter-spacing:.4px;
 }
 @media(max-width:768px){
   .site-footer__inner{ grid-template-columns:1fr; gap:32px; padding:48px 24px 32px }

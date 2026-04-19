@@ -1,33 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://verde-ulasli.com/</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://verde-ulasli.com/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://verde-ulasli.com/?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://verde-ulasli.com/?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://verde-ulasli.com/?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://verde-ulasli.com/"/>
   </url>
   <url>
     <loc>https://verde-ulasli.com/story</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://verde-ulasli.com/story?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://verde-ulasli.com/story?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://verde-ulasli.com/story?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://verde-ulasli.com/story?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://verde-ulasli.com/story"/>
   </url>
   <url>
     <loc>https://verde-ulasli.com/experience</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://verde-ulasli.com/experience?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://verde-ulasli.com/experience?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://verde-ulasli.com/experience?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://verde-ulasli.com/experience?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://verde-ulasli.com/experience"/>
   </url>
   <url>
     <loc>https://verde-ulasli.com/gallery</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://verde-ulasli.com/gallery?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://verde-ulasli.com/gallery?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://verde-ulasli.com/gallery?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://verde-ulasli.com/gallery?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://verde-ulasli.com/gallery"/>
   </url>
   <url>
     <loc>https://verde-ulasli.com/book</loc>
-    <lastmod>2026-03-29</lastmod>
+    <lastmod>2026-04-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://verde-ulasli.com/book?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://verde-ulasli.com/book?lang=tr"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://verde-ulasli.com/book?lang=de"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://verde-ulasli.com/book?lang=ar"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://verde-ulasli.com/book"/>
+  </url>
+  <url>
+    <loc>https://verde-ulasli.com/privacy</loc>
+    <lastmod>2026-04-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://verde-ulasli.com/cookies</loc>
+    <lastmod>2026-04-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://verde-ulasli.com/terms</loc>
+    <lastmod>2026-04-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://verde-ulasli.com/impressum</loc>
+    <lastmod>2026-04-19</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 </urlset>

@@ -108,7 +108,8 @@ export default function BookingPage() {
     note ? `Note: ${note}` : "",
   ].filter(Boolean).join("\n"));
   const waUrl = `https://wa.me/${CONTACT.whatsappNumber}?text=${waText}`;
-  const mailUrl = `mailto:${CONTACT.email}?subject=Booking – ${vi.name}&body=${waText}`;
+  const mailSubject = encodeURIComponent(`Booking – ${vi.name}`);
+  const mailUrl = `mailto:${CONTACT.email}?subject=${mailSubject}&body=${waText}`;
 
   const scroll = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "center" });
   const send = (type: "wa" | "mail") => {
@@ -363,9 +364,10 @@ export default function BookingPage() {
           <textarea
             className="bk-textarea"
             value={note}
-            onChange={(e) => setNote(e.target.value)}
+            onChange={(e) => setNote(e.target.value.slice(0, 2000))}
             placeholder={t("booking.placeholder")}
             rows={4}
+            maxLength={2000}
           />
         </section>
 

@@ -76,10 +76,24 @@ function FinancialsTab() {
   const [rates, setRates] = useState<Record<Currency, number>>({ EUR: 1, USD: 1.08, GBP: 0.86 });
 
   useEffect(() => {
-    fetch("https://api.exchangerate.host/latest?base=EUR&symbols=USD,GBP")
-      .then(r => r.json())
-      .then(d => d?.rates && setRates(p => ({ ...p, USD: d.rates.USD ?? p.USD, GBP: d.rates.GBP ?? p.GBP })))
-      .catch(() => {});
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 4000);
+    fetch("https://api.exchangerate.host/latest?base=EUR&symbols=USD,GBP", { signal: ctrl.signal })
+      .then(r => r.ok ? r.json() : null)
+      .then((d: unknown) => {
+        if (!d || typeof d !== "object") return;
+        const rates = (d as { rates?: unknown }).rates;
+        if (!rates || typeof rates !== "object") return;
+        const usd = (rates as { USD?: unknown }).USD;
+        const gbp = (rates as { GBP?: unknown }).GBP;
+        setRates(p => ({
+          ...p,
+          USD: typeof usd === "number" && Number.isFinite(usd) ? usd : p.USD,
+          GBP: typeof gbp === "number" && Number.isFinite(gbp) ? gbp : p.GBP,
+        }));
+      })
+      .catch(() => { /* network / abort / deprecated endpoint — fall back to defaults */ });
+    return () => { clearTimeout(timer); ctrl.abort(); };
   }, []);
 
   const fx = (n: number) => n * (rates[currency] ?? 1);
@@ -453,7 +467,7 @@ function BrandTab() {
             <tr><td>{t("investor.labelPrice")}</td><td>{t("investor.valuePrice")}</td></tr>
             <tr><td>{t("investor.labelCapex")}</td><td>{t("investor.valueCapex")}</td></tr>
             <tr><td>{t("investor.labelOpening")}</td><td>{t("investor.valueOpening")}</td></tr>
-            <tr><td>{t("investor.labelWebsite")}</td><td><a href="https://verde-ulasli.com" target="_blank" rel="noopener">verde-ulasli.com</a></td></tr>
+            <tr><td>{t("investor.labelWebsite")}</td><td><a href="https://verde-ulasli.com" target="_blank" rel="noopener noreferrer">verde-ulasli.com</a></td></tr>
             <tr><td>{t("investor.labelInstagram")}</td><td>@verde.ulasli</td></tr>
             <tr><td>{t("investor.labelEmail")}</td><td>info@verde-ulasli.com</td></tr>
           </tbody>
@@ -464,7 +478,7 @@ function BrandTab() {
       <section className="inv-section">
         <h2 className="inv-section__title">{t("investor.brandTitle")}</h2>
         <div className="inv-section__divider" />
-        <p className="inv-section__body" dangerouslySetInnerHTML={{ __html: t("investor.brandBody") }} />
+        <p className="inv-section__body"><strong>VERDE</strong> — {t("investor.brandBody")}</p>
         <table className="inv-table">
           <tbody>
             <tr><td>{t("investor.labelBrandName")}</td><td>VERDE ULAŞLI</td></tr>

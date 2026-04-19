@@ -116,7 +116,7 @@ export default function LocationMap() {
           const isLg = p.size === "lg";
           const r = isLg ? 4 : 3;
           let tx = p.x, ty = p.y;
-          let anchor: string = "start";
+          let anchor: "start" | "middle" | "end" = "start";
           let dy1 = 0, dy2 = 13;
 
           if (p.align === "l") { tx = p.x - 14; anchor = "end"; }

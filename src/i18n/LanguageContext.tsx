@@ -53,7 +53,7 @@ function detectLocale(): Locale {
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>(detectLocale);
 
-  const dir = locale === "ar" ? "rtl" : "ltr";
+  const dir: "ltr" | "rtl" = locale === "ar" ? "rtl" : "ltr";
 
   // Sync ?lang= param on navigation
   useEffect(() => {

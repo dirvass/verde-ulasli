@@ -1,5 +1,49 @@
 {
   "nav": { "home": "Ana Sayfa", "story": "Hikâyemiz", "gallery": "Galeri", "experience": "Deneyimler", "booking": "Rezervasyon", "planner": "Yatırım" },
+  "cookies": {
+    "aria": "Çerez onayı",
+    "body": "Web sitesini nasıl kullandığınızı anlamak için anonim analitik çerezler kullanıyoruz. Onay vermeden hiçbir şey kaydedilmez.",
+    "learnMore": "Daha fazla",
+    "accept": "Kabul et",
+    "reject": "Reddet",
+    "title": "Çerez politikası",
+    "intro": "VERDE Ulaşlı, ziyaretçilerin siteyi nasıl kullandığını anlamak için minimum düzeyde analitik kullanır. Dilediğiniz zaman tercihinizi değiştirebilirsiniz.",
+    "whatTitle": "Ne kullanıyoruz",
+    "whatBody": "PostHog — AB'de barındırılan gizliliğe saygılı bir analitik aracı. Yalnızca anonim sayfa görüntüleme ve etkileşim kaydeder; IP anonimleştirmesi etkindir.",
+    "choiceTitle": "Tercihiniz",
+    "choiceBody": "Kabul etmeden önce hiçbir şey kaydedilmez. Reddederseniz analitik çerez veya tanımlayıcı oluşturulmaz. Tarayıcı deponuzu temizleyerek tercihinizi değiştirebilirsiniz.",
+    "contact": "Veri koruma soruları için privacy@verde-ulasli.com adresine yazın."
+  },
+  "privacy": {
+    "title": "Gizlilik politikası",
+    "intro": "Bu bildirim, VERDE Ulaşlı'nın kişisel verileri nasıl işlediğini açıklar. Mümkün olduğunca az veri toplarız ve hiçbir zaman satmayız.",
+    "dataTitle": "Topladığımız veriler",
+    "dataBody": "İletişim formu veya WhatsApp üzerinden gönderdiğiniz rezervasyon talepleri — yalnızca e-posta kutunuzda saklanır. Anonim analitik — yalnızca çerezleri kabul ederseniz. Sitede ödeme verisi işlenmez.",
+    "rightsTitle": "Haklarınız",
+    "rightsBody": "KVKK, GDPR ve UK-DPA kapsamında verilerinize erişim, düzeltme, silme veya taşınabilirlik talep edebilirsiniz.",
+    "contact": "Veri sorumlusu: VERDE Ulaşlı · Ulaşlı, Kocaeli, Türkiye · privacy@verde-ulasli.com"
+  },
+  "terms": {
+    "title": "Kullanım koşulları",
+    "intro": "verde-ulasli.com sitesini kullanarak aşağıdaki koşulları kabul edersiniz. Rezervasyonun bağlayıcı hale gelmesi için her koşul yazılı olarak ayrıca onaylanır.",
+    "bookTitle": "Rezervasyonlar",
+    "bookBody": "Form ve WhatsApp akışı yalnızca ön taleptir. Rezervasyon; yazılı mutabakat ve depozito transferi sonrasında kesinleşir.",
+    "cancelTitle": "İptal",
+    "cancelBody": "Gelişten 14 günden önce yapılan iptallerde depozito tam olarak iade edilir. 14 gün içindeki iptallerde depozito iade edilmez. Mücbir sebep durumları ayrıca değerlendirilir.",
+    "lawTitle": "Uygulanacak hukuk",
+    "lawBody": "Bu koşullar Türkiye Cumhuriyeti yasalarına tabidir. Uyuşmazlıklarda Kocaeli mahkemeleri yetkilidir."
+  },
+  "impressum": {
+    "title": "Künye",
+    "responsible": "Sorumlu",
+    "responsibleBody": "VERDE Ulaşlı — kurucu ortaklar tarafından işletilmektedir. Ulaşlı, Kocaeli, Türkiye.",
+    "contact": "İletişim",
+    "contactBody": "info@verde-ulasli.com · Instagram @verde.ulasli",
+    "content": "İçerik",
+    "contentBody": "Tüm renderlar, fotoğraflar, metinler ve VERDE Ulaşlı markası © VERDE Ulaşlı. Yazılı izin olmadan çoğaltılamaz.",
+    "hosting": "Barındırma",
+    "hostingBody": "Cloudflare Pages (Cloudflare, Inc., 101 Townsend Street, San Francisco, CA 94107, ABD)."
+  },
   "home": {
     "badge": "Kocaeli, Ulaşlı",
     "title": "VERDE",
@@ -342,7 +386,7 @@
     "labelEmail": "E-posta",
 
     "brandTitle": "Marka Kimliği",
-    "brandBody": "<strong>VERDE</strong> — İtalyanca \"yeşil\". İslam geleneğinde cennetin rengi, İtalyan zarafetinin dili ve sizi ağırlayan toprağın özü. Körfez müşteri psikolojisi dahil çoklu kriter analiziyle 47 aday arasından seçildi.",
+    "brandBody": "İtalyanca \"yeşil\". İslam geleneğinde cennetin rengi, İtalyan zarafetinin dili ve sizi ağırlayan toprağın özü. Körfez müşteri psikolojisi dahil çoklu kriter analiziyle 47 aday arasından seçildi.",
     "labelBrandName": "Marka adı",
     "labelLogo": "Logo",
     "valueLogo": "Altın zeytin ağacı + VERDE yazı tipi",

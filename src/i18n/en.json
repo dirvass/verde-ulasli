@@ -1,5 +1,49 @@
 {
   "nav": { "home": "Home", "story": "Our Story", "gallery": "Gallery", "experience": "Experiences", "booking": "Booking", "planner": "Investment" },
+  "cookies": {
+    "aria": "Cookie consent",
+    "body": "We use analytics cookies to understand how visitors experience the estate. Nothing is tracked before you agree.",
+    "learnMore": "Learn more",
+    "accept": "Accept",
+    "reject": "Reject",
+    "title": "Cookie policy",
+    "intro": "VERDE Ulaşlı uses a minimal analytics setup to understand how visitors use the website. You can accept or reject this at any time.",
+    "whatTitle": "What we use",
+    "whatBody": "PostHog — a privacy-respecting analytics tool hosted in the EU. It records page views and anonymous interactions, with IP anonymisation enabled.",
+    "choiceTitle": "Your choice",
+    "choiceBody": "Nothing is recorded before you click Accept. If you reject, no analytics cookies or identifiers are created. You can change your choice by clearing your browser storage.",
+    "contact": "For any data-protection question, write to privacy@verde-ulasli.com."
+  },
+  "privacy": {
+    "title": "Privacy policy",
+    "intro": "This notice explains how VERDE Ulaşlı handles personal data. We collect as little as possible and never sell it.",
+    "dataTitle": "What we collect",
+    "dataBody": "Booking enquiries you send via the contact form or WhatsApp link — stored only in your email provider's inbox. Anonymous analytics — only if you accept cookies. No payment data is processed on this site.",
+    "rightsTitle": "Your rights",
+    "rightsBody": "Under GDPR, UK-DPA and KVKK you may request access, correction, deletion, or portability of your data at any time.",
+    "contact": "Controller: VERDE Ulaşlı · Ulaşlı, Kocaeli, Turkey · privacy@verde-ulasli.com"
+  },
+  "terms": {
+    "title": "Terms of use",
+    "intro": "By using verde-ulasli.com you agree to the following terms. Specific booking conditions will be confirmed in writing before any reservation becomes binding.",
+    "bookTitle": "Bookings",
+    "bookBody": "The form and WhatsApp flow are for enquiries only. A reservation is confirmed only after written agreement and receipt of the deposit by bank transfer.",
+    "cancelTitle": "Cancellation",
+    "cancelBody": "Cancellations more than 14 days before arrival receive a full refund of the deposit. Within 14 days the deposit is retained. Force-majeure situations are handled case by case.",
+    "lawTitle": "Governing law",
+    "lawBody": "These terms are governed by the law of the Republic of Turkey. Any dispute falls under the jurisdiction of the courts of Kocaeli."
+  },
+  "impressum": {
+    "title": "Legal notice / Impressum",
+    "responsible": "Responsible party",
+    "responsibleBody": "VERDE Ulaşlı — operated by the founding partners. Ulaşlı, Kocaeli, Türkiye.",
+    "contact": "Contact",
+    "contactBody": "info@verde-ulasli.com · Instagram @verde.ulasli",
+    "content": "Content",
+    "contentBody": "All renders, photographs, text and the VERDE Ulaşlı brand are © VERDE Ulaşlı. Reproduction without written consent is prohibited.",
+    "hosting": "Hosting",
+    "hostingBody": "Cloudflare Pages (Cloudflare, Inc., 101 Townsend Street, San Francisco, CA 94107, USA)."
+  },
   "home": {
     "badge": "Kocaeli, Ulasli",
     "title": "VERDE",
@@ -342,7 +386,7 @@
     "labelEmail": "Email",
 
     "brandTitle": "Brand Identity",
-    "brandBody": "<strong>VERDE</strong> — Italian for \"green\". The colour of paradise in Islamic tradition, the language of Italian elegance, and the essence of the land that hosts you. Selected from 47 candidates through a multi-criteria analysis including Gulf customer psychology.",
+    "brandBody": "Italian for \"green\". The colour of paradise in Islamic tradition, the language of Italian elegance, and the essence of the land that hosts you. Selected from 47 candidates through a multi-criteria analysis including Gulf customer psychology.",
     "labelBrandName": "Brand name",
     "labelLogo": "Logo",
     "valueLogo": "Golden olive tree + VERDE wordmark",

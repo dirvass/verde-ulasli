@@ -18,6 +18,20 @@ export default function Footer() {
         <div className="site-footer__brand">
           <span className="site-footer__logo">VERDE ULAŞLI</span>
           <p className="site-footer__tagline">{t("footer.tagline")}</p>
+          <a
+            href="https://www.instagram.com/verde.ulasli"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="site-footer__social"
+            aria-label="Instagram"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <circle cx="12" cy="12" r="5" />
+              <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none" />
+            </svg>
+            <span>@verde.ulasli</span>
+          </a>
         </div>
         <div className="site-footer__col">
           <h4 className="site-footer__heading">{t("footer.nav")}</h4>
@@ -37,6 +51,15 @@ export default function Footer() {
       </div>
       <div className="site-footer__bottom">
         <span>{t("footer.copy")}</span>
+        <span className="site-footer__legal">
+          <Link to="/privacy" className="site-footer__link">{t("privacy.title")}</Link>
+          <span aria-hidden="true"> · </span>
+          <Link to="/cookies" className="site-footer__link">{t("cookies.title")}</Link>
+          <span aria-hidden="true"> · </span>
+          <Link to="/terms" className="site-footer__link">{t("terms.title")}</Link>
+          <span aria-hidden="true"> · </span>
+          <Link to="/impressum" className="site-footer__link">{t("impressum.title")}</Link>
+        </span>
       </div>
     </footer>
   );

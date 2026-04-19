@@ -1,5 +1,49 @@
 {
   "nav": { "home": "Startseite", "story": "Unsere Geschichte", "gallery": "Galerie", "experience": "Erlebnisse", "booking": "Buchung", "planner": "Investition" },
+  "cookies": {
+    "aria": "Cookie-Zustimmung",
+    "body": "Wir verwenden anonyme Analyse-Cookies, um zu verstehen, wie Besucher die Website nutzen. Vor Ihrer Zustimmung wird nichts erfasst.",
+    "learnMore": "Mehr erfahren",
+    "accept": "Annehmen",
+    "reject": "Ablehnen",
+    "title": "Cookie-Richtlinie",
+    "intro": "VERDE Ulaşlı verwendet minimale Analysen, um die Nutzung der Website zu verstehen. Ihre Entscheidung können Sie jederzeit ändern.",
+    "whatTitle": "Was wir verwenden",
+    "whatBody": "PostHog — ein datenschutzfreundliches Analysewerkzeug mit Hosting in der EU. Es erfasst anonyme Seitenaufrufe und Interaktionen; die IP-Adresse wird anonymisiert.",
+    "choiceTitle": "Ihre Wahl",
+    "choiceBody": "Vor Ihrer Zustimmung wird nichts erfasst. Bei Ablehnung werden keine Analyse-Cookies oder Kennungen gesetzt. Sie können Ihre Entscheidung durch Leeren des Browser-Speichers ändern.",
+    "contact": "Bei Datenschutzfragen schreiben Sie an privacy@verde-ulasli.com."
+  },
+  "privacy": {
+    "title": "Datenschutzerklärung",
+    "intro": "Diese Erklärung beschreibt, wie VERDE Ulaşlı personenbezogene Daten verarbeitet. Wir erfassen so wenig wie möglich und verkaufen Daten nie.",
+    "dataTitle": "Was wir erfassen",
+    "dataBody": "Buchungsanfragen über das Kontaktformular oder WhatsApp — ausschließlich im Postfach Ihres E-Mail-Anbieters gespeichert. Anonyme Analysen — nur bei Zustimmung. Auf dieser Seite werden keine Zahlungsdaten verarbeitet.",
+    "rightsTitle": "Ihre Rechte",
+    "rightsBody": "Nach DSGVO, UK-DPA und KVKK können Sie jederzeit Auskunft, Berichtigung, Löschung oder Übertragbarkeit Ihrer Daten verlangen.",
+    "contact": "Verantwortlicher: VERDE Ulaşlı · Ulaşlı, Kocaeli, Türkei · privacy@verde-ulasli.com"
+  },
+  "terms": {
+    "title": "Nutzungsbedingungen",
+    "intro": "Mit der Nutzung von verde-ulasli.com akzeptieren Sie die folgenden Bedingungen. Konkrete Buchungskonditionen werden vor jeder verbindlichen Reservierung schriftlich bestätigt.",
+    "bookTitle": "Buchungen",
+    "bookBody": "Formular und WhatsApp dienen nur der Anfrage. Eine Reservierung ist erst nach schriftlicher Bestätigung und Eingang der Anzahlung verbindlich.",
+    "cancelTitle": "Stornierung",
+    "cancelBody": "Stornierungen mehr als 14 Tage vor Anreise werden mit voller Rückerstattung der Anzahlung bearbeitet. Innerhalb von 14 Tagen verfällt die Anzahlung. Force-Majeure-Fälle werden einzeln geprüft.",
+    "lawTitle": "Anwendbares Recht",
+    "lawBody": "Es gilt das Recht der Republik Türkei. Gerichtsstand ist Kocaeli."
+  },
+  "impressum": {
+    "title": "Impressum",
+    "responsible": "Verantwortlich",
+    "responsibleBody": "VERDE Ulaşlı — betrieben von den Gründungspartnern. Ulaşlı, Kocaeli, Türkei.",
+    "contact": "Kontakt",
+    "contactBody": "info@verde-ulasli.com · Instagram @verde.ulasli",
+    "content": "Inhalt",
+    "contentBody": "Alle Renderings, Fotos, Texte und die Marke VERDE Ulaşlı sind © VERDE Ulaşlı. Vervielfältigung nur mit schriftlicher Zustimmung.",
+    "hosting": "Hosting",
+    "hostingBody": "Cloudflare Pages (Cloudflare, Inc., 101 Townsend Street, San Francisco, CA 94107, USA)."
+  },
   "home": {
     "badge": "Kocaeli, Ulaşlı",
     "title": "VERDE",
@@ -342,7 +386,7 @@
     "labelEmail": "E-Mail",
 
     "brandTitle": "Markenidentität",
-    "brandBody": "<strong>VERDE</strong> — Italienisch für \"Grün\". Die Farbe des Paradieses in der islamischen Tradition, die Sprache italienischer Eleganz und das Wesen des Landes, das Sie empfängt. Aus 47 Kandidaten durch eine Mehrkriterienanalyse einschließlich Golf-Kundenpsychologie ausgewählt.",
+    "brandBody": "Italienisch für \"Grün\". Die Farbe des Paradieses in der islamischen Tradition, die Sprache italienischer Eleganz und das Wesen des Landes, das Sie empfängt. Aus 47 Kandidaten durch eine Mehrkriterienanalyse einschließlich Golf-Kundenpsychologie ausgewählt.",
     "labelBrandName": "Markenname",
     "labelLogo": "Logo",
     "valueLogo": "Goldener Olivenbaum + VERDE-Wortmarke",
