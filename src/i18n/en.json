@@ -208,7 +208,8 @@
     "close": "Close",
     "prev": "Previous image",
     "next": "Next image",
-    "hint": "← → to browse · ESC to close"
+    "hint": "← → to browse · ESC to close",
+    "mediaErr": "This image couldn't be loaded. We've been notified."
   },
   "planner": {
     "heroBadge": "Investment Overview",

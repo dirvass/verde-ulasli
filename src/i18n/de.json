@@ -208,7 +208,8 @@
     "close": "Schließen",
     "prev": "Vorheriges Bild",
     "next": "Nächstes Bild",
-    "hint": "← → zum Blättern · ESC zum Schließen"
+    "hint": "← → zum Blättern · ESC zum Schließen",
+    "mediaErr": "Dieses Bild konnte nicht geladen werden. Wir wurden benachrichtigt."
   },
   "planner": {
     "heroBadge": "Investitionsübersicht",

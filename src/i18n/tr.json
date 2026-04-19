@@ -208,7 +208,8 @@
     "close": "Kapat",
     "prev": "Önceki görsel",
     "next": "Sonraki görsel",
-    "hint": "← → ile gezin · ESC ile kapat"
+    "hint": "← → ile gezin · ESC ile kapat",
+    "mediaErr": "Bu görsel yüklenemedi. Sorun bize bildirildi."
   },
   "planner": {
     "heroBadge": "Yatırım Özeti",

@@ -29,8 +29,6 @@ const MEDIA: Media[] = [
   { id: "ext2-bahce-patika", type: "image", src: "/media/dis-mekan/bahce-peyzaj-patika-gunduz-render.jpg", alt: "Garden landscape with pathways", category: "exterior", featured: true },
   { id: "ext2-havuz-satranc-sauna", type: "image", src: "/media/dis-mekan/havuz-satranc-sauna-gunduz-render.jpg", alt: "Pool, chess garden & sauna pavilion", category: "exterior", featured: true },
   { id: "ext2-on-cephe-mangal", type: "image", src: "/media/dis-mekan/on-cephe-havuz-mangal-gunduz-render.jpg", alt: "Front facade with pool & outdoor kitchen", category: "exterior" },
-  { id: "ext2-sauna-jakuzi", type: "image", src: "/media/dis-mekan/sauna-jakuzi-gunduz-render.jpg", alt: "Sauna cabin & jacuzzi terrace", category: "exterior" },
-  { id: "ext2-sauna-jakuzi-gece", type: "image", src: "/media/dis-mekan/sauna-jakuzi-gece-render.jpg", alt: "Sauna cabin & jacuzzi terrace — night", category: "exterior" },
   { id: "ext2-kus-bakisi-otopark", type: "image", src: "/media/dis-mekan/kus-bakisi-otopark-gunduz-render.jpg", alt: "Bird's eye — parking & entrance", category: "exterior" },
   { id: "ext2-kus-bakisi-deniz", type: "image", src: "/media/dis-mekan/kus-bakisi-deniz-gunduz-render.jpg", alt: "Bird's eye with sea view", category: "exterior" },
   { id: "ext2-giris-deniz-golden", type: "image", src: "/media/dis-mekan/giris-avlusu-deniz-golden-hour-render.jpg", alt: "Entrance courtyard — golden hour, sea view", category: "exterior" },
@@ -278,6 +276,8 @@ export default function GalleryPage() {
   };
 
   const currentMedia = activeIndex >= 0 ? filteredItems[activeIndex] : null;
+  const [mediaErrored, setMediaErrored] = useState(false);
+  useEffect(() => { setMediaErrored(false); }, [activeId]);
 
   return (
     <>
@@ -393,12 +393,18 @@ export default function GalleryPage() {
           </button>
 
           <div className="gal-lightbox__inner" onClick={(e) => e.stopPropagation()}>
-            {currentMedia.type === "image" ? (
+            {mediaErrored ? (
+              <div className="gal-lightbox__err" role="status">
+                <span className="gal-lightbox__err-mark" aria-hidden="true">—</span>
+                <span className="gal-lightbox__err-text">{t("gallery.mediaErr")}</span>
+              </div>
+            ) : currentMedia.type === "image" ? (
               <img
                 key={currentMedia.id}
                 className="gal-lightbox__media"
                 src={currentMedia.src}
                 alt={currentMedia.alt}
+                onError={() => setMediaErrored(true)}
               />
             ) : (
               <video
@@ -410,6 +416,7 @@ export default function GalleryPage() {
                 muted
                 playsInline
                 preload="metadata"
+                onError={() => setMediaErrored(true)}
               />
             )}
             <div className="gal-lightbox__caption">

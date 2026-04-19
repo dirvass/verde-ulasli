@@ -217,6 +217,27 @@
   box-shadow:0 24px 64px rgba(0,0,0,.5);
 }
 
+/* Lightbox error fallback */
+.gal-lightbox__err{
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:14px;
+  width:min(480px, 86vw); aspect-ratio:4/3;
+  border-radius:var(--radius-md);
+  background:linear-gradient(135deg, rgba(14,26,22,.75), rgba(45,80,64,.55));
+  border:1px solid rgba(195,165,100,.2);
+  padding:24px;
+  text-align:center;
+}
+.gal-lightbox__err-mark{
+  font-family:var(--serif);
+  font-size:3rem; color:rgba(195,165,100,.5);
+  line-height:1;
+}
+.gal-lightbox__err-text{
+  color:rgba(235,232,225,.75);
+  font-size:.9rem; max-width:280px;
+}
+
 .gal-lightbox__caption{
   display:flex; align-items:center; gap:10px;
   margin-top:16px; color:rgba(255,255,255,.8); font-size:.9rem;
