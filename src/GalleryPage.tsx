@@ -73,7 +73,7 @@ const MEDIA: Media[] = [
   // ─── VIDEOS ───
   { id: "vid-1", type: "video", src: "/media/videolar/villa-video-1.mp4", alt: "Villa site tour 1", category: "construction" },
   { id: "vid-2", type: "video", src: "/media/videolar/villa-video-2.mp4", alt: "Villa site tour 2", category: "construction" },
-  { id: "vid-3", type: "video", src: "/media/videolar/villa-video-3.mp4", alt: "Villa site overview", category: "construction" },
+  { id: "vid-3", type: "video", src: "/media/videolar/villa-video-3.mp4", poster: "/media/videolar/villa-video-3-poster.jpg", alt: "Villa interior walkthrough", category: "interior" },
   { id: "vid-4", type: "video", src: "/media/videolar/villa-video-4.mp4", alt: "Construction progress walkthrough", category: "construction" },
 ];
 
