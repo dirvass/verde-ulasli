@@ -30,7 +30,6 @@ const MEDIA: Media[] = [
   { id: "ext2-havuz-satranc-sauna", type: "image", src: "/media/dis-mekan/havuz-satranc-sauna-gunduz-render.jpg", alt: "Pool, chess garden & sauna pavilion", category: "exterior", featured: true },
   { id: "ext2-on-cephe-mangal", type: "image", src: "/media/dis-mekan/on-cephe-havuz-mangal-gunduz-render.jpg", alt: "Front facade with pool & outdoor kitchen", category: "exterior" },
   { id: "ext2-sauna-jakuzi-gece", type: "image", src: "/media/dis-mekan/sauna-jakuzi-gece-render-v2.jpg", alt: "Sauna cabin & jacuzzi terrace — night", category: "exterior" },
-  { id: "ext2-kus-bakisi-otopark", type: "image", src: "/media/dis-mekan/kus-bakisi-otopark-gunduz-render.jpg", alt: "Bird's eye — parking & entrance", category: "exterior" },
   { id: "ext2-kus-bakisi-deniz", type: "image", src: "/media/dis-mekan/kus-bakisi-deniz-gunduz-render.jpg", alt: "Bird's eye with sea view", category: "exterior" },
   { id: "ext2-giris-deniz-golden", type: "image", src: "/media/dis-mekan/giris-avlusu-deniz-golden-hour-render.jpg", alt: "Entrance courtyard — golden hour, sea view", category: "exterior" },
   { id: "ext2-giris-yolu-golden", type: "image", src: "/media/dis-mekan/giris-yolu-deniz-golden-hour-render.jpg", alt: "Arrival drive — golden hour, sea backdrop", category: "exterior" },
@@ -48,10 +47,6 @@ const MEDIA: Media[] = [
   { id: "ext-giris-gece", type: "image", src: "/media/dis-mekan/giris-avlusu-gece-ai-render.jpg", alt: "Entrance courtyard — evening", category: "exterior" },
   { id: "ext-giris-peyzaj", type: "image", src: "/media/dis-mekan/giris-yolu-peyzaj-render.jpg", alt: "Landscaped entrance pathway", category: "exterior" },
   { id: "ext-kus-bakisi-gece", type: "image", src: "/media/dis-mekan/kus-bakisi-gece-ai-render.jpg", alt: "Aerial view — night", category: "exterior" },
-  { id: "ext-kus-bakisi-otopark", type: "image", src: "/media/dis-mekan/kus-bakisi-otopark-render.jpg", alt: "Aerial view with parking area", category: "exterior" },
-  { id: "ext-on-cephe-satranc", type: "image", src: "/media/dis-mekan/on-cephe-havuz-satranc-render.jpg", alt: "Pool terrace and chess garden", category: "exterior" },
-  { id: "ext-satranc-alani", type: "image", src: "/media/dis-mekan/on-cephe-satranc-alani-render.jpg", alt: "Outdoor chess area", category: "exterior" },
-  { id: "ext-arka-cephe", type: "image", src: "/media/dis-mekan/arka-cephe-otopark-render.jpg", alt: "Rear facade and parking", category: "exterior" },
   { id: "ext-yan-cephe", type: "image", src: "/media/dis-mekan/yan-cephe-genel-gorunum-render.jpg", alt: "Side view — full estate", category: "exterior" },
 
   // ─── INTERIOR RENDERS (ic-mekan) ───
