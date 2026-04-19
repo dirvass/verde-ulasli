@@ -8,15 +8,15 @@ import { usePageMeta } from "./hooks/usePageMeta";
 import "./styles/StoryPage.css";
 
 const SECTIONS = [
-  { key: "s1",  img: "/media/dis-mekan/havuz-deniz-manzarasi-konsept.jpg" },
+  { key: "s1",  img: "/media/videolar/insaat-villa-zeytin-deniz-poster.jpg" },
   { key: "s2",  img: "/media/ic-mekan/salon-somine-kahverengi-koltuk-render.jpg" },
-  { key: "s3",  img: "/media/dis-mekan/on-cephe-ates-cukuru-render.jpg" },
-  { key: "s6",  img: "/media/dis-mekan/giris-yolu-peyzaj-render.jpg" },
-  { key: "s4",  img: "/media/dis-mekan/drone-genel-gorunum-render.jpg" },
+  { key: "s3",  img: "/media/dis-mekan/havuz-deniz-manzarasi-konsept.jpg" },
+  { key: "s6",  img: "/media/videolar/insaat-cevre-manzara-poster.jpg" },
+  { key: "s4",  img: "/media/dis-mekan/bahce-peyzaj-patika-gunduz-render.jpg" },
   { key: "s7",  img: "/media/dis-mekan/giris-avlusu-gece-ai-render.jpg" },
-  { key: "s5",  img: "/media/dis-mekan/on-cephe-havuz-satranc-render.jpg" },
-  { key: "s8",  img: "/media/dis-mekan/on-cephe-satranc-alani-render.jpg" },
-  { key: "s9",  img: "/media/dis-mekan/kus-bakisi-gece-ai-render.jpg" },
+  { key: "s5",  img: "/media/insaat-sureci/insaat-on-cephe-deniz-manzarasi.jpg" },
+  { key: "s8",  img: "/media/dis-mekan/giris-avlusu-zeytin-agaci-render.jpg" },
+  { key: "s9",  img: "/media/videolar/villa-video-4-poster.jpg" },
 ];
 
 export default function StoryPage() {
