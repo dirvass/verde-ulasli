@@ -8,7 +8,7 @@ import { usePageMeta } from "./hooks/usePageMeta";
 import "./styles/StoryPage.css";
 
 const SECTIONS = [
-  { key: "s1",  img: "/media/dis-mekan/drone-genel-gorunum-render.jpg" },
+  { key: "s1",  img: "/media/dis-mekan/kus-bakisi-gunduz-ai-render.jpg" },
   { key: "s2",  img: "/media/ic-mekan/salon-somine-kahverengi-koltuk-render.jpg" },
   { key: "s3",  img: "/media/dis-mekan/havuz-deniz-manzarasi-konsept.jpg" },
   { key: "s6",  img: "/media/dis-mekan/giris-yolu-deniz-golden-hour-render.jpg" },
