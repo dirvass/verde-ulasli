@@ -59,6 +59,10 @@ const MEDIA: Media[] = [
   { id: "int-yatak-yesil", type: "image", src: "/media/ic-mekan/yatak-odasi-yesil-dus-render.png", alt: "Bedroom with walk-in shower", category: "interior" },
 
   // ─── CONSTRUCTION PROCESS (insaat-sureci) ───
+  // New site-visit videos lead the section for prominence.
+  { id: "vid-villa-zeytin-deniz", type: "video", src: "/media/videolar/insaat-villa-zeytin-deniz.mp4", poster: "/media/videolar/insaat-villa-zeytin-deniz-poster.jpg", alt: "Villa shell with olive tree and sea view", category: "construction" },
+  { id: "vid-arazi-zeytin", type: "video", src: "/media/videolar/insaat-arazi-zeytin.mp4", poster: "/media/videolar/insaat-arazi-zeytin-poster.jpg", alt: "Walking the land — olive trees and terraced grounds", category: "construction" },
+  { id: "vid-cevre-manzara", type: "video", src: "/media/videolar/insaat-cevre-manzara.mp4", poster: "/media/videolar/insaat-cevre-manzara-poster.jpg", alt: "Forested slopes and Marmara panorama from the site", category: "construction" },
   { id: "con-on-cephe-deniz", type: "image", src: "/media/insaat-sureci/insaat-on-cephe-deniz-manzarasi.jpg", alt: "Twin villa shells facing the sea — golden hour", category: "construction", featured: true },
   { id: "con-foto3", type: "image", src: "/media/insaat-sureci/insaat-fotograf-3.jpg", alt: "Foundation formwork with sea panorama", category: "construction", featured: true },
   { id: "con-arazi", type: "image", src: "/media/insaat-sureci/arazi-hazirligi-genel-gorunum.jpg", alt: "Site preparation — overview", category: "construction" },
@@ -76,9 +80,6 @@ const MEDIA: Media[] = [
   { id: "vid-2", type: "video", src: "/media/videolar/villa-video-2.mp4", alt: "Villa site tour 2", category: "construction" },
   { id: "vid-3", type: "video", src: "/media/videolar/villa-video-3.mp4", poster: "/media/videolar/villa-video-3-poster.jpg", alt: "Villa interior walkthrough", category: "interior" },
   { id: "vid-4", type: "video", src: "/media/videolar/villa-video-4.mp4", alt: "Construction progress walkthrough", category: "construction" },
-  { id: "vid-villa-zeytin-deniz", type: "video", src: "/media/videolar/insaat-villa-zeytin-deniz.mp4", poster: "/media/videolar/insaat-villa-zeytin-deniz-poster.jpg", alt: "Villa shell with olive tree and sea view", category: "construction" },
-  { id: "vid-arazi-zeytin", type: "video", src: "/media/videolar/insaat-arazi-zeytin.mp4", poster: "/media/videolar/insaat-arazi-zeytin-poster.jpg", alt: "Walking the land — olive trees and terraced grounds", category: "construction" },
-  { id: "vid-cevre-manzara", type: "video", src: "/media/videolar/insaat-cevre-manzara.mp4", poster: "/media/videolar/insaat-cevre-manzara-poster.jpg", alt: "Forested slopes and Marmara panorama from the site", category: "construction" },
 ];
 
 function MediaThumb({ item }: { item: Media }) {
