@@ -27,6 +27,47 @@ export function writeConsent(v: Consent) {
 
 let loaded = false;
 
+/**
+ * Strip email addresses and phone-number-like sequences from any string
+ * property before it is sent to PostHog. Guards against accidental PII
+ * leakage through URL query strings, referrers, form values, etc.
+ */
+const EMAIL_RX = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
+const PHONE_RX = /\+?\d[\d\s().-]{7,}\d/g;
+
+function sanitizeProperties(props: Record<string, unknown>): Record<string, unknown> {
+  const out: Record<string, unknown> = {};
+  for (const [k, v] of Object.entries(props)) {
+    if (typeof v === "string") {
+      out[k] = v.replace(EMAIL_RX, "[redacted-email]").replace(PHONE_RX, "[redacted-phone]");
+    } else {
+      out[k] = v;
+    }
+  }
+  return out;
+}
+
+/**
+ * GeoIP and IP properties PostHog adds server-side during ingestion.
+ * Blacklisting them drops the values at the client before any event is sent.
+ */
+const PRIVACY_BLACKLIST = [
+  "$ip",
+  "$geoip_city_name",
+  "$geoip_country_name",
+  "$geoip_country_code",
+  "$geoip_continent_name",
+  "$geoip_continent_code",
+  "$geoip_postal_code",
+  "$geoip_latitude",
+  "$geoip_longitude",
+  "$geoip_time_zone",
+  "$geoip_subdivision_1_code",
+  "$geoip_subdivision_1_name",
+  "$geoip_subdivision_2_code",
+  "$geoip_subdivision_2_name",
+];
+
 export function initAnalytics() {
   if (loaded) return;
   if (readConsent() !== "accepted") return;
@@ -54,6 +95,15 @@ export function initAnalytics() {
     autocapture: true,
     persistence: "localStorage+cookie",
     disable_session_recording: true,
+
+    // Privacy hardening
+    respect_dnt: true,
+    secure_cookie: true,
+    cross_subdomain_cookie: false,
+    property_blacklist: PRIVACY_BLACKLIST,
+    sanitize_properties: sanitizeProperties,
+    mask_all_text: true,
+    mask_all_element_attributes: true,
   });
 }
 
