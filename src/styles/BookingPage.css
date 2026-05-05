@@ -236,7 +236,7 @@
   align-self:flex-start;
 }
 .bk-stepper__btn{
-  width:34px; height:34px; border-radius:var(--radius-pill);
+  width:44px; height:44px; border-radius:var(--radius-pill);
   border:none; background:#fff;
   color:var(--brand); font-size:1.15rem; font-weight:600;
   cursor:pointer; display:inline-flex; align-items:center; justify-content:center;

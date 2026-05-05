@@ -117,6 +117,7 @@
     "minNights": "{{min}}+ gece",
     "warnDates": "Lütfen giriş ve çıkış tarihlerini seçin.",
     "warnMin": "Minimum konaklama süresi {{min}} gecedir.",
+    "warnBlocked": "Seçilen tarihler dolu bir dönemle çakışıyor. Lütfen başka bir aralık seçin.",
     "dotSelected": "Seçili",
     "dotUnavail": "Dolu",
     "dotAvail": "Müsait",

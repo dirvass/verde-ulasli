@@ -59,14 +59,6 @@ export default function Home() {
           <p className="home-hero__tagline">{t("home.tagline")}</p>
           <div className="home-hero__divider" />
           <p className="home-hero__subtitle">{t("home.subtitle")}</p>
-          <div className="home-hero__actions">
-            <Link to="/book" className="home-hero__cta home-hero__cta--primary">
-              {t("home.ctaReserve")}
-            </Link>
-            <Link to="/story" className="home-hero__cta home-hero__cta--ghost">
-              {t("home.ctaStory")}
-            </Link>
-          </div>
         </div>
         <button
           type="button"

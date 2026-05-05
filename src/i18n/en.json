@@ -117,6 +117,7 @@
     "minNights": "{{min}}+ nights",
     "warnDates": "Please select check-in and check-out dates.",
     "warnMin": "Minimum stay is {{min}} nights.",
+    "warnBlocked": "Selected dates overlap an unavailable period. Please choose another range.",
     "dotSelected": "Selected",
     "dotUnavail": "Unavailable",
     "dotAvail": "Available",

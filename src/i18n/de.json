@@ -117,6 +117,7 @@
     "minNights": "{{min}}+ Nächte",
     "warnDates": "Bitte wählen Sie An- und Abreisedatum.",
     "warnMin": "Mindestaufenthalt ist {{min}} Nächte.",
+    "warnBlocked": "Die gewählten Daten überschneiden sich mit einem belegten Zeitraum. Bitte wählen Sie einen anderen Bereich.",
     "dotSelected": "Ausgewählt",
     "dotUnavail": "Nicht verfügbar",
     "dotAvail": "Verfügbar",

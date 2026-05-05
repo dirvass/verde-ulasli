@@ -1,6 +1,10 @@
 import React, { useMemo, useState, useEffect } from "react";
 import TopNav from "./components/TopNav";
-import { getBooked, setBooked, VillaKey, BookedRange } from "./availability";
+import {
+  getBooked, fetchBooked, saveBooked,
+  getAdminToken, setAdminToken, clearAdminToken,
+  VillaKey, BookedRange,
+} from "./availability";
 import "./styles/AdminPage.css";
 
 const VILLAS: VillaKey[] = ["ALYA", "ZEHRA"];
@@ -17,7 +21,6 @@ function rangeIssue(r: BookedRange, others: BookedRange[]): RangeIssue {
   const today = todayIso();
   if (r.to < today) return "past";
   if (r.from > r.to) return "reversed";
-  // Overlap check — two ranges overlap if neither ends before the other starts
   for (const o of others) {
     if (!o.from || !o.to) continue;
     if (!(r.to < o.from || o.to < r.from)) return "overlap";
@@ -29,8 +32,20 @@ export default function AdminPage() {
   const [data, setData] = useState(() => getBooked());
   const [heroVis, setHeroVis] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => { const t = setTimeout(() => setHeroVis(true), 100); return () => clearTimeout(t); }, []);
+
+  // Load latest from server on mount.
+  useEffect(() => {
+    let alive = true;
+    fetchBooked()
+      .then(d => { if (alive) setData(d); })
+      .finally(() => { if (alive) setLoading(false); });
+    return () => { alive = false; };
+  }, []);
 
   const issues = useMemo(() => {
     const out: Record<VillaKey, RangeIssue[]> = { ALYA: [], ZEHRA: [] };
@@ -43,11 +58,8 @@ export default function AdminPage() {
   const hasBlocking = VILLAS.some(v => issues[v].some(i => i === "past" || i === "reversed" || i === "overlap"));
 
   function addRange(villa: VillaKey) {
-    setData(prev => ({
-      ...prev,
-      [villa]: [...prev[villa], { from: "", to: "" }],
-    }));
-    setSaved(false);
+    setData(prev => ({ ...prev, [villa]: [...prev[villa], { from: "", to: "" }] }));
+    setSaved(false); setError(null);
   }
 
   function updateRange(villa: VillaKey, idx: number, field: "from" | "to", value: string) {
@@ -55,27 +67,43 @@ export default function AdminPage() {
       ...prev,
       [villa]: prev[villa].map((r, i) => i === idx ? { ...r, [field]: value } : r),
     }));
-    setSaved(false);
+    setSaved(false); setError(null);
   }
 
   function removeRange(villa: VillaKey, idx: number) {
-    setData(prev => ({
-      ...prev,
-      [villa]: prev[villa].filter((_, i) => i !== idx),
-    }));
-    setSaved(false);
+    setData(prev => ({ ...prev, [villa]: prev[villa].filter((_, i) => i !== idx) }));
+    setSaved(false); setError(null);
   }
 
-  function save() {
-    // Filter out incomplete ranges
+  async function save() {
     const cleaned: Record<VillaKey, BookedRange[]> = { ALYA: [], ZEHRA: [] };
-    for (const v of VILLAS) {
-      cleaned[v] = data[v].filter(r => r.from && r.to);
+    for (const v of VILLAS) cleaned[v] = data[v].filter(r => r.from && r.to);
+
+    let token = getAdminToken();
+    if (!token) {
+      const entered = window.prompt("Admin token (set in Cloudflare Pages → Settings → Environment variables):");
+      if (!entered) return;
+      token = entered.trim();
+      setAdminToken(token);
     }
-    setBooked(cleaned);
-    setData(cleaned);
-    setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
+
+    setSaving(true); setError(null);
+    try {
+      const fresh = await saveBooked(cleaned, token);
+      setData(fresh);
+      setSaved(true);
+      setTimeout(() => setSaved(false), 3000);
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : "save-failed";
+      if (msg === "unauthorized") {
+        clearAdminToken();
+        setError("Token rejected. Click Save again to re-enter.");
+      } else {
+        setError(`Could not save (${msg}). Check connection and try again.`);
+      }
+    } finally {
+      setSaving(false);
+    }
   }
 
   const total = VILLAS.reduce((a, v) => a + data[v].length, 0);
@@ -90,7 +118,7 @@ export default function AdminPage() {
           <span className="admin-hero__badge">Extranet</span>
           <h1 className="admin-hero__title">Availability Manager</h1>
           <div className="admin-hero__line" />
-          <p className="admin-hero__sub">Manage booked dates for each villa. Changes are saved locally and reflected on the booking page.</p>
+          <p className="admin-hero__sub">Manage booked dates for each villa. Saved to the server and reflected on the booking page for all visitors.</p>
         </div>
       </header>
 
@@ -99,7 +127,7 @@ export default function AdminPage() {
         <div className="admin-stats">
           <div className="admin-stat">
             <span className="admin-stat__label">Total Bookings</span>
-            <span className="admin-stat__value">{total}</span>
+            <span className="admin-stat__value">{loading ? "…" : total}</span>
           </div>
           {VILLAS.map(v => (
             <div key={v} className="admin-stat">
@@ -109,7 +137,6 @@ export default function AdminPage() {
           ))}
         </div>
 
-        {/* Villa sections */}
         {VILLAS.map(v => (
           <section key={v} className="admin-villa">
             <div className="admin-villa__head">
@@ -165,21 +192,22 @@ export default function AdminPage() {
           </section>
         ))}
 
-        {/* Save */}
         <div className="admin-save">
           <button
             type="button"
             className="admin-btn admin-btn--save"
             onClick={save}
-            disabled={hasBlocking}
-            aria-disabled={hasBlocking}
+            disabled={hasBlocking || saving}
+            aria-disabled={hasBlocking || saving}
           >
-            {saved ? "Saved \u2713" : "Save Changes"}
+            {saving ? "Saving…" : saved ? "Saved ✓" : "Save Changes"}
           </button>
           <p className="admin-save__hint">
-            {hasBlocking
-              ? "Resolve validation errors above before saving."
-              : "Changes are stored in your browser and will apply to the booking calendar immediately."}
+            {error
+              ? error
+              : hasBlocking
+                ? "Resolve validation errors above before saving."
+                : "Changes are saved to the server and apply to the booking calendar immediately for all visitors."}
           </p>
         </div>
       </main>

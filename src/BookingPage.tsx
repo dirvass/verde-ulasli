@@ -1,11 +1,11 @@
 import TopNav from "./components/TopNav";
 import React, { useEffect, useState } from "react";
 import { DayPicker, DateRange } from "react-day-picker";
-import { differenceInCalendarDays, format, isBefore, startOfToday } from "date-fns";
+import { differenceInCalendarDays, format, isBefore, startOfToday, eachDayOfInterval, isWithinInterval } from "date-fns";
 import "react-day-picker/dist/style.css";
 import { useLanguage } from "./i18n/LanguageContext";
 import { usePageMeta } from "./hooks/usePageMeta";
-import { getBooked, toDateRanges } from "./availability";
+import { getBooked, fetchBooked, toDateRanges } from "./availability";
 import "./styles/BookingPage.css";
 
 /* ── Feature flag: set to true to show pricing breakdown publicly ── */
@@ -113,8 +113,30 @@ export default function BookingPage() {
   const [quadH, setQuadH] = useState(0);
   const [transfers, setTransfers] = useState(0);
   const [calMonths, setCalMonths] = useState(1);
+  const [bookedData, setBookedData] = useState(() => getBooked());
 
   useEffect(() => { const tm = setTimeout(() => setHeroVis(true), 100); return () => clearTimeout(tm); }, []);
+
+  // Live availability — fetch from API on mount and when the tab regains focus.
+  // Also reflect storage updates from the same browser so admin edits propagate locally.
+  useEffect(() => {
+    let alive = true;
+    const refresh = () => { fetchBooked().then(d => { if (alive) setBookedData(d); }); };
+    refresh();
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === "verde-booked" || e.key === null) setBookedData(getBooked());
+    };
+    const onFocus = () => refresh();
+    window.addEventListener("storage", onStorage);
+    window.addEventListener("focus", onFocus);
+    document.addEventListener("visibilitychange", refresh);
+    return () => {
+      alive = false;
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener("focus", onFocus);
+      document.removeEventListener("visibilitychange", refresh);
+    };
+  }, []);
 
   const nights = nightsOf(range);
   const vi = VILLAS[villa];
@@ -135,9 +157,17 @@ export default function BookingPage() {
   const total = sub + svc;
 
   const today = startOfToday();
-  const bookedData = getBooked();
-  const disabled = [{ before: today }, ...toDateRanges(bookedData[villa])];
-  const ok = nights >= MIN_NIGHTS && !overCap;
+  const blockedRanges = toDateRanges(bookedData[villa]);
+  const disabled = [{ before: today }, ...blockedRanges];
+
+  // Reject ranges that span across an already-blocked period.
+  const crossesBlocked = !!(range?.from && range?.to && blockedRanges.some(b =>
+    eachDayOfInterval({ start: range.from!, end: range.to! }).some(d =>
+      isWithinInterval(d, { start: b.from, end: b.to })
+    )
+  ));
+
+  const ok = nights >= MIN_NIGHTS && !overCap && !crossesBlocked;
 
   const waText = encodeURIComponent([
     t("booking.waMsg"),
@@ -170,7 +200,7 @@ export default function BookingPage() {
   // Derived step-validity flags for the step-error highlight
   const datesMissing = !range?.from || !range?.to;
   const stepError = {
-    dates: showVal && (datesMissing || underMin),
+    dates: showVal && (datesMissing || underMin || crossesBlocked),
     guests: showVal && overCap,
   };
 
@@ -269,6 +299,9 @@ export default function BookingPage() {
           )}
           {showVal && !ok && rangeOk && underMin && (
             <div className="bk-warn" role="alert">{t("booking.warnMin", { min: MIN_NIGHTS })}</div>
+          )}
+          {rangeOk && crossesBlocked && (
+            <div className="bk-warn" role="alert">{t("booking.warnBlocked")}</div>
           )}
 
           <div className="bk-cal" id="bk-cal">
@@ -547,7 +580,13 @@ export default function BookingPage() {
 
             {showVal && !ok && (
               <div className="bk-warn" role="status" style={{ marginTop: 12 }}>
-                {!range?.from || !range?.to ? t("booking.warnDates") : underMin ? t("booking.warnMin", { min: MIN_NIGHTS }) : t("booking.warnCap", { villa: vi.name, max: vi.sleeps })}
+                {!range?.from || !range?.to
+                  ? t("booking.warnDates")
+                  : crossesBlocked
+                    ? t("booking.warnBlocked")
+                    : underMin
+                      ? t("booking.warnMin", { min: MIN_NIGHTS })
+                      : t("booking.warnCap", { villa: vi.name, max: vi.sleeps })}
               </div>
             )}
 
