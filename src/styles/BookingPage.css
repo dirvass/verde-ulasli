@@ -469,3 +469,93 @@
 /* Nav styles live in components.css */
 
 /* ── Old .booking styles removed — see .bk prefix above ── */
+
+/* ── Contact form (06) ── */
+.bk-contact{
+  display:grid; gap:16px;
+  grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+}
+.bk-field{ display:flex; flex-direction:column; gap:6px }
+.bk-field__label{
+  font-size:.78rem; font-weight:600; letter-spacing:.08em;
+  text-transform:uppercase; color:var(--muted);
+}
+.bk-field__input{
+  padding:14px 16px; border-radius:14px;
+  border:1px solid rgba(45,80,64,.18); background:#fff;
+  font-size:.95rem; color:var(--ink); font-family:inherit;
+  transition:border-color .2s ease, box-shadow .2s ease;
+}
+.bk-field__input:focus{
+  outline:none; border-color:var(--brand);
+  box-shadow:0 0 0 3px rgba(45,80,64,.12);
+}
+.bk-field__input[aria-invalid="true"]{
+  border-color:rgba(239,68,68,.55);
+  box-shadow:0 0 0 3px rgba(239,68,68,.10);
+}
+
+/* ── Single wide CTA ── */
+.bk-summary__actions--single{ display:flex; justify-content:center }
+.bk-cta--wide{ min-width:260px; padding:16px 36px }
+
+/* ── Success card ── */
+.bk--success{ padding-top:48px; padding-bottom:120px }
+.bk-success{
+  max-width:620px; margin:0 auto;
+  background:#fff; border:1px solid rgba(226,232,240,.7);
+  border-radius:24px; padding:56px 40px;
+  text-align:center;
+  box-shadow:0 24px 60px rgba(14,26,22,.08);
+  animation:bk-in .6s ease both;
+}
+.bk-success__eyebrow{
+  display:inline-block; font-size:.72rem; font-weight:700;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--brand);
+}
+.bk-success__title{
+  font-family:var(--serif); font-size:clamp(2rem, 4vw, 2.6rem);
+  font-weight:400; color:var(--ink); margin-top:12px; letter-spacing:.02em;
+}
+.bk-success__line{
+  width:48px; height:1px; background:rgba(45,80,64,.35);
+  margin:24px auto;
+}
+.bk-success__body{
+  font-size:1rem; color:var(--ink); line-height:1.6;
+  max-width:440px; margin:0 auto;
+}
+.bk-success__ref{
+  display:inline-flex; flex-direction:column; align-items:center;
+  margin-top:32px; padding:18px 28px;
+  background:var(--brand-tint, rgba(45,80,64,.06));
+  border-radius:14px; gap:6px;
+}
+.bk-success__refLabel{
+  font-size:.72rem; font-weight:700; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--muted);
+}
+.bk-success__refValue{
+  font-family:var(--serif); font-size:1.6rem; font-weight:600;
+  color:var(--brand); letter-spacing:.04em;
+}
+.bk-success__hint{
+  font-size:.85rem; color:var(--muted); margin-top:24px;
+}
+
+/* ── Gentle tone overrides ── */
+.bk__section{ padding:44px 0 }
+.bk__section:not(:last-of-type){ border-bottom-color:rgba(226,232,240,.4) }
+.bk__step{
+  width:38px; height:38px; font-size:.95rem;
+  background:transparent; border:1px solid rgba(45,80,64,.22);
+  color:rgba(45,80,64,.78);
+}
+.bk__section-head{ gap:16px; margin-bottom:24px }
+.bk-villa{ box-shadow:0 4px 16px rgba(14,26,22,.04) }
+.bk-villa--active{ box-shadow:0 8px 24px rgba(45,80,64,.12) }
+
+@media (max-width:640px){
+  .bk-success{ padding:40px 24px; border-radius:20px }
+  .bk-cta--wide{ width:100% }
+}

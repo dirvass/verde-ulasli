@@ -38,12 +38,7 @@ const TRANSFER_PER_WAY = 100;
 const TRANSFER_INCLUDED_NIGHTS = 7;
 const MIN_NIGHTS = 3;
 const DEPOSIT = 500;
-
-const CONTACT = {
-  whatsappNumber: "905370123285",
-  whatsappDisplay: "+90 537 012 32 85",
-  email: "reservations@verde-ulasli.com",
-} as const;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /* ── helpers ── */
 function nightsOf(r: DateRange | undefined) {
@@ -115,6 +110,15 @@ export default function BookingPage() {
   const [calMonths, setCalMonths] = useState(1);
   const [bookedData, setBookedData] = useState(() => getBooked());
 
+  // Contact + submission
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [honeypot, setHoneypot] = useState(""); // bots fill every field
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [submitted, setSubmitted] = useState<{ reference: string } | null>(null);
+
   useEffect(() => { const tm = setTimeout(() => setHeroVis(true), 100); return () => clearTimeout(tm); }, []);
 
   // Live availability — fetch from API on mount and when the tab regains focus.
@@ -167,28 +171,65 @@ export default function BookingPage() {
     )
   ));
 
-  const ok = nights >= MIN_NIGHTS && !overCap && !crossesBlocked;
-
-  const waText = encodeURIComponent([
-    t("booking.waMsg"),
-    `Villa: ${vi.name}`,
-    range?.from ? `Check-in: ${format(range.from, "dd MMM yyyy")}` : "Check-in: –",
-    range?.to   ? `Check-out: ${format(range.to,  "dd MMM yyyy")}` : "Check-out: –",
-    `Nights: ${nights}`, `Guests: ${adults} adults, ${children} children, ${infants} infants`,
-    `Extras: Chef=${chef?"Yes":"No"}, Quad=${quadH}h, Transfers=${xferInc?"Included":`${transfers} way(s)`}`,
-    `Estimate: ${euro(total)} (excl. deposit \u20AC${DEPOSIT})`,
-    note ? `Note: ${note}` : "",
-  ].filter(Boolean).join("\n"));
-  const waUrl = `https://wa.me/${CONTACT.whatsappNumber}?text=${waText}`;
-  const mailSubject = encodeURIComponent(`Booking – ${vi.name}`);
-  const mailUrl = `mailto:${CONTACT.email}?subject=${mailSubject}&body=${waText}`;
+  const dateOk = nights >= MIN_NIGHTS && !crossesBlocked;
+  const guestsOk = !overCap;
+  const nameOk = name.trim().length >= 2;
+  const emailOk = EMAIL_RE.test(email.trim());
+  const phoneOk = phone.trim().length >= 5;
+  const contactOk = nameOk && emailOk && phoneOk;
+  const ok = dateOk && guestsOk && contactOk;
 
   const scroll = (id: string) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "center" });
-  const send = (type: "wa" | "mail") => {
-    if (!ok) { setShowVal(true); scroll("bk-cal"); return; }
-    if (type === "wa") window.open(waUrl, "_blank", "noopener,noreferrer");
-    else window.location.href = mailUrl;
-  };
+
+  async function submitEnquiry() {
+    if (submitting) return;
+    if (!ok) {
+      setShowVal(true);
+      if (!range?.from || !range?.to || crossesBlocked || underMin) scroll("bk-cal");
+      else if (overCap) scroll("bk-guests");
+      else scroll("bk-contact");
+      return;
+    }
+    setSubmitting(true);
+    setSubmitError(null);
+    try {
+      const guestStr = `${adults} adults, ${children} children, ${infants} infants`;
+      const noteCombined = [
+        note,
+        chef ? `Chef dinner: yes (${nights} nights)` : "",
+        quadH > 0 ? `Quad bike: ${quadH}h` : "",
+        !xferInc && transfers > 0 ? `Transfers: ${transfers} way(s)` : "",
+      ].filter(Boolean).join("\n");
+
+      const res = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          villa,
+          checkIn:  format(range!.from!, "yyyy-MM-dd"),
+          checkOut: format(range!.to!,   "yyyy-MM-dd"),
+          nights,
+          guests: guestStr,
+          name:  name.trim(),
+          email: email.trim(),
+          phone: phone.trim(),
+          note:  noteCombined,
+          company: honeypot,
+        }),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({} as any));
+        throw new Error(err?.error || `HTTP ${res.status}`);
+      }
+      const body = await res.json();
+      setSubmitted({ reference: String(body?.reference || "—") });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (e) {
+      setSubmitError(e instanceof Error ? e.message : "submit-failed");
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   useEffect(() => {
     const up = () => setCalMonths(window.innerWidth >= 1440 ? 3 : window.innerWidth >= 768 ? 2 : 1);
@@ -202,6 +243,7 @@ export default function BookingPage() {
   const stepError = {
     dates: showVal && (datesMissing || underMin || crossesBlocked),
     guests: showVal && overCap,
+    contact: showVal && !contactOk,
   };
 
   const rangeOk = Boolean(range?.from && range?.to);
@@ -225,6 +267,21 @@ export default function BookingPage() {
         </div>
       </header>
 
+      {submitted ? (
+        <main className="bk bk--success">
+          <section className="bk-success">
+            <span className="bk-success__eyebrow">{t("booking.successEyebrow")}</span>
+            <h2 className="bk-success__title">{t("booking.successTitle")}</h2>
+            <div className="bk-success__line" aria-hidden="true" />
+            <p className="bk-success__body">{t("booking.successBody")}</p>
+            <div className="bk-success__ref">
+              <span className="bk-success__refLabel">{t("booking.successRefLabel")}</span>
+              <strong className="bk-success__refValue tnum">{submitted.reference}</strong>
+            </div>
+            <p className="bk-success__hint">{t("booking.successHint")}</p>
+          </section>
+        </main>
+      ) : (
       <main className="bk">
         {/* ═══ 1 · VILLA SELECTION ═══ */}
         <section className="bk__section">
@@ -472,6 +529,73 @@ export default function BookingPage() {
           </div>
         </section>
 
+        {/* ═══ 6 · YOUR DETAILS ═══ */}
+        <section className="bk__section" id="bk-contact">
+          <div className="bk__section-head">
+            <span className={`bk__step ${stepError.contact ? "bk__step--error" : ""}`}>06</span>
+            <div>
+              <h2 className="bk__section-title">{t("booking.s6Title")}</h2>
+              <p className="bk__section-desc">{t("booking.s6Desc")}</p>
+            </div>
+          </div>
+
+          <div className="bk-contact">
+            <label className="bk-field">
+              <span className="bk-field__label">{t("booking.nameLabel")}</span>
+              <input
+                type="text"
+                className="bk-field__input"
+                value={name}
+                onChange={(e) => setName(e.target.value.slice(0, 120))}
+                placeholder={t("booking.namePh")}
+                autoComplete="name"
+                aria-invalid={showVal && !nameOk}
+              />
+            </label>
+            <label className="bk-field">
+              <span className="bk-field__label">{t("booking.emailLabel")}</span>
+              <input
+                type="email"
+                className="bk-field__input"
+                value={email}
+                onChange={(e) => setEmail(e.target.value.slice(0, 200))}
+                placeholder={t("booking.emailPh")}
+                autoComplete="email"
+                inputMode="email"
+                aria-invalid={showVal && !emailOk}
+              />
+            </label>
+            <label className="bk-field">
+              <span className="bk-field__label">{t("booking.phoneLabel")}</span>
+              <input
+                type="tel"
+                className="bk-field__input"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value.slice(0, 60))}
+                placeholder={t("booking.phonePh")}
+                autoComplete="tel"
+                inputMode="tel"
+                aria-invalid={showVal && !phoneOk}
+              />
+            </label>
+          </div>
+
+          {/* honeypot — hidden from users, bots fill it */}
+          <input
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+            style={{ position: "absolute", left: "-9999px", height: 0, width: 0, opacity: 0 }}
+            aria-hidden="true"
+          />
+
+          {showVal && !contactOk && (
+            <div className="bk-warn" role="alert">{t("booking.warnContact")}</div>
+          )}
+        </section>
+
         {/* ═══ SUMMARY & CTA ═══ */}
         <section className="bk-summary" id="bk-summary">
           <div className="bk-summary__inner">
@@ -590,30 +714,26 @@ export default function BookingPage() {
               </div>
             )}
 
-            <div className="bk-summary__actions">
-              <button className="bk-cta bk-cta--primary" onClick={() => send("wa")}>
-                {t("booking.ctaWA")}
-              </button>
-              <button className="bk-cta bk-cta--ghost" onClick={() => send("mail")}>
-                {t("booking.ctaEmail")}
+            {submitError && (
+              <div className="bk-warn" role="alert" style={{ marginTop: 12 }}>
+                {t("booking.submitError")}
+              </div>
+            )}
+
+            <div className="bk-summary__actions bk-summary__actions--single">
+              <button
+                type="button"
+                className="bk-cta bk-cta--primary bk-cta--wide"
+                onClick={submitEnquiry}
+                disabled={submitting}
+              >
+                {submitting ? t("booking.ctaSubmitting") : t("booking.ctaSubmit")}
               </button>
             </div>
-
-            <p className="bk-summary__contact">
-              {t("booking.contact", { phone: CONTACT.whatsappDisplay })}
-            </p>
           </div>
         </section>
       </main>
-
-      {/* ═══ MOBILE STICKY BAR ═══ */}
-      <div className="bk-mobile-bar">
-        <div>
-          <strong className="bk-mobile-bar__total">{SHOW_PRICING ? euro(total) : t("booking.summaryTitle")}</strong>
-          <span className="bk-mobile-bar__sub">{nights ? nightLabel(nights) : t("booking.mobileAdd")}</span>
-        </div>
-        <button className="bk-cta bk-cta--primary bk-cta--sm" onClick={() => send("wa")}>{t("booking.mobileRes")}</button>
-      </div>
+      )}
     </>
   );
 }

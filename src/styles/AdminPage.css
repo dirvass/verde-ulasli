@@ -168,3 +168,70 @@
   .admin-range{ flex-wrap:wrap }
   .admin-range__arrow{ display:none }
 }
+
+/* ── Tabs ── */
+.admin-tabs{
+  display:flex; gap:8px; margin-top:32px; padding:6px;
+  background:#fff; border:1px solid rgba(226,232,240,.6); border-radius:14px;
+  width:fit-content;
+}
+.admin-tab{
+  padding:10px 20px; border:none; background:transparent; cursor:pointer;
+  font-size:.9rem; font-weight:600; letter-spacing:.04em; color:var(--muted);
+  border-radius:10px;
+  transition:background .2s ease, color .2s ease;
+}
+.admin-tab:hover{ color:var(--ink) }
+.admin-tab--active{ background:var(--brand); color:#fff }
+
+/* ── Enquiries list ── */
+.admin-enquiries{ margin-top:32px }
+.admin-enquiries__head{
+  display:flex; align-items:center; justify-content:space-between; margin-bottom:24px;
+}
+.admin-enquiries__title{
+  font-family:var(--serif); font-size:1.6rem; font-weight:500; color:var(--ink);
+}
+.admin-enquiries__error{
+  padding:14px 18px; border-radius:12px;
+  background:rgba(239,68,68,.08); color:#b91c1c;
+  border:1px solid rgba(239,68,68,.25);
+  font-size:.9rem;
+}
+.admin-enquiries__list{ display:flex; flex-direction:column; gap:16px }
+.admin-enq{
+  background:#fff; border:1px solid rgba(226,232,240,.7);
+  border-radius:16px; padding:20px 24px;
+  box-shadow:0 4px 16px rgba(14,26,22,.04);
+}
+.admin-enq__head{
+  display:flex; align-items:center; gap:16px; margin-bottom:14px;
+}
+.admin-enq__ref{
+  font-family:var(--serif); font-size:1.05rem; font-weight:600;
+  color:var(--brand); letter-spacing:.04em;
+}
+.admin-enq__when{
+  font-size:.8rem; color:var(--muted); margin-left:auto;
+}
+.admin-enq__grid{
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+  gap:12px 24px; margin-bottom:8px;
+}
+.admin-enq__grid > div{ display:flex; flex-direction:column; gap:2px }
+.admin-enq__grid span{
+  font-size:.7rem; font-weight:700; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--muted);
+}
+.admin-enq__grid strong{
+  font-size:.92rem; font-weight:500; color:var(--ink);
+  word-break:break-word;
+}
+.admin-enq__grid a{ color:var(--brand); text-decoration:none }
+.admin-enq__grid a:hover{ text-decoration:underline }
+.admin-enq__note{
+  margin-top:12px; padding:12px 14px;
+  background:rgba(45,80,64,.04); border-left:3px solid var(--brand);
+  border-radius:6px; font-size:.88rem; color:var(--ink);
+  white-space:pre-wrap; line-height:1.5;
+}

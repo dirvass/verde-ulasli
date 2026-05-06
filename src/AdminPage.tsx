@@ -28,13 +28,98 @@ function rangeIssue(r: BookedRange, others: BookedRange[]): RangeIssue {
   return "ok";
 }
 
+type Enquiry = {
+  reference: string;
+  villa: string;
+  checkIn: string;
+  checkOut: string;
+  nights: number;
+  guests: string;
+  name: string;
+  email: string;
+  phone: string;
+  note: string;
+  createdAt: string;
+};
+
+async function fetchEnquiries(token: string): Promise<Enquiry[]> {
+  const res = await fetch("/api/enquiry", { headers: { authorization: `Bearer ${token}` } });
+  if (res.status === 401) throw new Error("unauthorized");
+  if (!res.ok) throw new Error(`fetch-failed:${res.status}`);
+  const body = await res.json();
+  return Array.isArray(body?.items) ? body.items : [];
+}
+
+async function deleteEnquiry(id: string, token: string): Promise<void> {
+  const res = await fetch(`/api/enquiry?id=${encodeURIComponent(id)}`, {
+    method: "DELETE",
+    headers: { authorization: `Bearer ${token}` },
+  });
+  if (res.status === 401) throw new Error("unauthorized");
+  if (!res.ok) throw new Error(`delete-failed:${res.status}`);
+}
+
 export default function AdminPage() {
+  const [tab, setTab] = useState<"availability" | "enquiries">("availability");
   const [data, setData] = useState(() => getBooked());
   const [heroVis, setHeroVis] = useState(false);
   const [saved, setSaved] = useState(false);
   const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const [enquiries, setEnquiries] = useState<Enquiry[]>([]);
+  const [enqLoading, setEnqLoading] = useState(false);
+  const [enqError, setEnqError] = useState<string | null>(null);
+  const [enqLoaded, setEnqLoaded] = useState(false);
+
+  async function ensureToken(): Promise<string | null> {
+    let token = getAdminToken();
+    if (!token) {
+      const entered = window.prompt("Admin token:");
+      if (!entered) return null;
+      token = entered.trim();
+      setAdminToken(token);
+    }
+    return token;
+  }
+
+  async function loadEnquiries() {
+    const token = await ensureToken();
+    if (!token) return;
+    setEnqLoading(true);
+    setEnqError(null);
+    try {
+      const items = await fetchEnquiries(token);
+      setEnquiries(items);
+      setEnqLoaded(true);
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : "fetch-failed";
+      if (msg === "unauthorized") { clearAdminToken(); setEnqError("Token rejected. Click again to re-enter."); }
+      else setEnqError(`Could not load (${msg}).`);
+    } finally {
+      setEnqLoading(false);
+    }
+  }
+
+  async function removeEnquiry(id: string) {
+    if (!confirm(`Delete enquiry ${id}? This cannot be undone.`)) return;
+    const token = await ensureToken();
+    if (!token) return;
+    try {
+      await deleteEnquiry(id, token);
+      setEnquiries(prev => prev.filter(e => e.reference !== id));
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : "delete-failed";
+      if (msg === "unauthorized") { clearAdminToken(); setEnqError("Token rejected. Click again to re-enter."); }
+      else setEnqError(`Could not delete (${msg}).`);
+    }
+  }
+
+  useEffect(() => {
+    if (tab === "enquiries" && !enqLoaded && !enqLoading) loadEnquiries();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tab]);
 
   useEffect(() => { const t = setTimeout(() => setHeroVis(true), 100); return () => clearTimeout(t); }, []);
 
@@ -123,6 +208,27 @@ export default function AdminPage() {
       </header>
 
       <main className="admin">
+        {/* Tabs */}
+        <div className="admin-tabs" role="tablist">
+          <button
+            role="tab"
+            aria-selected={tab === "availability"}
+            className={`admin-tab ${tab === "availability" ? "admin-tab--active" : ""}`}
+            onClick={() => setTab("availability")}
+          >
+            Availability
+          </button>
+          <button
+            role="tab"
+            aria-selected={tab === "enquiries"}
+            className={`admin-tab ${tab === "enquiries" ? "admin-tab--active" : ""}`}
+            onClick={() => setTab("enquiries")}
+          >
+            Enquiries{enqLoaded ? ` (${enquiries.length})` : ""}
+          </button>
+        </div>
+
+        {tab === "availability" && (<>
         {/* Stats */}
         <div className="admin-stats">
           <div className="admin-stat">
@@ -210,6 +316,50 @@ export default function AdminPage() {
                 : "Changes are saved to the server and apply to the booking calendar immediately for all visitors."}
           </p>
         </div>
+        </>)}
+
+        {tab === "enquiries" && (
+          <section className="admin-enquiries">
+            <div className="admin-enquiries__head">
+              <h2 className="admin-enquiries__title">Enquiries</h2>
+              <button className="admin-btn admin-btn--add" onClick={loadEnquiries} disabled={enqLoading}>
+                {enqLoading ? "Loading…" : "Refresh"}
+              </button>
+            </div>
+
+            {enqError && <p className="admin-enquiries__error" role="alert">{enqError}</p>}
+
+            {enqLoaded && enquiries.length === 0 && !enqError && (
+              <p className="admin-empty">No enquiries yet.</p>
+            )}
+
+            <div className="admin-enquiries__list">
+              {enquiries.map(e => (
+                <article key={e.reference} className="admin-enq">
+                  <div className="admin-enq__head">
+                    <span className="admin-enq__ref">{e.reference}</span>
+                    <span className="admin-enq__when">{new Date(e.createdAt).toLocaleString()}</span>
+                    <button
+                      type="button"
+                      className="admin-btn admin-btn--del"
+                      aria-label={`Delete ${e.reference}`}
+                      onClick={() => removeEnquiry(e.reference)}
+                    >×</button>
+                  </div>
+                  <div className="admin-enq__grid">
+                    <div><span>Villa</span><strong>{e.villa}</strong></div>
+                    <div><span>Dates</span><strong>{e.checkIn} → {e.checkOut} ({e.nights}n)</strong></div>
+                    <div><span>Name</span><strong>{e.name}</strong></div>
+                    <div><span>Email</span><strong><a href={`mailto:${e.email}`}>{e.email}</a></strong></div>
+                    <div><span>Phone</span><strong><a href={`tel:${e.phone}`}>{e.phone}</a></strong></div>
+                    <div><span>Guests</span><strong>{e.guests}</strong></div>
+                  </div>
+                  {e.note && <p className="admin-enq__note">{e.note}</p>}
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
       </main>
     </>
   );
