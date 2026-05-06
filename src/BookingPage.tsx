@@ -572,14 +572,14 @@ export default function BookingPage() {
             </label>
           </div>
 
-          {/* honeypot — hidden from users, bots fill it */}
+          {/* honeypot — visually hidden without affecting layout */}
           <input
             type="text"
             tabIndex={-1}
             autoComplete="off"
             value={honeypot}
             onChange={(e) => setHoneypot(e.target.value)}
-            style={{ position: "absolute", left: "-9999px", height: 0, width: 0, opacity: 0 }}
+            className="bk-honeypot"
             aria-hidden="true"
           />
 
