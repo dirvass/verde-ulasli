@@ -99,7 +99,7 @@ async function writeIndex(env: Env, ids: string[]): Promise<void> {
 export const onRequestOptions: PagesFunction<Env> = async () =>
   new Response(null, { status: 204, headers: corsHeaders });
 
-export const onRequestPost: PagesFunction<Env> = async ({ env, request }) => {
+export const onRequestPost: PagesFunction<Env> = async ({ env, request, waitUntil }) => {
   let body: any;
   try { body = await request.json(); } catch { return json({ error: "invalid-json" }, { status: 400 }); }
 
@@ -145,19 +145,20 @@ export const onRequestPost: PagesFunction<Env> = async ({ env, request }) => {
   }
   await writeIndex(env, idx);
 
-  // Fire-and-forget to Apps Script
+  // Fire-and-forget to Apps Script — keep the handler alive until the call lands.
   if (env.APPS_SCRIPT_URL && env.APPS_SCRIPT_SECRET) {
     const payload = {
       secret: env.APPS_SCRIPT_SECRET,
       enquiry: { reference, villa, checkIn, checkOut, nights, guests, name, email, phone, note },
     };
-    // Don't await — return success to client immediately
-    fetch(env.APPS_SCRIPT_URL, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(payload),
-      redirect: "follow",
-    }).catch(() => { /* swallow — KV is the source of truth */ });
+    waitUntil(
+      fetch(env.APPS_SCRIPT_URL, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(payload),
+        redirect: "follow",
+      }).then(() => undefined).catch(() => undefined),
+    );
   }
 
   return json({ ok: true, reference });
