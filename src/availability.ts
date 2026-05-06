@@ -101,15 +101,15 @@ export async function saveBooked(
 }
 
 export function getAdminToken(): string {
-  try { return sessionStorage.getItem(ADMIN_TOKEN_KEY) || ""; } catch { return ""; }
+  try { return localStorage.getItem(ADMIN_TOKEN_KEY) || ""; } catch { return ""; }
 }
 
 export function setAdminToken(token: string) {
-  try { sessionStorage.setItem(ADMIN_TOKEN_KEY, token); } catch { /* swallow */ }
+  try { localStorage.setItem(ADMIN_TOKEN_KEY, token); } catch { /* swallow */ }
 }
 
 export function clearAdminToken() {
-  try { sessionStorage.removeItem(ADMIN_TOKEN_KEY); } catch { /* swallow */ }
+  try { localStorage.removeItem(ADMIN_TOKEN_KEY); } catch { /* swallow */ }
 }
 
 /** Convert stored ISO strings to Date objects for DayPicker */
