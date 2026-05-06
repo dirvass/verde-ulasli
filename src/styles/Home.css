@@ -6,7 +6,8 @@
 .home-hero{
   position:relative;
   min-height:100vh; min-height:100dvh;
-  display:flex; align-items:center; justify-content:center;
+  display:flex; align-items:flex-end; justify-content:center;
+  padding-bottom:clamp(96px, 14vh, 140px);
   overflow:hidden; color:#fff;
 }
 
@@ -21,15 +22,17 @@
   transform:scale(1);
 }
 
-/* Gradient overlay */
+/* Gradient overlay — light at the top so the view stays clean,
+   stronger at the bottom where the wordmark sits */
 .home-hero__overlay{
   position:absolute; inset:0; z-index:1;
   background:
     linear-gradient(180deg,
-      rgba(14,26,22,.72) 0%,
-      rgba(14,26,22,.35) 40%,
-      rgba(14,26,22,.18) 65%,
-      rgba(14,26,22,.55) 100%
+      rgba(14,26,22,.32) 0%,
+      rgba(14,26,22,.12) 25%,
+      rgba(14,26,22,.10) 50%,
+      rgba(14,26,22,.55) 78%,
+      rgba(14,26,22,.85) 100%
     );
 }
 
@@ -61,11 +64,11 @@
 /* Title */
 .home-hero__title{
   font-family:var(--serif);
-  font-size:clamp(4rem, 12vw, 9rem);
+  font-size:clamp(3rem, 8vw, 6rem);
   font-weight:400;
   letter-spacing:.15em;
   line-height:1;
-  margin-top:28px;
+  margin-top:18px;
   opacity:0; transform:translateY(30px);
   transition:opacity 1s ease .5s, transform 1s ease .5s;
 }
@@ -93,7 +96,7 @@
 .home-hero__divider{
   width:60px; height:1px;
   background:rgba(255,255,255,.35);
-  margin:24px 0;
+  margin:18px 0;
   opacity:0; transform:scaleX(0);
   transition:opacity .6s ease 1s, transform .8s ease 1s;
 }
