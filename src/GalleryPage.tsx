@@ -26,6 +26,14 @@ const MEDIA: Media[] = [
   // ─── EXTERIOR ───
   { id: "ext-havuz-deniz", type: "image", src: "/media/dis-mekan/havuz-deniz-manzarasi-konsept.jpg", alt: "Infinity pool with sea panorama", category: "exterior", featured: true },
 
+  // ─── EXTERIOR — PEYZAJ RENDER III (May 2026) ───
+  { id: "ext3-pivot-kapi", type: "image", src: "/media/dis-mekan/giris-pivot-kapi-render.jpg", alt: "Entrance with reeded pivot oak door", category: "exterior", featured: true },
+  { id: "ext3-kus-bakisi-genel", type: "image", src: "/media/dis-mekan/kus-bakisi-genel-deniz-render.jpg", alt: "Estate aerial — full grounds with sea horizon", category: "exterior", featured: true },
+  { id: "ext3-arka-cephe-cicek", type: "image", src: "/media/dis-mekan/arka-cephe-bahce-cicek-render.jpg", alt: "Rear view aerial — gardens in spring bloom", category: "exterior" },
+  { id: "ext3-yan-aci-genel", type: "image", src: "/media/dis-mekan/kus-bakisi-yan-aci-render.jpg", alt: "Wide bird's-eye — landscaped grounds and forest", category: "exterior" },
+  { id: "ext3-satranc-ates", type: "image", src: "/media/dis-mekan/yan-cephe-satranc-ates-render.jpg", alt: "Side view with chess garden and fire pit terrace", category: "exterior" },
+  { id: "ext3-giris-otopark", type: "image", src: "/media/dis-mekan/giris-cephe-otopark-render.jpg", alt: "Arrival forecourt with private parking bays", category: "exterior" },
+
   { id: "ext2-bahce-patika", type: "image", src: "/media/dis-mekan/bahce-peyzaj-patika-gunduz-render.jpg", alt: "Garden landscape with pathways", category: "exterior", featured: true },
   { id: "ext2-havuz-satranc-sauna", type: "image", src: "/media/dis-mekan/havuz-satranc-sauna-gunduz-render.jpg", alt: "Pool, chess garden & sauna pavilion", category: "exterior", featured: true },
   { id: "ext2-on-cephe-mangal", type: "image", src: "/media/dis-mekan/on-cephe-havuz-mangal-gunduz-render.jpg", alt: "Front facade with pool & outdoor kitchen", category: "exterior" },
@@ -49,14 +57,18 @@ const MEDIA: Media[] = [
   { id: "ext-kus-bakisi-gece", type: "image", src: "/media/dis-mekan/kus-bakisi-gece-ai-render.jpg", alt: "Aerial view — night", category: "exterior" },
   { id: "ext-yan-cephe", type: "image", src: "/media/dis-mekan/yan-cephe-genel-gorunum-render.jpg", alt: "Side view — full estate", category: "exterior" },
 
-  // ─── INTERIOR RENDERS (ic-mekan) ───
-  { id: "int-salon-deniz", type: "image", src: "/media/ic-mekan/salon-deniz-manzarasi-render.jpg", alt: "Living room with sea view", category: "interior", featured: true },
-  { id: "int-yatak-banyo", type: "image", src: "/media/ic-mekan/yatak-odasi-banyolu-manzara-render.jpg", alt: "Master bedroom with en-suite bath", category: "interior", featured: true },
-  { id: "int-mutfak", type: "image", src: "/media/ic-mekan/mutfak-ada-tezgah-render.jpg", alt: "Kitchen with island counter", category: "interior" },
-  { id: "int-salon-somine", type: "image", src: "/media/ic-mekan/salon-somine-kahverengi-koltuk-render.jpg", alt: "Lounge with fireplace", category: "interior" },
-  { id: "int-salon-manzara", type: "image", src: "/media/ic-mekan/salon-somine-manzara-render.jpg", alt: "Salon with fireplace and panoramic view", category: "interior" },
-  { id: "int-yatak-minimalist", type: "image", src: "/media/ic-mekan/yatak-odasi-genis-minimalist-render.jpg", alt: "Minimalist bedroom suite", category: "interior" },
-  { id: "int-yatak-yesil", type: "image", src: "/media/ic-mekan/yatak-odasi-yesil-dus-render.png", alt: "Bedroom with walk-in shower", category: "interior" },
+  // ─── INTERIOR RENDERS (ic-mekan) — refreshed Jun 2026: real-site views, wow order ───
+  { id: "int-infinity-havuz", type: "image", src: "/media/ic-mekan/salon-infinity-havuz-manzara-render.jpg", alt: "Great room opening to the infinity pool and forested gulf view", category: "interior", featured: true },
+  { id: "int-yesil-dus-manzara", type: "image", src: "/media/ic-mekan/yatak-odasi-yesil-dus-manzara-render.jpg", alt: "Master bedroom with green walk-in shower and gulf view", category: "interior", featured: true },
+  { id: "int-kuvet-manzara", type: "image", src: "/media/ic-mekan/yatak-odasi-kuvet-manzara-render.jpg", alt: "Master bedroom with freestanding tub and panoramic view", category: "interior", featured: true },
+  { id: "int-loft-deniz", type: "image", src: "/media/ic-mekan/loft-yatak-odasi-deniz-render.jpg", alt: "Double-height loft bedroom with mezzanine and view", category: "interior" },
+  { id: "int-loft-asma", type: "image", src: "/media/ic-mekan/loft-yatak-odasi-asma-kat-render.jpg", alt: "Loft bedroom with mezzanine bed", category: "interior" },
+  { id: "int-somine", type: "image", src: "/media/ic-mekan/salon-somine-deri-koltuk-render.jpg", alt: "Living room with fireplace and leather sofa", category: "interior" },
+  { id: "int-banyo-yesil", type: "image", src: "/media/ic-mekan/banyo-yesil-dus-render.jpg", alt: "Bathroom with green herringbone walk-in shower", category: "interior" },
+  { id: "int-mutfak", type: "image", src: "/media/ic-mekan/mutfak-ada-yeni-render.jpg", alt: "Kitchen with marble island", category: "interior" },
+  { id: "int-yemek", type: "image", src: "/media/ic-mekan/yemek-odasi-render.jpg", alt: "Dining area with open kitchen", category: "interior" },
+  { id: "int-salon-deri", type: "image", src: "/media/ic-mekan/salon-deri-koltuk-manzara-render.jpg", alt: "Lounge with leather sofa", category: "interior" },
+  { id: "int-misafir-yatak", type: "image", src: "/media/ic-mekan/misafir-yatak-odasi-render.jpg", alt: "Guest bedroom", category: "interior" },
 
   // ─── CONSTRUCTION PROCESS (insaat-sureci) ───
   // New site-visit videos lead the section for prominence.
