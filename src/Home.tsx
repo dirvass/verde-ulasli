@@ -103,7 +103,7 @@ export default function Home() {
             <img
               className="home-agro__img"
               src="/media/dis-mekan/drone-genel-gorunum-render.jpg"
-              alt="Verde Ulasli estate aerial"
+              alt="Verde Ulasli resort aerial"
               loading="lazy"
             />
           </div>

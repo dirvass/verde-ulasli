@@ -1,4 +1,4 @@
-# VERDE ULAŞLI — Turkey's First Agro-Luxury Villa Estate
+# VERDE ULAŞLI — Turkey's First Agro-Luxury Villa Resort
 
 Live: **https://verde-ulasli.com**
 

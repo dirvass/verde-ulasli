@@ -28,7 +28,7 @@ const MEDIA: Media[] = [
 
   // ─── EXTERIOR — PEYZAJ RENDER III (May 2026) ───
   { id: "ext3-pivot-kapi", type: "image", src: "/media/dis-mekan/giris-pivot-kapi-render.jpg", alt: "Entrance with reeded pivot oak door", category: "exterior", featured: true },
-  { id: "ext3-kus-bakisi-genel", type: "image", src: "/media/dis-mekan/kus-bakisi-genel-deniz-render.jpg", alt: "Estate aerial — full grounds with sea horizon", category: "exterior", featured: true },
+  { id: "ext3-kus-bakisi-genel", type: "image", src: "/media/dis-mekan/kus-bakisi-genel-deniz-render.jpg", alt: "Resort aerial — full grounds with sea horizon", category: "exterior", featured: true },
   { id: "ext3-arka-cephe-cicek", type: "image", src: "/media/dis-mekan/arka-cephe-bahce-cicek-render.jpg", alt: "Rear view aerial — gardens in spring bloom", category: "exterior" },
   { id: "ext3-yan-aci-genel", type: "image", src: "/media/dis-mekan/kus-bakisi-yan-aci-render.jpg", alt: "Wide bird's-eye — landscaped grounds and forest", category: "exterior" },
   { id: "ext3-satranc-ates", type: "image", src: "/media/dis-mekan/yan-cephe-satranc-ates-render.jpg", alt: "Side view with chess garden and fire pit terrace", category: "exterior" },
@@ -51,11 +51,11 @@ const MEDIA: Media[] = [
   { id: "vid-yayla", type: "video", src: "/media/videolar/kuzu-yayla.mp4", poster: "/media/videolar/kuzu-yayla-poster.jpg", alt: "Kuzu Yayla — highland meadows and mountain views", category: "construction" },
   { id: "ext-kus-bakisi-gunduz", type: "image", src: "/media/dis-mekan/kus-bakisi-gunduz-ai-render.jpg", alt: "Aerial view — daytime", category: "exterior", featured: true },
   { id: "ext-on-cephe-ates", type: "image", src: "/media/dis-mekan/on-cephe-ates-cukuru-render.jpg", alt: "Front facade with fire pit", category: "exterior", featured: true },
-  { id: "ext-drone-genel", type: "image", src: "/media/dis-mekan/drone-genel-gorunum-render.jpg", alt: "Drone overview of the estate", category: "exterior" },
+  { id: "ext-drone-genel", type: "image", src: "/media/dis-mekan/drone-genel-gorunum-render.jpg", alt: "Drone overview of the resort", category: "exterior" },
   { id: "ext-giris-gece", type: "image", src: "/media/dis-mekan/giris-avlusu-gece-ai-render.jpg", alt: "Entrance courtyard — evening", category: "exterior" },
   { id: "ext-giris-peyzaj", type: "image", src: "/media/dis-mekan/giris-yolu-peyzaj-render.jpg", alt: "Landscaped entrance pathway", category: "exterior" },
   { id: "ext-kus-bakisi-gece", type: "image", src: "/media/dis-mekan/kus-bakisi-gece-ai-render.jpg", alt: "Aerial view — night", category: "exterior" },
-  { id: "ext-yan-cephe", type: "image", src: "/media/dis-mekan/yan-cephe-genel-gorunum-render.jpg", alt: "Side view — full estate", category: "exterior" },
+  { id: "ext-yan-cephe", type: "image", src: "/media/dis-mekan/yan-cephe-genel-gorunum-render.jpg", alt: "Side view — full resort", category: "exterior" },
 
   // ─── INTERIOR RENDERS (ic-mekan) — curated set, wow order ───
   // Two "wow" hero rooms lead the section (and the whole gallery): the master

@@ -128,17 +128,17 @@ export function usePageMeta(titleKey: string, descKey: string) {
         { "@type": "LocationFeatureSpecification", name: "Infinity pool", value: true },
         { "@type": "LocationFeatureSpecification", name: "Organic garden", value: true },
         { "@type": "LocationFeatureSpecification", name: "Sauna", value: true },
-        { "@type": "LocationFeatureSpecification", name: "Private estate", value: true },
+        { "@type": "LocationFeatureSpecification", name: "Private resort", value: true },
       ],
     });
 
     return () => {
       document.querySelectorAll('link[rel="alternate"][hreflang]').forEach(el => el.remove());
       removeJsonLd();
-      document.title = "VERDE Ulaşlı — Agro-Luxury Villa Estate";
-      setMeta("name", "description", "Turkey's first agro-luxury villa estate. Two private villas on 5,500 m² of living land in Kocaeli.");
-      setMeta("property", "og:title", "VERDE Ulaşlı — Agro-Luxury Villa Estate");
-      setMeta("property", "og:description", "Turkey's first agro-luxury villa estate. Two private villas on 5,500 m² of living land in Kocaeli.");
+      document.title = "VERDE Ulaşlı — Agro-Luxury Villa Resort";
+      setMeta("name", "description", "Turkey's first agro-luxury villa resort. Two private villas on 5,500 m² of living land in Kocaeli.");
+      setMeta("property", "og:title", "VERDE Ulaşlı — Agro-Luxury Villa Resort");
+      setMeta("property", "og:description", "Turkey's first agro-luxury villa resort. Two private villas on 5,500 m² of living land in Kocaeli.");
       setMeta("property", "og:locale", "en_US");
     };
   }, [t, titleKey, descKey, locale]);
