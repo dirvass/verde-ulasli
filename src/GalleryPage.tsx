@@ -58,8 +58,8 @@ const MEDIA: Media[] = [
   { id: "ext-yan-cephe", type: "image", src: "/media/dis-mekan/yan-cephe-genel-gorunum-render.jpg", alt: "Side view — full estate", category: "exterior" },
 
   // ─── INTERIOR RENDERS (ic-mekan) — refreshed Jun 2026: real-site views, wow order ───
-  { id: "int-infinity-havuz", type: "image", src: "/media/ic-mekan/salon-infinity-havuz-manzara-render.jpg", alt: "Great room opening to the infinity pool and forested gulf view", category: "interior", featured: true },
-  { id: "int-yesil-dus-manzara", type: "image", src: "/media/ic-mekan/yatak-odasi-yesil-dus-manzara-render.jpg", alt: "Master bedroom with green walk-in shower and gulf view", category: "interior", featured: true },
+  { id: "int-infinity-havuz", type: "image", src: "/media/ic-mekan/salon-infinity-havuz-manzara-render-v2.jpg", alt: "Great room opening to the infinity pool and forested gulf view", category: "interior", featured: true },
+  { id: "int-yesil-dus-manzara", type: "image", src: "/media/ic-mekan/yatak-odasi-yesil-dus-manzara-render-v2.jpg", alt: "Master bedroom with green walk-in shower and gulf view", category: "interior", featured: true },
   { id: "int-kuvet-manzara", type: "image", src: "/media/ic-mekan/yatak-odasi-kuvet-manzara-render.jpg", alt: "Master bedroom with freestanding tub and panoramic view", category: "interior", featured: true },
   { id: "int-loft-deniz", type: "image", src: "/media/ic-mekan/loft-yatak-odasi-deniz-render.jpg", alt: "Double-height loft bedroom with mezzanine and view", category: "interior" },
   { id: "int-loft-asma", type: "image", src: "/media/ic-mekan/loft-yatak-odasi-asma-kat-render.jpg", alt: "Loft bedroom with mezzanine bed", category: "interior" },
