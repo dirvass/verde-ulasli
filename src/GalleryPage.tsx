@@ -57,10 +57,9 @@ const MEDIA: Media[] = [
   { id: "ext-kus-bakisi-gece", type: "image", src: "/media/dis-mekan/kus-bakisi-gece-ai-render.jpg", alt: "Aerial view — night", category: "exterior" },
   { id: "ext-yan-cephe", type: "image", src: "/media/dis-mekan/yan-cephe-genel-gorunum-render.jpg", alt: "Side view — full estate", category: "exterior" },
 
-  // ─── INTERIOR RENDERS (ic-mekan) — refreshed Jun 2026: real-site views, wow order ───
+  // ─── INTERIOR RENDERS (ic-mekan) — curated set, wow order ───
   { id: "int-infinity-havuz", type: "image", src: "/media/ic-mekan/salon-infinity-havuz-manzara-render-v2.jpg", alt: "Great room opening to the infinity pool and forested gulf view", category: "interior", featured: true },
   { id: "int-yesil-dus-manzara", type: "image", src: "/media/ic-mekan/yatak-odasi-yesil-dus-manzara-render-v2.jpg", alt: "Master bedroom with green walk-in shower and gulf view", category: "interior", featured: true },
-  { id: "int-kuvet-manzara", type: "image", src: "/media/ic-mekan/yatak-odasi-kuvet-manzara-render.jpg", alt: "Master bedroom with freestanding tub and panoramic view", category: "interior", featured: true },
   { id: "int-loft-deniz", type: "image", src: "/media/ic-mekan/loft-yatak-odasi-deniz-render.jpg", alt: "Double-height loft bedroom with mezzanine and view", category: "interior" },
   { id: "int-loft-asma", type: "image", src: "/media/ic-mekan/loft-yatak-odasi-asma-kat-render.jpg", alt: "Loft bedroom with mezzanine bed", category: "interior" },
   { id: "int-somine", type: "image", src: "/media/ic-mekan/salon-somine-deri-koltuk-render.jpg", alt: "Living room with fireplace and leather sofa", category: "interior" },
@@ -68,7 +67,10 @@ const MEDIA: Media[] = [
   { id: "int-mutfak", type: "image", src: "/media/ic-mekan/mutfak-ada-yeni-render.jpg", alt: "Kitchen with marble island", category: "interior" },
   { id: "int-yemek", type: "image", src: "/media/ic-mekan/yemek-odasi-render.jpg", alt: "Dining area with open kitchen", category: "interior" },
   { id: "int-salon-deri", type: "image", src: "/media/ic-mekan/salon-deri-koltuk-manzara-render.jpg", alt: "Lounge with leather sofa", category: "interior" },
-  { id: "int-misafir-yatak", type: "image", src: "/media/ic-mekan/misafir-yatak-odasi-render.jpg", alt: "Guest bedroom", category: "interior" },
+  { id: "int-sinema", type: "image", src: "/media/ic-mekan/ev-sinema-render.jpg", alt: "Home cinema room", category: "interior" },
+  { id: "int-giyinme", type: "image", src: "/media/ic-mekan/giyinme-odasi-render.jpg", alt: "Walk-in dressing room", category: "interior" },
+  { id: "int-tuvalet", type: "image", src: "/media/ic-mekan/misafir-tuvalet-render.jpg", alt: "Powder room", category: "interior" },
+  { id: "int-giyinme-koridor", type: "image", src: "/media/ic-mekan/giyinme-odasi-koridor-render.jpg", alt: "Dressing corridor with display shelving", category: "interior" },
 
   // ─── CONSTRUCTION PROCESS (insaat-sureci) ───
   // New site-visit videos lead the section for prominence.
