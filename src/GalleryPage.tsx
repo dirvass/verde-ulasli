@@ -61,7 +61,7 @@ const MEDIA: Media[] = [
   // Two "wow" hero rooms lead the section (and the whole gallery): the master
   // suite with the freestanding tub over the gulf, then the fireplace lounge.
   { id: "int-kuvet-deniz", type: "image", src: "/media/ic-mekan/yatak-odasi-kuvet-deniz-render.jpg", alt: "Master suite with freestanding tub and panoramic gulf view", category: "interior", featured: true },
-  { id: "int-somine", type: "image", src: "/media/ic-mekan/salon-somine-deri-koltuk-render.jpg", alt: "Living room with fireplace, leather sofa and gulf view", category: "interior", featured: true },
+  { id: "int-somine", type: "image", src: "/media/ic-mekan/salon-somine-deri-koltuk-render-v2.jpg", alt: "Living room with fireplace, leather sofa and gulf view", category: "interior", featured: true },
   { id: "int-infinity-havuz", type: "image", src: "/media/ic-mekan/salon-infinity-havuz-manzara-render-v2.jpg", alt: "Great room opening to the infinity pool and forested gulf view", category: "interior", featured: true },
   { id: "int-yesil-dus-manzara", type: "image", src: "/media/ic-mekan/yatak-odasi-yesil-dus-manzara-render-v2.jpg", alt: "Master bedroom with green walk-in shower and gulf view", category: "interior", featured: true },
   { id: "int-loft-deniz", type: "image", src: "/media/ic-mekan/loft-yatak-odasi-deniz-render.jpg", alt: "Double-height loft bedroom with mezzanine and view", category: "interior" },
