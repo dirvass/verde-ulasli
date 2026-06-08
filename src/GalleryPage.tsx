@@ -69,8 +69,8 @@ const MEDIA: Media[] = [
   { id: "int-salon-deri", type: "image", src: "/media/ic-mekan/salon-deri-koltuk-manzara-render.jpg", alt: "Lounge with leather sofa", category: "interior" },
   { id: "int-sinema", type: "image", src: "/media/ic-mekan/ev-sinema-render.jpg", alt: "Home cinema room", category: "interior" },
   { id: "int-giyinme", type: "image", src: "/media/ic-mekan/giyinme-odasi-render.jpg", alt: "Walk-in dressing room", category: "interior" },
-  { id: "int-tuvalet", type: "image", src: "/media/ic-mekan/misafir-tuvalet-render.jpg", alt: "Powder room", category: "interior" },
-  { id: "int-giyinme-koridor", type: "image", src: "/media/ic-mekan/giyinme-odasi-koridor-render.jpg", alt: "Dressing corridor with display shelving", category: "interior" },
+  { id: "int-tuvalet", type: "image", src: "/media/ic-mekan/misafir-tuvalet-render-v2.jpg", alt: "Powder room", category: "interior" },
+  { id: "int-giyinme-koridor", type: "image", src: "/media/ic-mekan/giyinme-odasi-koridor-render-v2.jpg", alt: "Dressing corridor with display shelving", category: "interior" },
 
   // ─── CONSTRUCTION PROCESS (insaat-sureci) ───
   // New site-visit videos lead the section for prominence.
