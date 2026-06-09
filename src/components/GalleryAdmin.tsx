@@ -1,18 +1,19 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import { fetchManifest, saveManifest, uploadImage } from "../galleryStore";
 import { CATEGORIES, FRONTS, type GalleryItem } from "../data/galleryTypes";
-import { getAdminToken, setAdminToken, clearAdminToken } from "../availability";
 import { resizeImage } from "../lib/imageResize";
 
 /** Owner-facing gallery manager. Edits the manifest locally, then publishes it
- *  to the live site via Save. Reorder by drag (or the ↑ ↓ buttons on touch). */
-export default function GalleryAdmin() {
+ *  to the live site via Save. Reorder by drag (or the ↑ ↓ buttons on touch).
+ *  The session token comes from the parent — this never prompts on its own. */
+export default function GalleryAdmin({ token, onAuthError }: { token: string; onAuthError: () => void }) {
   const [items, setItems] = useState<GalleryItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(0);
+  const [dirty, setDirty] = useState(false);
   const dragFrom = useRef<number | null>(null);
 
   useEffect(() => {
@@ -21,20 +22,17 @@ export default function GalleryAdmin() {
     return () => { alive = false; };
   }, []);
 
-  function ensureToken(): string | null {
-    let token = getAdminToken();
-    if (!token) {
-      const entered = window.prompt("Admin token:");
-      if (!entered) return null;
-      token = entered.trim();
-      setAdminToken(token);
-    }
-    return token;
-  }
+  // Warn before leaving with unsaved arrangement changes.
+  useEffect(() => {
+    if (!dirty) return;
+    const warn = (e: BeforeUnloadEvent) => { e.preventDefault(); e.returnValue = ""; };
+    window.addEventListener("beforeunload", warn);
+    return () => window.removeEventListener("beforeunload", warn);
+  }, [dirty]);
 
   const setField = (i: number, field: keyof GalleryItem, value: string) => {
     setItems((p) => p.map((it, idx) => (idx === i ? { ...it, [field]: value } : it)));
-    setSaved(false);
+    setSaved(false); setDirty(true);
   };
 
   const move = (i: number, dir: -1 | 1) =>
@@ -43,14 +41,14 @@ export default function GalleryAdmin() {
       if (j < 0 || j >= p.length) return p;
       const next = p.slice();
       [next[i], next[j]] = [next[j], next[i]];
-      setSaved(false);
+      setSaved(false); setDirty(true);
       return next;
     });
 
   const removeItem = (i: number) =>
     setItems((p) => {
       if (!window.confirm("Remove this photo from the gallery?")) return p;
-      setSaved(false);
+      setSaved(false); setDirty(true);
       return p.filter((_, idx) => idx !== i);
     });
 
@@ -62,49 +60,46 @@ export default function GalleryAdmin() {
       const next = p.slice();
       const [moved] = next.splice(from, 1);
       next.splice(to, 0, moved);
-      setSaved(false);
+      setSaved(false); setDirty(true);
       return next;
     });
 
   const onUploadFiles = useCallback(async (files: FileList | null) => {
     if (!files || files.length === 0) return;
-    const token = ensureToken();
-    if (!token) return;
     setError(null);
     for (const file of Array.from(files)) {
       setBusy((b) => b + 1);
       try {
         const { blob, ext } = await resizeImage(file);
         const { src } = await uploadImage(blob, ext, token);
+        // Prepend so the new photo is immediately visible at the top, ready to place.
         setItems((p) => [
-          ...p,
           { id: crypto.randomUUID(), type: "image", src, category: "interior", front: "off", caption: "" },
+          ...p,
         ]);
-        setSaved(false);
+        setSaved(false); setDirty(true);
       } catch (e) {
         const msg = e instanceof Error ? e.message : "upload-failed";
-        if (msg === "unauthorized") { clearAdminToken(); setError("Token rejected. Try uploading again."); }
+        if (msg === "unauthorized") onAuthError();
         else if (msg === "not-an-image") setError("That file isn't an image.");
         else setError(`Upload failed (${msg}).`);
       } finally {
         setBusy((b) => b - 1);
       }
     }
-  }, []);
+  }, [token, onAuthError]);
 
   async function save() {
-    const token = ensureToken();
-    if (!token) return;
     setSaving(true);
     setError(null);
     try {
       const fresh = await saveManifest({ items }, token);
       setItems(fresh.items);
-      setSaved(true);
+      setSaved(true); setDirty(false);
       setTimeout(() => setSaved(false), 3000);
     } catch (e) {
       const msg = e instanceof Error ? e.message : "save-failed";
-      if (msg === "unauthorized") { clearAdminToken(); setError("Token rejected. Click Save again."); }
+      if (msg === "unauthorized") onAuthError();
       else setError(`Could not save (${msg}).`);
     } finally {
       setSaving(false);

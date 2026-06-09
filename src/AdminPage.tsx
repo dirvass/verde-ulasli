@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect, useCallback } from "react";
 import TopNav from "./components/TopNav";
 import {
   getBooked, fetchBooked, saveBooked,
@@ -6,9 +6,18 @@ import {
   VillaKey, BookedRange,
 } from "./availability";
 import GalleryAdmin from "./components/GalleryAdmin";
+import AdminLogin from "./components/AdminLogin";
 import "./styles/AdminPage.css";
 
 const VILLAS: VillaKey[] = ["ALYA", "ZEHRA"];
+
+type AdminTab = "availability" | "enquiries" | "gallery";
+
+const HERO: Record<AdminTab, { title: string; sub: string }> = {
+  availability: { title: "Availability Manager", sub: "Manage booked dates for each villa. Saved to the server and reflected on the booking page for all visitors." },
+  enquiries: { title: "Enquiries", sub: "Booking enquiries submitted through the website." },
+  gallery: { title: "Gallery Manager", sub: "Upload, arrange and caption the photos shown on the public gallery." },
+};
 
 function todayIso(): string {
   const d = new Date();
@@ -61,7 +70,8 @@ async function deleteEnquiry(id: string, token: string): Promise<void> {
 }
 
 export default function AdminPage() {
-  const [tab, setTab] = useState<"availability" | "enquiries" | "gallery">("availability");
+  const [token, setToken] = useState<string>(() => getAdminToken());
+  const [tab, setTab] = useState<AdminTab>("availability");
   const [data, setData] = useState(() => getBooked());
   const [heroVis, setHeroVis] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -74,19 +84,20 @@ export default function AdminPage() {
   const [enqError, setEnqError] = useState<string | null>(null);
   const [enqLoaded, setEnqLoaded] = useState(false);
 
-  async function ensureToken(): Promise<string | null> {
-    let token = getAdminToken();
-    if (!token) {
-      const entered = window.prompt("Admin token:");
-      if (!entered) return null;
-      token = entered.trim();
-      setAdminToken(token);
-    }
-    return token;
-  }
+  // Single sign-out path: any rejected token kicks back to the login screen.
+  const logout = useCallback(() => {
+    clearAdminToken();
+    setToken("");
+    setError("Session expired — please sign in again.");
+  }, []);
+
+  const authenticate = useCallback((t: string) => {
+    setAdminToken(t);
+    setToken(t);
+    setError(null);
+  }, []);
 
   async function loadEnquiries() {
-    const token = await ensureToken();
     if (!token) return;
     setEnqLoading(true);
     setEnqError(null);
@@ -96,7 +107,7 @@ export default function AdminPage() {
       setEnqLoaded(true);
     } catch (e) {
       const msg = e instanceof Error ? e.message : "fetch-failed";
-      if (msg === "unauthorized") { clearAdminToken(); setEnqError("Token rejected. Click again to re-enter."); }
+      if (msg === "unauthorized") logout();
       else setEnqError(`Could not load (${msg}).`);
     } finally {
       setEnqLoading(false);
@@ -105,14 +116,13 @@ export default function AdminPage() {
 
   async function removeEnquiry(id: string) {
     if (!confirm(`Delete enquiry ${id}? This cannot be undone.`)) return;
-    const token = await ensureToken();
     if (!token) return;
     try {
       await deleteEnquiry(id, token);
       setEnquiries(prev => prev.filter(e => e.reference !== id));
     } catch (e) {
       const msg = e instanceof Error ? e.message : "delete-failed";
-      if (msg === "unauthorized") { clearAdminToken(); setEnqError("Token rejected. Click again to re-enter."); }
+      if (msg === "unauthorized") logout();
       else setEnqError(`Could not delete (${msg}).`);
     }
   }
@@ -162,16 +172,9 @@ export default function AdminPage() {
   }
 
   async function save() {
+    if (!token) return;
     const cleaned: Record<VillaKey, BookedRange[]> = { ALYA: [], ZEHRA: [] };
     for (const v of VILLAS) cleaned[v] = data[v].filter(r => r.from && r.to);
-
-    let token = getAdminToken();
-    if (!token) {
-      const entered = window.prompt("Admin token (set in Cloudflare Pages → Settings → Environment variables):");
-      if (!entered) return;
-      token = entered.trim();
-      setAdminToken(token);
-    }
 
     setSaving(true); setError(null);
     try {
@@ -181,18 +184,17 @@ export default function AdminPage() {
       setTimeout(() => setSaved(false), 3000);
     } catch (e) {
       const msg = e instanceof Error ? e.message : "save-failed";
-      if (msg === "unauthorized") {
-        clearAdminToken();
-        setError("Token rejected. Click Save again to re-enter.");
-      } else {
-        setError(`Could not save (${msg}). Check connection and try again.`);
-      }
+      if (msg === "unauthorized") logout();
+      else setError(`Could not save (${msg}). Check connection and try again.`);
     } finally {
       setSaving(false);
     }
   }
 
   const total = VILLAS.reduce((a, v) => a + data[v].length, 0);
+
+  // Single password gate — once signed in, no tab or action asks again.
+  if (!token) return <AdminLogin onAuth={authenticate} />;
 
   return (
     <>
@@ -202,9 +204,9 @@ export default function AdminPage() {
         <TopNav />
         <div className="admin-hero__ct">
           <span className="admin-hero__badge">Extranet</span>
-          <h1 className="admin-hero__title">Availability Manager</h1>
+          <h1 className="admin-hero__title">{HERO[tab].title}</h1>
           <div className="admin-hero__line" />
-          <p className="admin-hero__sub">Manage booked dates for each villa. Saved to the server and reflected on the booking page for all visitors.</p>
+          <p className="admin-hero__sub">{HERO[tab].sub}</p>
         </div>
       </header>
 
@@ -370,7 +372,7 @@ export default function AdminPage() {
           </section>
         )}
 
-        {tab === "gallery" && <GalleryAdmin />}
+        {tab === "gallery" && <GalleryAdmin token={token} onAuthError={logout} />}
       </main>
     </>
   );
