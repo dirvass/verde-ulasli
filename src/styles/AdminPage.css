@@ -235,3 +235,46 @@
   border-radius:6px; font-size:.88rem; color:var(--ink);
   white-space:pre-wrap; line-height:1.5;
 }
+
+/* ── Gallery manager ── */
+.gadmin{ display:flex; flex-direction:column; gap:16px }
+.gadmin__bar{ display:flex; align-items:center; gap:16px; flex-wrap:wrap }
+.gadmin__upload{ cursor:pointer }
+.gadmin__count{ color:var(--muted); font-size:.9rem }
+.gadmin__grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+  gap:16px;
+}
+.gadmin__card{
+  border:1px solid rgba(226,232,240,.7); border-radius:12px;
+  padding:10px; background:#fff;
+  display:flex; flex-direction:column; gap:8px;
+  cursor:grab;
+}
+.gadmin__card:active{ cursor:grabbing }
+.gadmin__thumb{
+  position:relative; aspect-ratio:4/3;
+  border-radius:8px; overflow:hidden; background:#eee;
+}
+.gadmin__thumb img{ width:100%; height:100%; object-fit:cover; display:block }
+.gadmin__vid{
+  position:absolute; top:6px; left:6px;
+  background:rgba(0,0,0,.6); color:#fff; font-size:.65rem;
+  padding:2px 6px; border-radius:4px; letter-spacing:.04em;
+}
+.gadmin__row{ display:flex; gap:6px }
+.gadmin__mini{
+  flex:1; border:1px solid rgba(226,232,240,.9); background:#fafafa;
+  border-radius:6px; padding:4px; cursor:pointer; font-size:.9rem;
+}
+.gadmin__mini:hover{ background:#f0f0f0 }
+.gadmin__mini--del{ color:#b00; flex:0 0 auto; padding:4px 10px }
+.gadmin__field{
+  display:flex; flex-direction:column; gap:2px;
+  font-size:.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:.04em;
+}
+.gadmin__field select, .gadmin__field input{
+  font-size:.85rem; padding:5px 6px; text-transform:none; letter-spacing:0;
+  border:1px solid rgba(226,232,240,.9); border-radius:6px; color:var(--ink);
+}

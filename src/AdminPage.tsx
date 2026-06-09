@@ -5,6 +5,7 @@ import {
   getAdminToken, setAdminToken, clearAdminToken,
   VillaKey, BookedRange,
 } from "./availability";
+import GalleryAdmin from "./components/GalleryAdmin";
 import "./styles/AdminPage.css";
 
 const VILLAS: VillaKey[] = ["ALYA", "ZEHRA"];
@@ -60,7 +61,7 @@ async function deleteEnquiry(id: string, token: string): Promise<void> {
 }
 
 export default function AdminPage() {
-  const [tab, setTab] = useState<"availability" | "enquiries">("availability");
+  const [tab, setTab] = useState<"availability" | "enquiries" | "gallery">("availability");
   const [data, setData] = useState(() => getBooked());
   const [heroVis, setHeroVis] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -226,6 +227,14 @@ export default function AdminPage() {
           >
             Enquiries{enqLoaded ? ` (${enquiries.length})` : ""}
           </button>
+          <button
+            role="tab"
+            aria-selected={tab === "gallery"}
+            className={`admin-tab ${tab === "gallery" ? "admin-tab--active" : ""}`}
+            onClick={() => setTab("gallery")}
+          >
+            Gallery
+          </button>
         </div>
 
         {tab === "availability" && (<>
@@ -360,6 +369,8 @@ export default function AdminPage() {
             </div>
           </section>
         )}
+
+        {tab === "gallery" && <GalleryAdmin />}
       </main>
     </>
   );
