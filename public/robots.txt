@@ -3,5 +3,6 @@ Allow: /
 
 Disallow: /investor
 Disallow: /admin
+Disallow: /d/
 
 Sitemap: https://verde-ulasli.com/sitemap.xml

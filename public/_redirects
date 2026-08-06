@@ -1,5 +1,9 @@
 /proje /proje/index.html 200
 
+# Listelenmemiş belge bağlantıları (navigasyonda ve sitemap'te yok)
+/d/turizm-koridoru-9m4x2p /d/turizm-koridoru-9m4x2p/index.html 200
+/d/verde-ulasli-6q8r3n /d/verde-ulasli-6q8r3n/index.html 200
+
 # /contact was never a route but keeps getting traffic from old links
 /contact /book 301
 
