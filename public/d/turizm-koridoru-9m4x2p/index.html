@@ -14,23 +14,24 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--green);color:var(--mist);font-family:'Inter',-apple-system,'Segoe UI',sans-serif;
      -webkit-font-smoothing:antialiased}
-header{padding:26px 26px 20px;border-bottom:1px solid rgba(201,185,154,.2);
-       position:sticky;top:0;background:rgba(14,26,22,.97);backdrop-filter:blur(8px);z-index:10}
+header{padding:16px 26px 14px;border-bottom:1px solid rgba(201,185,154,.2)}
 .wrap{max-width:940px;margin:0 auto}
-.eyebrow{font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:600}
-h1{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:clamp(19px,3.4vw,27px);
-   line-height:1.15;margin-top:9px}
-.sub{font-size:12.5px;color:var(--muted);margin-top:7px;line-height:1.5}
-.bar{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}
-.btn{display:inline-block;font-size:11px;letter-spacing:.13em;text-transform:uppercase;font-weight:600;
-     padding:9px 16px;border:1px solid var(--gold);color:var(--gold);text-decoration:none;border-radius:2px;
-     transition:background .18s,color .18s}
+.top{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.titles{flex:1 1 340px;min-width:0}
+.eyebrow{font-size:8.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:600}
+h1{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:clamp(17px,2.3vw,21px);
+   line-height:1.2;margin-top:5px}
+.sub{font-size:11.5px;color:var(--muted);margin-top:4px;line-height:1.45}
+.bar{display:flex;flex-wrap:wrap;gap:7px;flex:0 0 auto}
+.btn{display:inline-block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+     padding:7px 13px;border:1px solid var(--gold);color:var(--gold);text-decoration:none;border-radius:2px;
+     transition:background .18s,color .18s;white-space:nowrap}
 .btn:hover{background:var(--gold);color:var(--green)}
 .btn.solid{background:var(--gold);color:var(--green)}
 .btn.solid:hover{background:var(--sand);border-color:var(--sand)}
 .btn.ghost{border-color:rgba(201,185,154,.4);color:var(--sand)}
 .btn.ghost:hover{background:rgba(201,185,154,.14);color:var(--mist)}
-main{padding:26px 16px 60px}
+main{padding:18px 16px 60px}
 .pages{max-width:940px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
 .pages img{width:100%;height:auto;display:block;border-radius:2px;
            box-shadow:0 6px 26px rgba(0,0,0,.45);background:#FCFBF7}
@@ -42,16 +43,18 @@ footer a{color:#6E6F69}
 </head>
 <body>
 
-<header><div class="wrap">
-  <div class="eyebrow">Bütünleşik Turizm Gelişim Vizyonu</div>
-  <h1>İzmit Körfezi Güney Kıyısı Turizm Koridoru</h1>
-  <div class="sub">Osmangazi Köprüsü – Gölcük hattı, yaklaşık 45 kilometrelik kıyı şeridi. Ulaşlı pilot bölge önerisi.</div>
-  <div class="bar">
-    <a class="btn solid" href="Izmit-Korfezi-Guney-Kiyisi-Turizm-Koridoru.pdf" target="_blank" rel="noopener">PDF olarak aç</a>
-    <a class="btn" href="Izmit-Korfezi-Guney-Kiyisi-Turizm-Koridoru.pdf" download>Sunumu indir · 10 sayfa</a>
-    <a class="btn ghost" href="Talep-Ozeti.pdf" download>Talep özeti · 1 sayfa</a>
+<header><div class="wrap"><div class="top">
+  <div class="titles">
+    <div class="eyebrow">Bütünleşik Turizm Gelişim Vizyonu</div>
+    <h1>İzmit Körfezi Güney Kıyısı Turizm Koridoru</h1>
+    <div class="sub">Osmangazi Köprüsü – Gölcük hattı, yaklaşık 45 kilometrelik kıyı şeridi. Ulaşlı pilot bölge önerisi.</div>
   </div>
-</div></header>
+  <div class="bar">
+    <a class="btn solid" href="Izmit-Korfezi-Guney-Kiyisi-Turizm-Koridoru.pdf" target="_blank" rel="noopener">PDF aç</a>
+    <a class="btn" href="Izmit-Korfezi-Guney-Kiyisi-Turizm-Koridoru.pdf" download>İndir · 10 sayfa</a>
+    <a class="btn ghost" href="Talep-Ozeti.pdf" download>Talep özeti</a>
+  </div>
+</div></div></header>
 
 <main><div class="pages">
   <img src="p01.jpg" alt="Sayfa 1" width="1157" height="1638">
