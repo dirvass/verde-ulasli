@@ -230,6 +230,7 @@
     "prev": "Previous image",
     "next": "Next image",
     "hint": "← → to browse · ESC to close",
+    "hintTouch": "Swipe to browse · pinch to zoom · swipe down to close",
     "mediaErr": "This image couldn't be loaded. We've been notified."
   },
   "planner": {

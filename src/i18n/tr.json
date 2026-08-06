@@ -230,6 +230,7 @@
     "prev": "Önceki görsel",
     "next": "Sonraki görsel",
     "hint": "← → ile gezin · ESC ile kapat",
+    "hintTouch": "Kaydırarak gezin · sıkıştırarak yakınlaştırın · aşağı kaydırıp kapatın",
     "mediaErr": "Bu görsel yüklenemedi. Sorun bize bildirildi."
   },
   "planner": {

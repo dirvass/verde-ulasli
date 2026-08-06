@@ -230,6 +230,7 @@
     "prev": "Vorheriges Bild",
     "next": "Nächstes Bild",
     "hint": "← → zum Blättern · ESC zum Schließen",
+    "hintTouch": "Wischen zum Blättern · Zoomen mit zwei Fingern · nach unten wischen zum Schließen",
     "mediaErr": "Dieses Bild konnte nicht geladen werden. Wir wurden benachrichtigt."
   },
   "planner": {

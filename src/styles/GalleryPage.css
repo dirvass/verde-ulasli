@@ -198,9 +198,16 @@
 /* ── Lightbox ── */
 .gal-lightbox{
   position:fixed; inset:0; z-index:1200;
-  background:rgba(0,0,0,.92); backdrop-filter:blur(4px);
+  /* dvh tracks the mobile URL bar and survives rotation; vh is the fallback */
+  height:100vh; height:100dvh;
+  background:rgba(0,0,0,.94); backdrop-filter:blur(4px);
   display:flex; align-items:center; justify-content:center;
-  padding:16px;
+  padding:
+    max(16px, env(safe-area-inset-top))
+    max(16px, env(safe-area-inset-right))
+    max(16px, env(safe-area-inset-bottom))
+    max(16px, env(safe-area-inset-left));
+  overscroll-behavior:contain;
   animation:gal-lb-in .25s ease;
 }
 @keyframes gal-lb-in{
@@ -208,13 +215,39 @@
   to{ opacity:1 }
 }
 
+/* Column layout with no fixed heights: the media takes whatever space the
+   caption leaves, so portrait and landscape both fill the screen. */
 .gal-lightbox__inner{
-  max-width:min(1200px, 94vw); text-align:center;
-  display:flex; flex-direction:column; align-items:center;
+  position:relative;
+  width:100%; max-width:1200px; height:100%; min-height:0;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:14px; text-align:center;
 }
+
+/* Gesture surface — touch-action:none hands pinch/pan to us instead of
+   letting the browser zoom the whole overlay. */
+.gal-lightbox__stage{
+  flex:1 1 auto; min-height:0; width:100%;
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+  touch-action:none;
+  user-select:none; -webkit-user-select:none; -webkit-touch-callout:none;
+}
+.gal-lightbox__stage--video{ touch-action:auto }
+.gal-lightbox__stage--zoomed{ cursor:grab }
+
 .gal-lightbox__media{
-  max-width:100%; max-height:75vh; border-radius:12px;
+  max-width:100%; max-height:100%; min-height:0;
+  width:auto; height:auto; object-fit:contain;
+  border-radius:12px;
   box-shadow:0 24px 64px rgba(0,0,0,.5);
+  will-change:transform;
+  -webkit-user-drag:none;
+}
+/* Only animate between gestures, never during one. */
+.gal-lightbox__media--settling{ transition:transform 240ms var(--ease-out) }
+@media (prefers-reduced-motion:reduce){
+  .gal-lightbox__media--settling{ transition:none }
 }
 
 /* Lightbox error fallback */
@@ -239,8 +272,9 @@
 }
 
 .gal-lightbox__caption{
-  display:flex; align-items:center; gap:10px;
-  margin-top:16px; color:rgba(255,255,255,.8); font-size:.9rem;
+  flex:0 0 auto;
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  color:rgba(255,255,255,.8); font-size:.9rem;
 }
 .gal-lightbox__caption-cat{
   padding:4px 12px; border-radius:999px;
@@ -249,12 +283,13 @@
   color:rgba(255,255,255,.7);
 }
 .gal-lightbox__counter{
-  margin-top:8px; font-size:.8rem; color:rgba(255,255,255,.82);
+  flex:0 0 auto;
+  margin-top:-6px; font-size:.8rem; color:rgba(255,255,255,.82);
   font-variant-numeric:tabular-nums; letter-spacing:.12em;
 }
 
 .gal-lightbox__hint{
-  position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+  position:fixed; bottom:calc(16px + env(safe-area-inset-bottom)); left:50%; transform:translateX(-50%);
   padding:10px 18px; border-radius:var(--radius-pill);
   background:rgba(14,26,22,.75); backdrop-filter:blur(8px);
   border:1px solid rgba(195,165,100,.35);
@@ -269,26 +304,28 @@
 }
 
 .gal-lightbox__close{
-  position:fixed; top:20px; right:20px; z-index:1300;
+  position:fixed; z-index:1300;
+  top:max(16px, env(safe-area-inset-top));
+  right:max(16px, env(safe-area-inset-right));
   width:44px; height:44px; border-radius:999px;
   border:1px solid rgba(255,255,255,.25);
-  background:rgba(255,255,255,.08); backdrop-filter:blur(8px);
+  background:rgba(0,0,0,.35); backdrop-filter:blur(8px);
   color:#fff; font-size:24px; font-weight:300; cursor:pointer;
   transition:background .2s ease;
 }
 .gal-lightbox__close:hover{ background:rgba(255,255,255,.15) }
 
 .gal-lightbox__nav{
-  position:fixed; top:50%; transform:translateY(-50%);
+  position:fixed; top:50%; transform:translateY(-50%); z-index:1300;
   width:48px; height:48px; border-radius:999px;
   border:1px solid rgba(255,255,255,.2);
-  background:rgba(255,255,255,.06); backdrop-filter:blur(8px);
+  background:rgba(0,0,0,.3); backdrop-filter:blur(8px);
   color:#fff; font-size:28px; font-weight:300; cursor:pointer;
   transition:background .2s ease;
 }
 .gal-lightbox__nav:hover{ background:rgba(255,255,255,.12) }
-.gal-lightbox__nav--prev{ left:20px }
-.gal-lightbox__nav--next{ right:20px }
+.gal-lightbox__nav--prev{ left:max(16px, env(safe-area-inset-left)) }
+.gal-lightbox__nav--next{ right:max(16px, env(safe-area-inset-right)) }
 
 /* ── Gallery responsive ── */
 @media (max-width:900px){
@@ -302,8 +339,46 @@
   .gallery-grid--compact{ grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)) }
   .gallery-card{ border-radius:12px }
   .gallery-section__header{ flex-direction:column; align-items:flex-start }
-  .gal-lightbox__nav{ width:40px; height:40px; font-size:22px }
-  .gal-lightbox__nav--prev{ left:10px }
-  .gal-lightbox__nav--next{ right:10px }
-  .gal-lightbox__media{ max-height:60vh }
+  .gal-lightbox{
+    padding:
+      max(10px, env(safe-area-inset-top))
+      10px
+      max(12px, env(safe-area-inset-bottom));
+  }
+  .gal-lightbox__inner{ gap:10px }
+  .gal-lightbox__caption{ flex-wrap:wrap; font-size:.82rem; padding:0 8px }
+  .gal-lightbox__nav{ width:44px; height:44px; font-size:24px }
+  .gal-lightbox__nav--prev{ left:max(8px, env(safe-area-inset-left)) }
+  .gal-lightbox__nav--next{ right:max(8px, env(safe-area-inset-right)) }
+}
+
+/* Landscape phones: almost no vertical room, so the chrome shrinks and the
+   sides open up to keep the arrows off the photo. */
+@media (max-height:520px) and (orientation:landscape){
+  .gal-lightbox{
+    padding:8px max(56px, env(safe-area-inset-right)) 8px max(56px, env(safe-area-inset-left));
+  }
+  .gal-lightbox__inner{ gap:6px }
+  .gal-lightbox__caption{ font-size:.74rem; gap:8px }
+  .gal-lightbox__caption-cat{ padding:2px 8px; font-size:.62rem }
+  .gal-lightbox__counter{ margin-top:-2px; font-size:.7rem }
+  .gal-lightbox__close,
+  .gal-lightbox__nav{ width:38px; height:38px; font-size:20px }
+  .gal-lightbox__hint{ bottom:10px; padding:6px 12px; font-size:.7rem }
+}
+
+/* Touch devices never get :hover, so the card caption would stay invisible.
+   Kept to a single line so it reads as a label, not a block over the photo. */
+@media (hover:none){
+  .gallery-card__overlay{
+    opacity:1;
+    padding:12px 14px;
+    background:linear-gradient(180deg, transparent 62%, rgba(14,26,22,.82) 100%);
+  }
+  .gallery-card__alt{ width:100%; min-width:0; font-size:.78rem; gap:6px }
+  .gallery-card__alt-text{
+    min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .gallery-card__play{ width:24px; height:24px; font-size:11px }
+  .gallery-card:hover .gallery-card__img{ transform:none }
 }

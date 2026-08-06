@@ -1,6 +1,7 @@
 import React, { useMemo, useState, useEffect, useCallback, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import TopNav from "./components/TopNav";
+import LightboxStage from "./components/LightboxStage";
 import { useLanguage } from "./i18n/LanguageContext";
 import { usePageMeta } from "./hooks/usePageMeta";
 import { fetchManifest } from "./galleryStore";
@@ -67,7 +68,7 @@ function GalleryCard({ item, idx, onOpen }: { item: GalleryItem; idx: number; on
       <div className="gallery-card__overlay">
         <span className="gallery-card__alt">
           {item.type === "video" && <span className="gallery-card__play" aria-hidden="true">&#9654;</span>}
-          {item.caption}
+          <span className="gallery-card__alt-text">{item.caption}</span>
         </span>
       </div>
     </article>
@@ -75,6 +76,10 @@ function GalleryCard({ item, idx, onOpen }: { item: GalleryItem; idx: number; on
 }
 
 type FilterTab = "all" | Category;
+
+/** Touch devices get gesture wording in the lightbox hint, not keyboard keys. */
+const isTouch =
+  typeof window !== "undefined" && window.matchMedia?.("(hover: none) and (pointer: coarse)").matches;
 
 export default function GalleryPage() {
   usePageMeta("meta.galleryTitle", "meta.galleryDesc");
@@ -198,23 +203,9 @@ export default function GalleryPage() {
     };
   }, [activeId, go, close]);
 
-  // Touch swipe
-  const touchRef = useRef<{ x: number; y: number } | null>(null);
-  const onTouchStart = (e: React.TouchEvent) => {
-    const t = e.touches[0];
-    touchRef.current = { x: t.clientX, y: t.clientY };
-  };
-  const onTouchEnd = (e: React.TouchEvent) => {
-    const start = touchRef.current;
-    if (!start) return;
-    touchRef.current = null;
-    const t = e.changedTouches[0];
-    const dx = t.clientX - start.x;
-    const dy = t.clientY - start.y;
-    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
-      go(dx < 0 ? 1 : -1);
-    }
-  };
+  // Touch gestures (swipe, pinch-zoom, pan) live in LightboxStage, on the
+  // image itself. Handling them on this overlay meant a two-finger pinch read
+  // as a swipe and flipped the picture mid-zoom.
 
   // Category sections shown below the opener in the "all" view.
   const categories: Category[] = ["interior", "exterior", "construction"];
@@ -349,8 +340,6 @@ export default function GalleryPage() {
           aria-modal="true"
           aria-label={currentMedia.caption}
           onClick={close}
-          onTouchStart={onTouchStart}
-          onTouchEnd={onTouchEnd}
           ref={lightboxRef}
         >
           <button type="button" className="gal-lightbox__close" aria-label={t("gallery.close")} onClick={close}>
@@ -379,24 +368,12 @@ export default function GalleryPage() {
                 <span className="gal-lightbox__err-mark" aria-hidden="true">—</span>
                 <span className="gal-lightbox__err-text">{t("gallery.mediaErr")}</span>
               </div>
-            ) : currentMedia.type === "image" ? (
-              <img
-                key={currentMedia.id}
-                className="gal-lightbox__media"
-                src={currentMedia.src}
-                alt={currentMedia.caption}
-                onError={() => setMediaErrored(true)}
-              />
             ) : (
-              <video
-                key={currentMedia.id}
-                className="gal-lightbox__media"
-                src={currentMedia.src}
-                controls
-                autoPlay
-                muted
-                playsInline
-                preload="metadata"
+              <LightboxStage
+                item={currentMedia}
+                onNext={() => go(1)}
+                onPrev={() => go(-1)}
+                onClose={close}
                 onError={() => setMediaErrored(true)}
               />
             )}
@@ -413,7 +390,7 @@ export default function GalleryPage() {
 
           {showHint && (
             <div className="gal-lightbox__hint" role="status" aria-live="polite">
-              {t("gallery.hint")}
+              {t(isTouch ? "gallery.hintTouch" : "gallery.hint")}
             </div>
           )}
         </div>
