@@ -1,2 +1,6 @@
 /proje /proje/index.html 200
+
+# /contact was never a route but keeps getting traffic from old links
+/contact /book 301
+
 /* /index.html 200
