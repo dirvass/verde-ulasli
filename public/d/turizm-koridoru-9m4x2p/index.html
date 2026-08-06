@@ -10,17 +10,18 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--green:#0E1A16;--forest:#2D5040;--gold:#C3A564;--sand:#C9B99A;--mist:#EBE8E1;--muted:#8F9089}
+:root{--green:#0E1A16;--gold:#C3A564;--sand:#C9B99A;--mist:#EBE8E1;--muted:#8F9089}
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%}
 body{background:var(--green);color:var(--mist);font-family:'Inter',-apple-system,'Segoe UI',sans-serif;
-     display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
-header{padding:22px 26px 18px;border-bottom:1px solid rgba(201,185,154,.2);flex:0 0 auto}
+     -webkit-font-smoothing:antialiased}
+header{padding:26px 26px 20px;border-bottom:1px solid rgba(201,185,154,.2);
+       position:sticky;top:0;background:rgba(14,26,22,.97);backdrop-filter:blur(8px);z-index:10}
+.wrap{max-width:940px;margin:0 auto}
 .eyebrow{font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:600}
 h1{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:clamp(19px,3.4vw,27px);
-   line-height:1.15;margin-top:9px;color:var(--mist)}
+   line-height:1.15;margin-top:9px}
 .sub{font-size:12.5px;color:var(--muted);margin-top:7px;line-height:1.5}
-.bar{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px}
+.bar{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}
 .btn{display:inline-block;font-size:11px;letter-spacing:.13em;text-transform:uppercase;font-weight:600;
      padding:9px 16px;border:1px solid var(--gold);color:var(--gold);text-decoration:none;border-radius:2px;
      transition:background .18s,color .18s}
@@ -29,45 +30,46 @@ h1{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:clamp(
 .btn.solid:hover{background:var(--sand);border-color:var(--sand)}
 .btn.ghost{border-color:rgba(201,185,154,.4);color:var(--sand)}
 .btn.ghost:hover{background:rgba(201,185,154,.14);color:var(--mist)}
-main{flex:1 1 auto;min-height:0;background:#141d19}
-iframe{width:100%;height:100%;border:0;display:block;background:#141d19}
-.mobile{display:none;padding:34px 26px;text-align:center}
-.mobile p{font-size:13.5px;color:var(--muted);line-height:1.65;margin-bottom:20px}
-footer{flex:0 0 auto;padding:13px 26px;border-top:1px solid rgba(201,185,154,.15);
-       font-size:10.5px;color:#6E6F69;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+main{padding:26px 16px 60px}
+.pages{max-width:940px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+.pages img{width:100%;height:auto;display:block;border-radius:2px;
+           box-shadow:0 6px 26px rgba(0,0,0,.45);background:#FCFBF7}
+footer{padding:20px 26px 40px;border-top:1px solid rgba(201,185,154,.15);
+       font-size:10.5px;color:#6E6F69}
+footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
 footer a{color:#6E6F69}
-@media(max-width:820px){
-  main{flex:0 0 auto}
-  iframe{display:none}
-  .mobile{display:block}
-}
 </style>
 </head>
 <body>
 
-<header>
+<header><div class="wrap">
   <div class="eyebrow">Bütünleşik Turizm Gelişim Vizyonu</div>
   <h1>İzmit Körfezi Güney Kıyısı Turizm Koridoru</h1>
   <div class="sub">Osmangazi Köprüsü – Gölcük hattı, yaklaşık 45 kilometrelik kıyı şeridi. Ulaşlı pilot bölge önerisi.</div>
   <div class="bar">
-    <a class="btn solid" href="/d/izmit-korfezi-turizm-koridoru.pdf" target="_blank" rel="noopener">Tam ekran aç</a>
-    <a class="btn" href="/d/izmit-korfezi-turizm-koridoru.pdf" download>Sunumu indir · 10 sayfa</a>
-    <a class="btn ghost" href="/d/talep-ozeti.pdf" download>Talep özeti · 1 sayfa</a>
+    <a class="btn solid" href="Izmit-Korfezi-Guney-Kiyisi-Turizm-Koridoru.pdf" target="_blank" rel="noopener">PDF olarak aç</a>
+    <a class="btn" href="Izmit-Korfezi-Guney-Kiyisi-Turizm-Koridoru.pdf" download>Sunumu indir · 10 sayfa</a>
+    <a class="btn ghost" href="Talep-Ozeti.pdf" download>Talep özeti · 1 sayfa</a>
   </div>
-</header>
+</div></header>
 
-<main>
-  <iframe src="/d/izmit-korfezi-turizm-koridoru.pdf#view=FitH" title="İzmit Körfezi Güney Kıyısı Turizm Koridoru — sunum"></iframe>
-  <div class="mobile">
-    <p>Belgeyi telefonda görüntülemek için aşağıdaki bağlantıyı kullanın.</p>
-    <a class="btn solid" href="/d/izmit-korfezi-turizm-koridoru.pdf" target="_blank" rel="noopener">Sunumu aç</a>
-  </div>
-</main>
+<main><div class="pages">
+  <img src="p01.jpg" alt="Sayfa 1" width="1157" height="1638">
+  <img src="p02.jpg" alt="Sayfa 2" width="1157" height="1638" loading="lazy">
+  <img src="p03.jpg" alt="Sayfa 3" width="1157" height="1638" loading="lazy">
+  <img src="p04.jpg" alt="Sayfa 4" width="1157" height="1638" loading="lazy">
+  <img src="p05.jpg" alt="Sayfa 5" width="1157" height="1638" loading="lazy">
+  <img src="p06.jpg" alt="Sayfa 6" width="1157" height="1638" loading="lazy">
+  <img src="p07.jpg" alt="Sayfa 7" width="1157" height="1638" loading="lazy">
+  <img src="p08.jpg" alt="Sayfa 8" width="1157" height="1638" loading="lazy">
+  <img src="p09.jpg" alt="Sayfa 9" width="1157" height="1638" loading="lazy">
+  <img src="p10.jpg" alt="Sayfa 10" width="1157" height="1638" loading="lazy">
+</div></main>
 
-<footer>
+<footer><div class="wrap">
   <span>Verde Ulaşlı · Ulaşlı, Gölcük · 7 Ağustos 2026</span>
   <span><a href="mailto:info@verde-ulasli.com">info@verde-ulasli.com</a></span>
-</footer>
+</div></footer>
 
 <script>
 // Görüntüleme sayacı. Oturum başına bir kez sayar; çerez, IP veya konum saklanmaz.
