@@ -15,15 +15,15 @@ interface Experience {
 }
 
 const EXPERIENCES: Experience[] = [
-  { key: "1", img: "/media/insaat-sureci/arazi-hazirligi-genel-gorunum.jpg", season: "allSeasons" },
-  { key: "2", img: "/media/dis-mekan/on-cephe-ates-cukuru-render.jpg", season: "springSummer" },
-  { key: "3", img: "/media/dis-mekan/giris-avlusu-gece-ai-render.jpg", season: "allSeasons" },
-  { key: "4", img: "/media/dis-mekan/kus-bakisi-gece-ai-render.jpg", season: "allSeasons" },
+  { key: "1", img: "/media/dis-mekan/bahce-peyzaj-patika-gunduz-render.jpg", season: "allSeasons" },
+  { key: "2", img: "/media/dis-mekan/on-cephe-havuz-mangal-gunduz-render.jpg", season: "springSummer" },
+  { key: "3", img: "/media/dis-mekan/on-cephe-ates-cukuru-render.jpg", season: "allSeasons" },
+  { key: "4", img: "/media/dis-mekan/sauna-jakuzi-gece-render-v2.jpg", season: "allSeasons" },
   { key: "5", img: "/media/dis-mekan/yan-cephe-genel-gorunum-render.jpg", season: "allSeasons" },
   { key: "6", img: "/media/dis-mekan/havuz-deniz-manzarasi-konsept.jpg", season: "summerOnly" },
   { key: "7", img: "/media/dis-mekan/on-cephe-havuz-satranc-render.jpg", season: "allSeasons" },
   { key: "8", img: "/media/dis-mekan/drone-genel-gorunum-render.jpg", season: "allSeasons" },
-  { key: "9", img: "/media/dis-mekan/on-cephe-ates-cukuru-render.jpg", season: "summerOnly" },
+  { key: "9", img: "/media/ic-mekan/ev-sinema-render.jpg", season: "summerOnly" },
   { key: "10", img: "/media/dis-mekan/giris-yolu-peyzaj-render.jpg", season: "allSeasons" },
 ];
 
