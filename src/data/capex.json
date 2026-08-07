@@ -1,91 +1,1330 @@
 {
   "partners": [
-    { "name": "Abd Diz", "share": 41.82 },
-    { "name": "Sacit", "share": 20.02 },
-    { "name": "Ahmed", "share": 20.02 },
-    { "name": "Mehmet", "share": 18.14 }
+    {
+      "name": "Abd Diz",
+      "share": 37.24
+    },
+    {
+      "name": "Sacit",
+      "share": 23.25
+    },
+    {
+      "name": "Ahmed",
+      "share": 21.89
+    },
+    {
+      "name": "Mehmet",
+      "share": 17.62
+    }
   ],
   "expenses": [
-    { "item": "Arsa", "date": "2023-08-26", "tl": 3000000, "eurRate": 28.20, "eur": 106383.0, "status": "paid", "partners": [26595.74, 26595.74, 26595.74, 26595.74] },
-    { "item": "Arsa temizlik", "date": "2023-09-05", "tl": 12600, "eurRate": 28.63, "eur": 440.1, "status": "paid", "partners": [110.02, 110.02, 110.02, 110.02] },
-    { "item": "Arsa temizlik + Dolgu", "date": "2024-07-26", "tl": 189000, "eurRate": 35.27, "eur": 5358.7, "status": "paid", "partners": [1339.67, 1339.67, 1339.67, 1339.67] },
-    { "item": "Zemin etüdü", "date": "2024-10-01", "tl": 40000, "eurRate": 37.74, "eur": 1059.9, "status": "paid", "partners": [264.97, 264.97, 264.97, 264.97] },
-    { "item": "Mimar 1/2", "date": "2024-10-16", "tl": 70000, "eurRate": 36.80, "eur": 1902.2, "status": "paid", "partners": [475.54, 475.54, 475.54, 475.54] },
-    { "item": "İstinat duvarı (1. posta)", "date": "2024-10-31", "tl": 500000, "eurRate": 36.60, "eur": 13661.2, "status": "paid", "partners": [3415.30, 3415.30, 3415.30, 3415.30] },
-    { "item": "İstinat duvarı (2. posta)", "date": "2024-11-11", "tl": 1400000, "eurRate": 35.97, "eur": 38921.3, "status": "paid", "partners": [9730.33, 9730.33, 9730.33, 9730.33] },
-    { "item": "Mimar 2/2", "date": "2024-10-16", "tl": 70000, "eurRate": 37.30, "eur": 1876.7, "status": "paid", "partners": [469.17, 469.17, 469.17, 469.17] },
-    { "item": "Yapı Denetim + Şantiye Şefi", "date": "2024-12-20", "tl": 193000, "eurRate": 35.87, "eur": 5380.5, "status": "paid", "partners": [1345.00, 1345.00, 1345.00, 1345.00] },
-    { "item": "Demir", "date": "2025-08-29", "tl": 1215000, "eurRate": 47.485, "eur": 25586.9, "status": "paid", "partners": [25586.91, 0, 0, 0] },
-    { "item": "Hafriyat", "date": "2025-08-31", "tl": 85000, "eurRate": 47.485, "eur": 1790.0, "status": "paid", "partners": [1790.00, 0, 0, 0] },
-    { "item": "Beton", "date": "2025-08-31", "tl": 1100000, "eurRate": 47.485, "eur": 23165.1, "status": "paid", "partners": [23165.00, 0, 0, 0] },
-    { "item": "Nalburiye", "date": "2025-09-01", "tl": 12816, "eurRate": 47.80, "eur": 268.1, "status": "paid", "partners": [272.00, 0, 0, 0] },
-    { "item": "Kalfa (avans)", "date": "2025-09-03", "tl": 100000, "eurRate": 47.80, "eur": 2092.1, "status": "paid", "partners": [2092.00, 0, 0, 0] },
-    { "item": "Müteahhit", "date": "2025-09-12", "tl": 19500, "eurRate": 48.50, "eur": 402.1, "status": "paid", "partners": [402.00, 0, 0, 0] },
-    { "item": "Kepçe", "date": "2025-09-17", "tl": 15000, "eurRate": 48.50, "eur": 309.3, "status": "paid", "partners": [309.00, 0, 0, 0] },
-    { "item": "Kalfa (302m² temel)", "date": "2025-09-19", "tl": 500000, "eurRate": 48.00, "eur": 10416.7, "status": "paid", "partners": [10417.00, 0, 0, 0] },
-    { "item": "Yapıdenetim İSG", "date": "2025-09-25", "tl": 20000, "eurRate": 48.00, "eur": 416.7, "status": "paid", "partners": [417.00, 0, 0, 0] },
-    { "item": "Kepçe", "date": "2025-09-25", "tl": 10000, "eurRate": 48.00, "eur": 208.3, "status": "paid", "partners": [208.00, 0, 0, 0] },
-    { "item": "Kepçe", "date": "2025-10-01", "tl": 5000, "eurRate": 48.00, "eur": 104.2, "status": "paid", "partners": [104.00, 0, 0, 0] },
-    { "item": "Hafriyat + Mıcır", "date": "2025-10-01", "tl": 115000, "eurRate": 48.00, "eur": 2395.8, "status": "paid", "partners": [2396.00, 0, 0, 0] },
-    { "item": "Kalfa (192+125m²)", "date": "2025-10-01", "tl": 634000, "eurRate": 48.00, "eur": 13208.3, "status": "paid", "partners": [3302.00, 3302.00, 3302.00, 3302.00] },
-    { "item": "Beton", "date": "2025-10-01", "tl": 350000, "eurRate": 48.00, "eur": 7291.7, "status": "paid", "partners": [1823.00, 1823.00, 1823.00, 1823.00] },
-    { "item": "Kepçe", "date": "2025-10-02", "tl": 13000, "eurRate": 48.50, "eur": 268.0, "status": "paid", "partners": [262.00, 0, 0, 0] },
-    { "item": "Araç kira + yol", "date": "2025-10-05", "tl": 5000, "eurRate": 48.50, "eur": 103.1, "status": "paid", "partners": [103.00, 0, 0, 0] },
-    { "item": "Vinç", "date": "2025-10-13", "tl": 17500, "eurRate": 48.50, "eur": 360.8, "status": "paid", "partners": [361.00, 0, 0, 0] },
-    { "item": "Elektrik aboneliği", "date": "2025-10-16", "tl": 2880, "eurRate": 48.50, "eur": 59.4, "status": "paid", "partners": [59.00, 0, 0, 0] },
-    { "item": "Demir (506kg fark)", "date": "2025-10-17", "tl": 14932, "eurRate": 48.50, "eur": 307.9, "status": "paid", "partners": [308.00, 0, 0, 0] },
-    { "item": "Elektrikçi", "date": "2025-10-22", "tl": 13900, "eurRate": 48.00, "eur": 286.6, "status": "paid", "partners": [287.00, 0, 0, 0] },
-    { "item": "Demir Tevkifatı", "date": "2025-10-28", "tl": 99017, "eurRate": 48.40, "eur": 2045.8, "status": "paid", "partners": [2046.00, 0, 0, 0] },
-    { "item": "Kalfa (241m²)", "date": "2025-11-06", "tl": 482000, "eurRate": 47.67, "eur": 10111.2, "status": "paid", "partners": [2528.00, 2528.00, 2528.00, 2528.00] },
-    { "item": "İzolasyon", "date": "2025-11-10", "tl": 62250, "eurRate": 48.40, "eur": 1286.2, "status": "paid", "partners": [1286.00, 0, 0, 0] },
-    { "item": "Nalburiye", "date": "2025-12-09", "tl": 69500, "eurRate": 48.89, "eur": 1421.6, "status": "paid", "partners": [0, 473.82, 473.72, 473.82] },
-    { "item": "Kalfa (250m²)", "date": "2025-11-18", "tl": 500000, "eurRate": 48.11, "eur": 10392.8, "status": "paid", "partners": [2598.00, 2598.00, 2598.00, 2598.00] },
-    { "item": "Kalfa (250m²)", "date": "2025-11-19", "tl": 500000, "eurRate": 48.11, "eur": 10392.8, "status": "paid", "partners": [2598.00, 2598.00, 2598.00, 2598.00] },
-    { "item": "Su", "date": "2025-11-22", "tl": 30000, "eurRate": 48.11, "eur": 623.6, "status": "paid", "partners": [624.00, 0, 0, 0] },
-    { "item": "Yol masrafları", "date": "2025-11-24", "tl": 10000, "eurRate": 48.11, "eur": 207.9, "status": "paid", "partners": [104.00, 0, 104.00, 0] },
-    { "item": "Hafriyat (22 saat)", "date": "2025-11-24", "tl": 55000, "eurRate": 48.21, "eur": 1140.8, "status": "paid", "partners": [285.00, 285.00, 285.00, 285.00] },
-    { "item": "Kalfa yevmiye", "date": "2025-11-24", "tl": 70000, "eurRate": 48.29, "eur": 1449.6, "status": "paid", "partners": [362.00, 362.00, 362.00, 362.00] },
-    { "item": "Kepçe + YD + Lab", "date": "2025-11-28", "tl": 11000, "eurRate": 48.29, "eur": 227.8, "status": "paid", "partners": [228.00, 0, 0, 0] },
-    { "item": "Marsek Lab", "date": "2025-12-01", "tl": 31500, "eurRate": 48.50, "eur": 649.5, "status": "paid", "partners": [649.00, 0, 0, 0] },
-    { "item": "Kepçe", "date": "2025-12-01", "tl": 16000, "eurRate": 48.50, "eur": 329.9, "status": "paid", "partners": [330.00, 0, 0, 0] },
-    { "item": "Kepçe", "date": "2025-12-03", "tl": 8000, "eurRate": 49.00, "eur": 163.3, "status": "paid", "partners": [163.00, 0, 0, 0] },
-    { "item": "Vinç", "date": "2025-12-05", "tl": 17500, "eurRate": 49.00, "eur": 357.1, "status": "paid", "partners": [357.00, 0, 0, 0] },
-    { "item": "Kamera", "date": "2025-12-04", "tl": 5000, "eurRate": 48.545, "eur": 103.0, "status": "paid", "partners": [0, 103.00, 0, 0] },
-    { "item": "Kalfa (84m²)", "date": "2025-12-08", "tl": 168000, "eurRate": 48.89, "eur": 3436.3, "status": "paid", "partners": [859.00, 859.00, 859.00, 859.00] },
-    { "item": "Nalbur", "date": "2025-12-08", "tl": 7490, "eurRate": 48.89, "eur": 153.2, "status": "paid", "partners": [153.00, 0, 0, 0] },
-    { "item": "Peyzaj mimari 1/2", "date": "2025-12-08", "tl": 7500, "eurRate": 48.89, "eur": 153.4, "status": "paid", "partners": [153.00, 0, 0, 0] },
-    { "item": "Beton Hacıoğlu", "date": "2025-12-15", "tl": 342300, "eurRate": 48.90, "eur": 7000.0, "status": "paid", "partners": [2333.00, 2333.00, 2333.00, 0] },
-    { "item": "Tuğla çimento", "date": "2025-12-19", "tl": 100000, "eurRate": 49.41, "eur": 2023.9, "status": "paid", "partners": [674.00, 674.00, 674.00, 0] },
-    { "item": "Kepçe", "date": "2025-12-19", "tl": 12000, "eurRate": 49.41, "eur": 242.9, "status": "paid", "partners": [243.00, 0, 0, 0] },
-    { "item": "Manito", "date": "2025-12-22", "tl": 9000, "eurRate": 49.50, "eur": 184.1, "status": "paid", "partners": [184.00, 0, 0, 0] },
-    { "item": "Kepçe", "date": "2025-12-28", "tl": 12000, "eurRate": 49.50, "eur": 242.4, "status": "paid", "partners": [242.00, 0, 0, 0] },
-    { "item": "Kalfa (108m²)", "date": "2025-12-30", "tl": 216000, "eurRate": 49.50, "eur": 4363.6, "status": "paid", "partners": [1456.00, 1454.00, 1454.00, 0] },
-    { "item": "İnşaat malzemeleri", "date": "2025-12-31", "tl": 1490, "eurRate": 49.50, "eur": 30.1, "status": "paid", "partners": [0, 0, 30.00, 0] },
-    { "item": "Yol masrafları (Dec)", "date": "2026-01-05", "tl": 12000, "eurRate": 49.50, "eur": 242.4, "status": "paid", "partners": [0, 0, 242.00, 0] },
-    { "item": "Manitou", "date": "2026-01-05", "tl": 21500, "eurRate": 49.50, "eur": 434.3, "status": "paid", "partners": [144.67, 144.67, 0, 144.67] },
-    { "item": "Mimar ön ödeme", "date": "2026-01-07", "tl": 50000, "eurRate": 49.50, "eur": 1010.1, "status": "paid", "partners": [336.67, 336.67, 336.67, 0] },
-    { "item": "Yol masrafları (Jan)", "date": "2026-01-07", "tl": 4930, "eurRate": 49.50, "eur": 99.6, "status": "paid", "partners": [0, 0, 100.00, 0] },
-    { "item": "Hafriyat (51 saat)", "date": "2026-01-12", "tl": 140250, "eurRate": 49.73, "eur": 2820.2, "status": "paid", "partners": [940.00, 940.00, 940.00, 0] },
-    { "item": "Tuğla (7776 adet)", "date": "2026-01-22", "tl": 66096, "eurRate": 49.99, "eur": 1322.2, "status": "paid", "partners": [440.08, 440.08, 440.08, 0] },
-    { "item": "Ziyaret / Arsa İnşaat", "date": "2026-03-07", "tl": 5541, "eurRate": 50.378, "eur": 110.0, "status": "paid", "partners": [0, 0, 110.00, 0] },
-    { "item": "Kum + Manito (Cavit)", "date": "2026-03-09", "tl": 53600, "eurRate": 50.378, "eur": 1064.0, "status": "paid", "partners": [0, 532.00, 0, 532.00] },
-    { "item": "Kepçe", "date": "2026-03-16", "tl": 9000, "eurRate": 50.11, "eur": 179.6, "status": "paid", "partners": [0, 0, 179.60, 0] },
-    { "item": "Tuğla örme (Cavit)", "date": "2026-03-16", "tl": 123000, "eurRate": 50.11, "eur": 2454.6, "status": "paid", "partners": [0, 818.20, 818.20, 818.20] },
-    { "item": "Çimento kum tuğla ek", "date": "2026-03-16", "tl": 62410, "eurRate": 50.11, "eur": 1245.5, "status": "paid", "partners": [0, 415.17, 415.17, 415.17] },
-    { "item": "Cavit avans", "date": "2026-03-16", "tl": 20000, "eurRate": 50.11, "eur": 399.1, "status": "paid", "partners": [0, 133.03, 133.03, 133.03] }
+    {
+      "item": "Arsa",
+      "date": "2023-08-26",
+      "tl": 3000000,
+      "eurRate": 28.2,
+      "eur": 106383,
+      "status": "paid",
+      "partners": [
+        26595.74,
+        26595.74,
+        26595.74,
+        26595.74
+      ]
+    },
+    {
+      "item": "Arsa temizlik",
+      "date": "2023-09-05",
+      "tl": 12600,
+      "eurRate": 28.63,
+      "eur": 440.1,
+      "status": "paid",
+      "partners": [
+        110.02,
+        110.02,
+        110.02,
+        110.02
+      ]
+    },
+    {
+      "item": "Arsa temizlik + Dolgu malzemesi",
+      "date": "2024-07-26",
+      "tl": 189000,
+      "eurRate": 35.27,
+      "eur": 5358.7,
+      "status": "paid",
+      "partners": [
+        1339.67,
+        1339.67,
+        1339.67,
+        1339.67
+      ]
+    },
+    {
+      "item": "Zemin etüdü",
+      "date": "2024-10-01",
+      "tl": 40000,
+      "eurRate": 37.74,
+      "eur": 1059.9,
+      "status": "paid",
+      "partners": [
+        264.97,
+        264.97,
+        264.97,
+        264.97
+      ]
+    },
+    {
+      "item": "Mimar 1/2",
+      "date": "2024-10-16",
+      "tl": 70000,
+      "eurRate": 36.8,
+      "eur": 1902.2,
+      "status": "paid",
+      "partners": [
+        475.54,
+        475.54,
+        475.54,
+        475.54
+      ]
+    },
+    {
+      "item": "Istinat duvari (ilk posta)",
+      "date": "2024-10-31",
+      "tl": 500000,
+      "eurRate": 36.6,
+      "eur": 13661.2,
+      "status": "paid",
+      "partners": [
+        3415.3,
+        3415.3,
+        3415.3,
+        3415.3
+      ]
+    },
+    {
+      "item": "İstinat duvarı (ikinci posta)",
+      "date": "2024-11-11",
+      "tl": 1400000,
+      "eurRate": 35.97,
+      "eur": 38921.3,
+      "status": "paid",
+      "partners": [
+        9730.33,
+        9730.33,
+        9730.33,
+        9730.33
+      ]
+    },
+    {
+      "item": "Mimar 2/2",
+      "date": "2024-10-16",
+      "tl": 70000,
+      "eurRate": 37.3,
+      "eur": 1876.7,
+      "status": "paid",
+      "partners": [
+        469.17,
+        469.17,
+        469.17,
+        469.17
+      ]
+    },
+    {
+      "item": "Yapı Denetim + Şantiye Şefi",
+      "date": "2024-12-20",
+      "tl": 193000,
+      "eurRate": 35.87,
+      "eur": 5380.5,
+      "status": "paid",
+      "partners": [
+        1345,
+        1345,
+        1345,
+        1345
+      ]
+    },
+    {
+      "item": "Demir",
+      "date": "2025-08-29",
+      "tl": 1215000,
+      "eurRate": 47.485,
+      "eur": 25586.9,
+      "status": "paid",
+      "partners": [
+        25586.91,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Hafriyat",
+      "date": "2025-08-31",
+      "tl": 85000,
+      "eurRate": 47.485,
+      "eur": 1790,
+      "status": "paid",
+      "partners": [
+        1790,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Beton",
+      "date": "2025-08-31",
+      "tl": 1100000,
+      "eurRate": 47.485,
+      "eur": 23165.1,
+      "status": "paid",
+      "partners": [
+        23165,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Nalburiye",
+      "date": "2025-09-01",
+      "tl": 12816,
+      "eurRate": 47.8,
+      "eur": 268.1,
+      "status": "paid",
+      "partners": [
+        272,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Kalfa",
+      "date": "2025-09-03",
+      "tl": 100000,
+      "eurRate": 47.8,
+      "eur": 2092.1,
+      "status": "paid",
+      "partners": [
+        2092,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Müteahhit (resmi işlemler, çip vs)",
+      "date": "2025-09-12",
+      "tl": 19500,
+      "eurRate": 48.5,
+      "eur": 402.1,
+      "status": "paid",
+      "partners": [
+        402,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Kepçe",
+      "date": "2025-09-17",
+      "tl": 15000,
+      "eurRate": 48.5,
+      "eur": 309.3,
+      "status": "paid",
+      "partners": [
+        309,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Kalfa",
+      "date": "2025-09-19",
+      "tl": 500000,
+      "eurRate": 48,
+      "eur": 10416.7,
+      "status": "paid",
+      "partners": [
+        10417,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Yapıdenetim İSG",
+      "date": "2025-09-25",
+      "tl": 20000,
+      "eurRate": 48,
+      "eur": 416.7,
+      "status": "paid",
+      "partners": [
+        417,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Kepçe",
+      "date": "2025-09-25",
+      "tl": 10000,
+      "eurRate": 48,
+      "eur": 208.3,
+      "status": "paid",
+      "partners": [
+        208,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Kepçe",
+      "date": "2025-10-01",
+      "tl": 5000,
+      "eurRate": 48,
+      "eur": 104.2,
+      "status": "paid",
+      "partners": [
+        104,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Hafriyat + Mıcır",
+      "date": "2025-10-01",
+      "tl": 115000,
+      "eurRate": 48,
+      "eur": 2395.8,
+      "status": "paid",
+      "partners": [
+        2396,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Kalfa",
+      "date": "2025-10-01",
+      "tl": 634000,
+      "eurRate": 48,
+      "eur": 13208.3,
+      "status": "paid",
+      "partners": [
+        3302,
+        3302,
+        3302,
+        3302
+      ]
+    },
+    {
+      "item": "Beton",
+      "date": "2025-10-01",
+      "tl": 350000,
+      "eurRate": 48,
+      "eur": 7291.7,
+      "status": "paid",
+      "partners": [
+        1823,
+        1823,
+        1823,
+        1823
+      ]
+    },
+    {
+      "item": "Kepçe",
+      "date": "2025-10-02",
+      "tl": 13000,
+      "eurRate": 48.5,
+      "eur": 268,
+      "status": "paid",
+      "partners": [
+        262,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Araç kira + yol masrafları",
+      "date": "2025-10-05",
+      "tl": 5000,
+      "eurRate": 48.5,
+      "eur": 103.1,
+      "status": "paid",
+      "partners": [
+        103,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Vinç - Ahmet Sağlam",
+      "date": "2025-10-13",
+      "tl": 17500,
+      "eurRate": 48.5,
+      "eur": 360.8,
+      "status": "paid",
+      "partners": [
+        361,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Elektrik aboneliği başvurusu",
+      "date": "2025-10-16",
+      "tl": 2880,
+      "eurRate": 48.5,
+      "eur": 59.4,
+      "status": "paid",
+      "partners": [
+        59,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Demir",
+      "date": "2025-10-17",
+      "tl": 14932,
+      "eurRate": 48.5,
+      "eur": 307.9,
+      "status": "paid",
+      "partners": [
+        308,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Elektrikçi",
+      "date": "2025-10-22",
+      "tl": 13900,
+      "eurRate": 48,
+      "eur": 286.6,
+      "status": "paid",
+      "partners": [
+        287,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Demir Tevkifatı",
+      "date": "2025-10-28",
+      "tl": 99017,
+      "eurRate": 48.4,
+      "eur": 2045.8,
+      "status": "paid",
+      "partners": [
+        2046,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Kalfa",
+      "date": "2025-11-06",
+      "tl": 482000,
+      "eurRate": 47.67,
+      "eur": 10111.2,
+      "status": "paid",
+      "partners": [
+        2528,
+        2528,
+        2528,
+        2528
+      ]
+    },
+    {
+      "item": "İzolasyon",
+      "date": "2025-11-10",
+      "tl": 62250,
+      "eurRate": 48.4,
+      "eur": 1286.2,
+      "status": "paid",
+      "partners": [
+        1286,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Nalburiye",
+      "date": "2025-12-09",
+      "tl": 69500,
+      "eurRate": 48.89,
+      "eur": 1421.6,
+      "status": "paid",
+      "partners": [
+        0,
+        473.82,
+        473.72,
+        473.82
+      ]
+    },
+    {
+      "item": "Kalfa",
+      "date": "2025-11-18",
+      "tl": 500000,
+      "eurRate": 48.11,
+      "eur": 10392.8,
+      "status": "paid",
+      "partners": [
+        2598,
+        2598,
+        2598,
+        2598
+      ]
+    },
+    {
+      "item": "Kalfa",
+      "date": "2025-11-19",
+      "tl": 500000,
+      "eurRate": 48.11,
+      "eur": 10392.8,
+      "status": "paid",
+      "partners": [
+        2598,
+        2598,
+        2598,
+        2598
+      ]
+    },
+    {
+      "item": "Su",
+      "date": "2025-11-22",
+      "tl": 30000,
+      "eurRate": 48.11,
+      "eur": 623.6,
+      "status": "paid",
+      "partners": [
+        624,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "15 & 22 Nov yol masrafları",
+      "date": "2025-11-24",
+      "tl": 10000,
+      "eurRate": 48.11,
+      "eur": 207.9,
+      "status": "paid",
+      "partners": [
+        104,
+        0,
+        104,
+        0
+      ]
+    },
+    {
+      "item": "Hafriyat",
+      "date": "2025-11-24",
+      "tl": 55000,
+      "eurRate": 48.21,
+      "eur": 1140.8,
+      "status": "paid",
+      "partners": [
+        285,
+        285,
+        285,
+        285
+      ]
+    },
+    {
+      "item": "Kalfa Yevmiye",
+      "date": "2025-11-24",
+      "tl": 70000,
+      "eurRate": 48.29,
+      "eur": 1449.6,
+      "status": "paid",
+      "partners": [
+        362,
+        362,
+        362,
+        362
+      ]
+    },
+    {
+      "item": "Kepce + YD + Lab yevmiye",
+      "date": "2025-11-28",
+      "tl": 11000,
+      "eurRate": 48.29,
+      "eur": 227.8,
+      "status": "paid",
+      "partners": [
+        228,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Marsek Lab",
+      "date": "2025-12-01",
+      "tl": 31500,
+      "eurRate": 48.5,
+      "eur": 649.5,
+      "status": "paid",
+      "partners": [
+        649,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Kepçe",
+      "date": "2025-12-01",
+      "tl": 16000,
+      "eurRate": 48.5,
+      "eur": 329.9,
+      "status": "paid",
+      "partners": [
+        330,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Kepçe",
+      "date": "2025-12-03",
+      "tl": 8000,
+      "eurRate": 49,
+      "eur": 163.3,
+      "status": "paid",
+      "partners": [
+        163,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Vinç",
+      "date": "2025-12-05",
+      "tl": 17500,
+      "eurRate": 49,
+      "eur": 357.1,
+      "status": "paid",
+      "partners": [
+        357,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Kamera",
+      "date": "2025-12-04",
+      "tl": 5000,
+      "eurRate": 48.545,
+      "eur": 103,
+      "status": "paid",
+      "partners": [
+        0,
+        103,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Kalfa",
+      "date": "2025-12-08",
+      "tl": 168000,
+      "eurRate": 48.89,
+      "eur": 3436.3,
+      "status": "paid",
+      "partners": [
+        859,
+        859,
+        859,
+        859
+      ]
+    },
+    {
+      "item": "Nalbur",
+      "date": "2025-12-08",
+      "tl": 7490,
+      "eurRate": 48.89,
+      "eur": 153.2,
+      "status": "paid",
+      "partners": [
+        153,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Peyzaj mimari 1/2",
+      "date": "2025-12-08",
+      "tl": 7500,
+      "eurRate": 48.89,
+      "eur": 153.4,
+      "status": "paid",
+      "partners": [
+        153,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Beton Hacıoğlu",
+      "date": "2025-12-15",
+      "tl": 342300,
+      "eurRate": 48.9,
+      "eur": 7000,
+      "status": "paid",
+      "partners": [
+        2333,
+        2333,
+        2333,
+        0
+      ]
+    },
+    {
+      "item": "Tuğla çimento kim",
+      "date": "2025-12-19",
+      "tl": 100000,
+      "eurRate": 49.41,
+      "eur": 2023.9,
+      "status": "paid",
+      "partners": [
+        674,
+        674,
+        674,
+        0
+      ]
+    },
+    {
+      "item": "Kepçe",
+      "date": "2025-12-19",
+      "tl": 12000,
+      "eurRate": 49.41,
+      "eur": 242.9,
+      "status": "paid",
+      "partners": [
+        243,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Manito",
+      "date": "2025-12-22",
+      "tl": 9000,
+      "eurRate": 49.5,
+      "eur": 184.1,
+      "status": "paid",
+      "partners": [
+        184,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Kepce",
+      "date": "2025-12-28",
+      "tl": 12000,
+      "eurRate": 49.5,
+      "eur": 242.4,
+      "status": "paid",
+      "partners": [
+        242,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Kalfa",
+      "date": "2025-12-30",
+      "tl": 216000,
+      "eurRate": 49.5,
+      "eur": 4363.6,
+      "status": "paid",
+      "partners": [
+        1456,
+        1454,
+        1454,
+        0
+      ]
+    },
+    {
+      "item": "İnşaat malzemeleri",
+      "date": "2025-12-31",
+      "tl": 1490,
+      "eurRate": 49.5,
+      "eur": 30.1,
+      "status": "paid",
+      "partners": [
+        0,
+        0,
+        30,
+        0
+      ]
+    },
+    {
+      "item": "6 & 30 Dec yol masraflari",
+      "date": "2026-01-05",
+      "tl": 12000,
+      "eurRate": 49.5,
+      "eur": 242.4,
+      "status": "paid",
+      "partners": [
+        0,
+        0,
+        242,
+        0
+      ]
+    },
+    {
+      "item": "Manitou",
+      "date": "2026-01-05",
+      "tl": 21500,
+      "eurRate": 49.5,
+      "eur": 434.3,
+      "status": "paid",
+      "partners": [
+        144.67,
+        144.67,
+        0,
+        144.67
+      ]
+    },
+    {
+      "item": "Mimar ön ödeme",
+      "date": "2026-01-07",
+      "tl": 50000,
+      "eurRate": 49.5,
+      "eur": 1010.1,
+      "status": "paid",
+      "partners": [
+        336.67,
+        336.67,
+        336.67,
+        0
+      ]
+    },
+    {
+      "item": "06 Jan 2 yol masraflari",
+      "date": "2026-01-07",
+      "tl": 4930,
+      "eurRate": 49.5,
+      "eur": 99.6,
+      "status": "paid",
+      "partners": [
+        0,
+        0,
+        100,
+        0
+      ]
+    },
+    {
+      "item": "Hafriyat",
+      "date": "2026-01-12",
+      "tl": 140250,
+      "eurRate": 49.73,
+      "eur": 2820.2,
+      "status": "paid",
+      "partners": [
+        940,
+        940,
+        940,
+        0
+      ]
+    },
+    {
+      "item": "Tugla",
+      "date": "2026-01-22",
+      "tl": 66096,
+      "eurRate": 49.99,
+      "eur": 1322.2,
+      "status": "paid",
+      "partners": [
+        440.08,
+        440.08,
+        440.08,
+        0
+      ]
+    },
+    {
+      "item": "OP Ziyaret / Arsa Insaat",
+      "date": "2026-03-07",
+      "tl": 5541,
+      "eurRate": 50.378,
+      "eur": 110,
+      "status": "paid",
+      "partners": [
+        0,
+        0,
+        110,
+        0
+      ]
+    },
+    {
+      "item": "Kum + Manito (Cavit)",
+      "date": "2026-03-09",
+      "tl": 53600,
+      "eurRate": 50.378,
+      "eur": 1064,
+      "status": "paid",
+      "partners": [
+        0,
+        532,
+        0,
+        532
+      ]
+    },
+    {
+      "item": "Kepce",
+      "date": "2026-03-16",
+      "tl": 9000,
+      "eurRate": 50.11,
+      "eur": 179.6,
+      "status": "paid",
+      "partners": [
+        0,
+        0,
+        179.6,
+        0
+      ]
+    },
+    {
+      "item": "Tugla örme islemi (CK)",
+      "date": "2026-03-16",
+      "tl": 123000,
+      "eurRate": 50.11,
+      "eur": 2454.6,
+      "status": "paid",
+      "partners": [
+        0,
+        818.2,
+        818.2,
+        818.2
+      ]
+    },
+    {
+      "item": "Çimento kum tuğla ek sipariş (CK)",
+      "date": "2026-03-16",
+      "tl": 62410,
+      "eurRate": 50.11,
+      "eur": 1245.5,
+      "status": "paid",
+      "partners": [
+        0,
+        415.17,
+        415.17,
+        415.17
+      ]
+    },
+    {
+      "item": "Cavit Kurt avans (CK)",
+      "date": "2026-03-16",
+      "tl": 20000,
+      "eurRate": 50.11,
+      "eur": 399.1,
+      "status": "paid",
+      "partners": [
+        0,
+        133.03,
+        133.03,
+        133.03
+      ]
+    },
+    {
+      "item": "Asma kat profil (CK)",
+      "date": "2026-03-31",
+      "tl": 80000,
+      "eurRate": 50.39,
+      "eur": 1587.6,
+      "status": "paid",
+      "partners": [
+        397,
+        397,
+        397,
+        397
+      ]
+    },
+    {
+      "item": "Mimar 2. ödeme (75k)",
+      "date": "2026-04-14",
+      "tl": 75000,
+      "eurRate": 52.05,
+      "eur": 1440.9,
+      "status": "paid",
+      "partners": [
+        0,
+        480.3,
+        480.3,
+        480.3
+      ]
+    },
+    {
+      "item": "Peyzaj mimarı son ödeme",
+      "date": "2026-04-10",
+      "tl": 5000,
+      "eurRate": 52,
+      "eur": 96.2,
+      "status": "paid",
+      "partners": [
+        0,
+        0,
+        96.2,
+        0
+      ]
+    },
+    {
+      "item": "Yol masrafları",
+      "date": "2026-04-27",
+      "tl": 3350,
+      "eurRate": 52,
+      "eur": 64.4,
+      "status": "paid",
+      "partners": [
+        0,
+        0,
+        64.2,
+        0
+      ]
+    },
+    {
+      "item": "Peyzaj mimarı ana ödeme",
+      "date": "2026-02-09",
+      "tl": 15000,
+      "eurRate": 49.5,
+      "eur": 303,
+      "status": "paid",
+      "partners": [
+        0,
+        0,
+        0,
+        303
+      ]
+    },
+    {
+      "item": "HGS 41ARV110",
+      "date": "2026-04-12",
+      "tl": 2660,
+      "eurRate": 52,
+      "eur": 51.2,
+      "status": "paid",
+      "partners": [
+        51.2,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Restoran (CK)",
+      "date": "2026-04-12",
+      "tl": 3000,
+      "eurRate": 52,
+      "eur": 57.7,
+      "status": "paid",
+      "partners": [
+        0,
+        57.7,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Uçan Merdiven Kapora (CK)",
+      "date": "2026-04-27",
+      "tl": 100000,
+      "eurRate": 52.237,
+      "eur": 1914.4,
+      "status": "paid",
+      "partners": [
+        0,
+        638.13,
+        638.13,
+        638.13
+      ]
+    },
+    {
+      "item": "cimento, kum, kirec (CK)",
+      "date": "2026-04-29",
+      "tl": 161260,
+      "eurRate": 52.123,
+      "eur": 3087.1,
+      "status": "paid",
+      "partners": [
+        0,
+        1029,
+        1029,
+        1029
+      ]
+    },
+    {
+      "item": "Manitu (CK)",
+      "date": "2026-05-05",
+      "tl": 20000,
+      "eurRate": 52.5,
+      "eur": 382.9,
+      "status": "paid",
+      "partners": [
+        0,
+        126.5,
+        126.5,
+        126.5
+      ]
+    },
+    {
+      "item": "CK",
+      "date": "2026-05-21",
+      "tl": 200000,
+      "eurRate": 52.4,
+      "eur": 3828.7,
+      "status": "paid",
+      "partners": [
+        3828.7,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "CK",
+      "date": "2026-05-21",
+      "tl": 500000,
+      "eurRate": 52.4,
+      "eur": 9542,
+      "status": "paid",
+      "partners": [
+        0,
+        4771,
+        4771,
+        0
+      ]
+    },
+    {
+      "item": "CK (400,000 sıvacı)",
+      "date": "2026-05-21",
+      "tl": 500000,
+      "eurRate": 52.609,
+      "eur": 9504.1,
+      "status": "paid",
+      "partners": [
+        0,
+        4752,
+        4752,
+        0
+      ]
+    },
+    {
+      "item": "Manito",
+      "date": "2026-06-29",
+      "tl": 33000,
+      "eurRate": 52.7,
+      "eur": 631.7,
+      "status": "paid",
+      "partners": [
+        0,
+        210.56,
+        210.56,
+        210.56
+      ]
+    },
+    {
+      "item": "Benzin",
+      "date": "2026-06-22",
+      "tl": 3400,
+      "eurRate": 52.7,
+      "eur": 65.1,
+      "status": "paid",
+      "partners": [
+        0,
+        0,
+        0,
+        65.1
+      ]
+    },
+    {
+      "item": "Elektrikci 1. Taksit",
+      "date": "2026-07-07",
+      "tl": 250000,
+      "eurRate": 52.7,
+      "eur": 4785.9,
+      "status": "paid",
+      "partners": [
+        0,
+        1595,
+        1595,
+        1595
+      ]
+    },
+    {
+      "item": "Anahtar priz eBay",
+      "date": "2026-07-06",
+      "tl": 8152,
+      "eurRate": 53,
+      "eur": 156.1,
+      "status": "paid",
+      "partners": [
+        0,
+        0,
+        156,
+        0
+      ]
+    },
+    {
+      "item": "Tuğla Örüm",
+      "date": "2026-07-16",
+      "tl": 80000,
+      "eurRate": 53,
+      "eur": 1509.4,
+      "status": "paid",
+      "partners": [
+        0,
+        754.7,
+        754.7,
+        0
+      ]
+    },
+    {
+      "item": "Kamera 1 yıllık internet",
+      "date": "2026-07-17",
+      "tl": 4750,
+      "eurRate": 53,
+      "eur": 89.6,
+      "status": "paid",
+      "partners": [
+        0,
+        0,
+        89.6,
+        0
+      ]
+    },
+    {
+      "item": "Gözlementepe beyaz eşya",
+      "date": "2026-07-29",
+      "tl": 100000,
+      "eurRate": 53.26,
+      "eur": 1877.4,
+      "status": "paid",
+      "partners": [
+        0,
+        1877.42,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "C.K ödemeler",
+      "date": "2026-07-30",
+      "tl": 300000,
+      "eurRate": 53.26,
+      "eur": 5632.7,
+      "status": "paid",
+      "partners": [
+        0,
+        1877.4,
+        1877.4,
+        1877.4
+      ]
+    },
+    {
+      "item": "C.K ödeme",
+      "date": "2026-08-03",
+      "tl": 115000,
+      "eurRate": 53.26,
+      "eur": 2159.2,
+      "status": "paid",
+      "partners": [
+        0,
+        719.73,
+        719.73,
+        719.73
+      ]
+    },
+    {
+      "item": "Sıvacı Kalfa",
+      "date": "2026-08-04",
+      "tl": 200000,
+      "eurRate": 54.05,
+      "eur": 3700,
+      "status": "paid",
+      "partners": [
+        0,
+        3700,
+        0,
+        0
+      ]
+    },
+    {
+      "item": "Proje dosya matbaa",
+      "date": "2026-08-07",
+      "tl": 3000,
+      "eurRate": 54.05,
+      "eur": 55.5,
+      "status": "paid",
+      "partners": [
+        0,
+        0,
+        0,
+        55.5
+      ]
+    }
   ],
   "forecast": [
-    { "item": "İnce inşaat (incl. mobilya)", "tl": 10000000, "eurRate": 49.00, "eur": 204081.6 },
-    { "item": "Havuz", "tl": 2000000, "eurRate": 49.00, "eur": 40816.3 },
-    { "item": "Peyzaj", "tl": 1000000, "eurRate": 49.00, "eur": 20408.2 },
-    { "item": "Mobilya", "tl": 1500000, "eurRate": 49.00, "eur": 30612.2 }
+    {
+      "item": "İnce inşaat (incl. mobilya)",
+      "tl": 10000000,
+      "eurRate": 49,
+      "eur": 204081.6
+    },
+    {
+      "item": "Havuz",
+      "tl": 2000000,
+      "eurRate": 49,
+      "eur": 40816.3
+    },
+    {
+      "item": "Peyzaj",
+      "tl": 1000000,
+      "eurRate": 49,
+      "eur": 20408.2
+    },
+    {
+      "item": "Mobilya",
+      "tl": 1500000,
+      "eurRate": 49,
+      "eur": 30612.2
+    }
   ],
   "totals": {
-    "paidTL": 9822145,
-    "paidEUR": 334138.9,
+    "paidTL": 15896574,
+    "paidEUR": 386661.9,
     "forecastTL": 14500000,
-    "forecastEUR": 295918.4,
-    "totalTL": 22822145,
-    "totalEUR": 599445.0
+    "forecastEUR": 295918.3,
+    "totalTL": 28896574,
+    "totalEUR": 651968
   }
 }
