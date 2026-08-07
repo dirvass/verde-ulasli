@@ -53,6 +53,7 @@ export const MEDIA: Media[] = [
   { id: "int-somine", type: "image", src: "/media/ic-mekan/salon-somine-deri-koltuk-render-v2.jpg", alt: "Living room with fireplace, leather sofa and gulf view", category: "interior", featured: true },
   { id: "int-infinity-havuz", type: "image", src: "/media/ic-mekan/salon-infinity-havuz-manzara-render-v2.jpg", alt: "Great room opening to the infinity pool and forested gulf view", category: "interior", featured: true },
   { id: "int-yesil-dus-manzara", type: "image", src: "/media/ic-mekan/yatak-odasi-yesil-dus-manzara-render-v2.jpg", alt: "Master bedroom with green walk-in shower and gulf view", category: "interior", featured: true },
+  { id: "int-mutfak-yemek-teras", type: "image", src: "/media/ic-mekan/mutfak-yemek-teras-render.jpg", alt: "Open kitchen and dining hall opening onto the deck terrace", category: "interior", featured: true },
   { id: "int-loft-deniz", type: "image", src: "/media/ic-mekan/loft-yatak-odasi-deniz-render.jpg", alt: "Double-height loft bedroom with mezzanine and view", category: "interior" },
   { id: "int-loft-asma", type: "image", src: "/media/ic-mekan/loft-yatak-odasi-asma-kat-render.jpg", alt: "Loft bedroom with mezzanine bed", category: "interior" },
   { id: "int-banyo-yesil", type: "image", src: "/media/ic-mekan/banyo-yesil-dus-render.jpg", alt: "Bathroom with green herringbone walk-in shower", category: "interior" },
