@@ -647,6 +647,20 @@ function BrandTab() {
 function CapexTab() {
   const { t, locale } = useLanguage();
 
+  // Live data from the expenses sheet via /api/capex; the bundled snapshot
+  // stays on screen if the API is unavailable or the sheet fails to parse.
+  const [data, setData] = useState<typeof capexData>(capexData);
+  useEffect(() => {
+    let alive = true;
+    fetch("/api/capex")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => {
+        if (alive && j && j.totals && Array.isArray(j.expenses)) setData(j);
+      })
+      .catch(() => {});
+    return () => { alive = false; };
+  }, []);
+
   const MONTHS_EN = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   const MONTHS_TR = ["Oca","Şub","Mar","Nis","May","Haz","Tem","Ağu","Eyl","Eki","Kas","Ara"];
   const MONTHS_DE = ["Jan","Feb","Mär","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez"];
@@ -663,19 +677,19 @@ function CapexTab() {
   const fmtRate = (n: number) => new Intl.NumberFormat("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 3 }).format(n);
   const fmtPct = (n: number) => `${n.toFixed(1)}%`;
 
-  const { partners, expenses, forecast, totals } = capexData;
+  const { partners, expenses, forecast, totals } = data;
   const progressPct = (totals.paidEUR / totals.totalEUR) * 100;
 
   // Calculate each partner's total contribution from expenses
   const partnerTotals = useMemo(() =>
     partners.map((_, pi) =>
       expenses.reduce((sum, e) => sum + (e.partners[pi] ?? 0), 0)
-    ), []
+    ), [data]
   );
 
   // Expected share of grand total EUR for each partner
   const partnerExpected = useMemo(() =>
-    partners.map(p => (p.share / 100) * totals.totalEUR), []
+    partners.map(p => (p.share / 100) * totals.totalEUR), [data]
   );
 
   return (
