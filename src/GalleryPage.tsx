@@ -345,6 +345,22 @@ export default function GalleryPage() {
           <button type="button" className="gal-lightbox__close" aria-label={t("gallery.close")} onClick={close}>
             &times;
           </button>
+          {/* Opens the file on its own, where the browser's native zoom shows
+              the full resolution. The overlay can't: on a phone in landscape
+              the browser toolbars take most of the height. */}
+          {currentMedia.type === "image" && !mediaErrored && (
+            <a
+              className="gal-lightbox__full"
+              href={currentMedia.src}
+              target="_blank"
+              rel="noopener"
+              aria-label={t("gallery.fullSize")}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <span aria-hidden="true">&#x2922;</span>
+              <span className="gal-lightbox__full-label">{t("gallery.fullSize")}</span>
+            </a>
+          )}
           <button
             type="button"
             className="gal-lightbox__nav gal-lightbox__nav--prev"

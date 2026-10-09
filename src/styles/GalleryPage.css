@@ -327,6 +327,20 @@
 .gal-lightbox__nav--prev{ left:max(16px, env(safe-area-inset-left)) }
 .gal-lightbox__nav--next{ right:max(16px, env(safe-area-inset-right)) }
 
+.gal-lightbox__full{
+  position:fixed; z-index:1300;
+  top:max(16px, env(safe-area-inset-top));
+  left:max(16px, env(safe-area-inset-left));
+  height:44px; padding:0 16px; border-radius:999px;
+  display:inline-flex; align-items:center; gap:8px;
+  border:1px solid rgba(255,255,255,.25);
+  background:rgba(0,0,0,.35); backdrop-filter:blur(8px);
+  color:#fff; text-decoration:none; font-size:.8rem; letter-spacing:.04em;
+  transition:background .2s ease;
+}
+.gal-lightbox__full:hover{ background:rgba(255,255,255,.15) }
+.gal-lightbox__full > span[aria-hidden]{ font-size:1.05rem; line-height:1 }
+
 /* ── Gallery responsive ── */
 @media (max-width:900px){
   .gallery-card--featured{ grid-column:span 1; grid-row:span 1; aspect-ratio:4/3 }
@@ -352,18 +366,28 @@
   .gal-lightbox__nav--next{ right:max(8px, env(safe-area-inset-right)) }
 }
 
-/* Landscape phones: almost no vertical room, so the chrome shrinks and the
-   sides open up to keep the arrows off the photo. */
+/* Landscape phones: the browser toolbars leave very little height, so the
+   photo gets all of it. Caption is dropped, the counter floats on the photo,
+   the buttons shrink and sit on the side margins. */
 @media (max-height:520px) and (orientation:landscape){
   .gal-lightbox{
-    padding:8px max(56px, env(safe-area-inset-right)) 8px max(56px, env(safe-area-inset-left));
+    padding:0 max(56px, env(safe-area-inset-right)) 0 max(56px, env(safe-area-inset-left));
   }
-  .gal-lightbox__inner{ gap:6px }
-  .gal-lightbox__caption{ font-size:.74rem; gap:8px }
-  .gal-lightbox__caption-cat{ padding:2px 8px; font-size:.62rem }
-  .gal-lightbox__counter{ margin-top:-2px; font-size:.7rem }
+  .gal-lightbox__inner{ gap:0 }
+  .gal-lightbox__media{ border-radius:0; box-shadow:none }
+  .gal-lightbox__caption{ display:none }
+  .gal-lightbox__counter{
+    position:absolute; bottom:6px; left:50%; transform:translateX(-50%);
+    margin:0; padding:2px 9px; border-radius:999px;
+    background:rgba(0,0,0,.5); font-size:.66rem; pointer-events:none;
+  }
   .gal-lightbox__close,
   .gal-lightbox__nav{ width:38px; height:38px; font-size:20px }
+  .gal-lightbox__close{ top:8px; right:max(8px, env(safe-area-inset-right)) }
+  .gal-lightbox__full{ top:8px; left:max(8px, env(safe-area-inset-left)); width:38px; height:38px; padding:0; justify-content:center }
+  .gal-lightbox__full-label{ display:none }
+  .gal-lightbox__nav--prev{ left:max(8px, env(safe-area-inset-left)) }
+  .gal-lightbox__nav--next{ right:max(8px, env(safe-area-inset-right)) }
   .gal-lightbox__hint{ bottom:10px; padding:6px 12px; font-size:.7rem }
 }
 
