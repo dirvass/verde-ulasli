@@ -19,7 +19,7 @@ interface Env {
 }
 
 /** İzin verilen belge kimlikleri. Yeni bağlantı = buraya yeni satır. */
-const SLUGS = new Set(["koridor", "verde", "talep"]);
+const SLUGS = new Set(["koridor", "verde", "talep", "fenster"]);
 
 const KEY = (slug: string) => `view:${slug}`;
 const MAX_STAMPS = 500; // KV değeri sınırsız büyümesin
