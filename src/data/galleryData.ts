@@ -53,7 +53,7 @@ export const MEDIA: Media[] = [
   // ─── INTERIOR RENDERS (ic-mekan) — curated set, wow order ───
   { id: "int-salon-gunbatimi", type: "image", src: "/media/ic-mekan/salon-gunbatimi-infinity-havuz-render.jpg", alt: "Living room at sunset, opening onto the infinity pool and gulf", category: "interior", featured: true },
   { id: "int-salon-gunduz-havuz", type: "image", src: "/media/ic-mekan/salon-gunduz-dikdortgen-havuz-render.jpg", alt: "Living room by day, the long pool and the gulf beyond the glass", category: "interior" },
-  { id: "int-mutfak-yemek-ada", type: "image", src: "/media/ic-mekan/mutfak-yemek-ada-havuz-deniz-render.jpg", alt: "Kitchen and dining room, the island facing the terrace, the pool and the gulf", category: "interior" },
+  { id: "int-mutfak-yemek-ada", type: "image", src: "/media/ic-mekan/mutfak-yemek-ada-genis-cam-deniz-render.jpg", alt: "Kitchen and dining room, the island facing the terrace, the pool and the gulf", category: "interior" },
   { id: "int-kuvet-deniz", type: "image", src: "/media/ic-mekan/yatak-odasi-kuvet-deniz-render.jpg", alt: "Master suite with freestanding tub and panoramic gulf view", category: "interior", featured: true },
   { id: "int-somine", type: "image", src: "/media/ic-mekan/salon-somine-deri-koltuk-render-v2.jpg", alt: "Living room with fireplace, leather sofa and gulf view", category: "interior", featured: true },
   { id: "int-infinity-havuz", type: "image", src: "/media/ic-mekan/salon-infinity-havuz-manzara-render-v2.jpg", alt: "Great room opening to the infinity pool and forested gulf view", category: "interior", featured: true },
