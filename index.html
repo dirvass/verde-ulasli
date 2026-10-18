@@ -2,6 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <!-- Marks a JS-capable browser before first paint, so the prerendered
+         crawler shell (scripts/prerender.mjs) never flashes before React mounts. -->
+    <script>document.documentElement.classList.add("js")</script>
 
     <!-- Mobile & PWA-friendly -->
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />

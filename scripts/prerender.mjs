@@ -81,12 +81,14 @@ function renderBlock(block, t) {
 }
 
 /**
- * Brand-consistent styling for the shell. It is on screen only until React
- * mounts, and it is the whole page for a visitor with JavaScript disabled, so it
- * should look deliberate rather than like unstyled markup. Lives inside the shell
- * so React removes it together with the content.
+ * Brand-consistent styling for the shell. It is the whole page for a visitor
+ * with JavaScript disabled, so it should look deliberate rather than like
+ * unstyled markup. Browsers that run JS get html.js (inline script in
+ * index.html) and never see it, which stops it flashing before React mounts.
+ * Lives inside the shell so React removes it together with the content.
  */
 const SHELL_STYLE = `<style>
+html.js #seo-shell{display:none}
 #seo-shell{max-width:44rem;margin:0 auto;padding:4rem 1.5rem;color:#EBE8E1;background:#0E1A16;font-family:Inter,system-ui,sans-serif;line-height:1.65}
 #seo-shell h1,#seo-shell h2{font-family:'Playfair Display',Georgia,serif;font-weight:600;color:#EBE8E1}
 #seo-shell h1{font-size:2.25rem;line-height:1.15;margin:0 0 1rem}
