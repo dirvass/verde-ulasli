@@ -39,6 +39,8 @@ export const MEDIA: Media[] = [
   { id: "ext2-satranc-patika", type: "image", src: "/media/dis-mekan/satranc-alani-bahce-patika-render.jpg", alt: "Chess area with garden pathways", category: "exterior" },
 
   // ─── EXTERIOR — PREVIOUS RENDERS ───
+  { id: "vid-ekrandan-manzaraya", type: "video", src: "/media/videolar/insaat-ekrandan-manzaraya.mp4", poster: "/media/videolar/insaat-ekrandan-manzaraya-poster.jpg", alt: "From the screen to the real view — the gulf from the site", category: "construction" },
+  { id: "con-kaba-yapi-deniz", type: "image", src: "/media/insaat-sureci/insaat-kaba-yapi-deniz-ekim-2026.jpg", alt: "Villa shell complete, facing the gulf — October 2026", category: "construction", featured: true },
   { id: "vid-yayla", type: "video", src: "/media/videolar/kuzu-yayla.mp4", poster: "/media/videolar/kuzu-yayla-poster.jpg", alt: "Kuzu Yayla — highland meadows and mountain views", category: "construction" },
   { id: "ext-kus-bakisi-gunduz", type: "image", src: "/media/dis-mekan/kus-bakisi-gunduz-ai-render.jpg", alt: "Aerial view — daytime", category: "exterior", featured: true },
   { id: "ext-on-cephe-ates", type: "image", src: "/media/dis-mekan/on-cephe-ates-cukuru-render.jpg", alt: "Front facade with fire pit", category: "exterior", featured: true },
@@ -49,6 +51,7 @@ export const MEDIA: Media[] = [
   { id: "ext-yan-cephe", type: "image", src: "/media/dis-mekan/yan-cephe-genel-gorunum-render.jpg", alt: "Side view — full resort", category: "exterior" },
 
   // ─── INTERIOR RENDERS (ic-mekan) — curated set, wow order ───
+  { id: "int-salon-gunbatimi", type: "image", src: "/media/ic-mekan/salon-gunbatimi-infinity-havuz-render.jpg", alt: "Living room at sunset, opening onto the infinity pool and gulf", category: "interior", featured: true },
   { id: "int-kuvet-deniz", type: "image", src: "/media/ic-mekan/yatak-odasi-kuvet-deniz-render.jpg", alt: "Master suite with freestanding tub and panoramic gulf view", category: "interior", featured: true },
   { id: "int-somine", type: "image", src: "/media/ic-mekan/salon-somine-deri-koltuk-render-v2.jpg", alt: "Living room with fireplace, leather sofa and gulf view", category: "interior", featured: true },
   { id: "int-infinity-havuz", type: "image", src: "/media/ic-mekan/salon-infinity-havuz-manzara-render-v2.jpg", alt: "Great room opening to the infinity pool and forested gulf view", category: "interior", featured: true },
@@ -94,6 +97,7 @@ export const MEDIA: Media[] = [
 // smaller boxes alongside. `big` maps to front="big", otherwise front="small".
 export const SHOWCASE: { id: string; big: boolean }[] = [
   { id: "ext-havuz-deniz", big: true },        // 1 — infinity pool over the gulf
+  { id: "int-salon-gunbatimi", big: false },
   { id: "int-kuvet-deniz", big: false },
   { id: "int-somine", big: false },
   { id: "ext2-bahce-patika", big: true },       // 2 — garden aerial
