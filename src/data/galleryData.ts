@@ -55,9 +55,9 @@ export const MEDIA: Media[] = [
   { id: "int-salon-gunduz-havuz", type: "image", src: "/media/ic-mekan/salon-gunduz-dikdortgen-havuz-render.jpg", alt: "Living room by day, the long pool and the gulf beyond the glass", category: "interior" },
   { id: "int-mutfak-yemek-ada", type: "image", src: "/media/ic-mekan/mutfak-yemek-ada-genis-cam-deniz-render.jpg", alt: "Kitchen and dining room, the island facing the terrace, the pool and the gulf", category: "interior" },
   { id: "int-salon-ust-somine", type: "image", src: "/media/ic-mekan/salon-ust-kat-somine-gizli-isik-deniz-render.jpg", alt: "Upper living room, the fire low under soft cove light, the gulf across the corner glass", category: "interior" },
-  { id: "int-kuvet-deniz", type: "image", src: "/media/ic-mekan/yatak-odasi-kuvet-deniz-render.jpg", alt: "Master suite with freestanding tub and panoramic gulf view", category: "interior", featured: true },
+  { id: "int-kuvet-kose", type: "image", src: "/media/ic-mekan/yatak-odasi-kuvet-kose-cam-deniz-render.jpg", alt: "Master suite, the tub by the corner glass, the gulf and the forest below", category: "interior", featured: true },
   { id: "int-salon-somine-keten", type: "image", src: "/media/ic-mekan/salon-somine-keten-koltuk-deniz-render.jpg", alt: "Living room, the fire set low in plaster, a linen sofa and the gulf at the window", category: "interior", featured: true },
-  { id: "int-yesil-dus-kose", type: "image", src: "/media/ic-mekan/yatak-odasi-yesil-dus-kose-cam-render.jpg", alt: "Master bedroom with green walk-in shower, the gulf through the corner glass", category: "interior", featured: true },
+  { id: "int-yesil-dus-ceviz", type: "image", src: "/media/ic-mekan/yatak-odasi-yesil-dus-ceviz-panel-render.jpg", alt: "Master bedroom, green walk-in shower behind a walnut screen, the gulf through the corner glass", category: "interior", featured: true },
   { id: "int-mutfak-yemek-teras", type: "image", src: "/media/ic-mekan/mutfak-yemek-teras-render.jpg", alt: "Open kitchen and dining hall opening onto the deck terrace", category: "interior", featured: true },
   { id: "int-loft-deniz", type: "image", src: "/media/ic-mekan/loft-yatak-odasi-deniz-render.jpg", alt: "Double-height loft bedroom with mezzanine and view", category: "interior" },
   { id: "int-loft-asma", type: "image", src: "/media/ic-mekan/loft-yatak-odasi-asma-kat-render.jpg", alt: "Loft bedroom with mezzanine bed", category: "interior" },
@@ -100,10 +100,10 @@ export const MEDIA: Media[] = [
 export const SHOWCASE: { id: string; big: boolean }[] = [
   { id: "ext-havuz-deniz", big: true },        // 1 — infinity pool over the gulf
   { id: "int-salon-gunbatimi", big: false },
-  { id: "int-kuvet-deniz", big: false },
+  { id: "int-kuvet-kose", big: false },
   { id: "int-salon-somine-keten", big: false },
   { id: "ext2-bahce-patika", big: true },       // 2 — garden aerial
-  { id: "int-yesil-dus-kose", big: false },
+  { id: "int-yesil-dus-ceviz", big: false },
   { id: "ext3-pivot-kapi", big: true },          // 3 — entrance with pivot oak door
   { id: "int-loft-deniz", big: false },
   { id: "int-mutfak", big: false },
