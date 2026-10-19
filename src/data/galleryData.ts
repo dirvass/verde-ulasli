@@ -54,10 +54,9 @@ export const MEDIA: Media[] = [
   { id: "int-salon-gunbatimi", type: "image", src: "/media/ic-mekan/salon-gunbatimi-infinity-havuz-render-v2.jpg", alt: "Living room at sunset, opening onto the infinity pool and gulf", category: "interior", featured: true },
   { id: "int-salon-gunduz-havuz", type: "image", src: "/media/ic-mekan/salon-gunduz-dikdortgen-havuz-render.jpg", alt: "Living room by day, the long pool and the gulf beyond the glass", category: "interior" },
   { id: "int-mutfak-yemek-ada", type: "image", src: "/media/ic-mekan/mutfak-yemek-ada-genis-cam-deniz-render.jpg", alt: "Kitchen and dining room, the island facing the terrace, the pool and the gulf", category: "interior" },
-  { id: "int-salon-giris-somine", type: "image", src: "/media/ic-mekan/salon-giris-kat-somine-deniz-render.jpg", alt: "Upper living room, the fire on one side, the gulf across the long glass", category: "interior" },
+  { id: "int-salon-ust-somine", type: "image", src: "/media/ic-mekan/salon-ust-kat-somine-gizli-isik-deniz-render.jpg", alt: "Upper living room, the fire low under soft cove light, the gulf across the corner glass", category: "interior" },
   { id: "int-kuvet-deniz", type: "image", src: "/media/ic-mekan/yatak-odasi-kuvet-deniz-render.jpg", alt: "Master suite with freestanding tub and panoramic gulf view", category: "interior", featured: true },
   { id: "int-somine", type: "image", src: "/media/ic-mekan/salon-somine-deri-koltuk-render-v2.jpg", alt: "Living room with fireplace, leather sofa and gulf view", category: "interior", featured: true },
-  { id: "int-infinity-havuz", type: "image", src: "/media/ic-mekan/salon-infinity-havuz-manzara-render-v2.jpg", alt: "Great room opening to the infinity pool and forested gulf view", category: "interior", featured: true },
   { id: "int-yesil-dus-manzara", type: "image", src: "/media/ic-mekan/yatak-odasi-yesil-dus-manzara-render-v2.jpg", alt: "Master bedroom with green walk-in shower and gulf view", category: "interior", featured: true },
   { id: "int-mutfak-yemek-teras", type: "image", src: "/media/ic-mekan/mutfak-yemek-teras-render.jpg", alt: "Open kitchen and dining hall opening onto the deck terrace", category: "interior", featured: true },
   { id: "int-loft-deniz", type: "image", src: "/media/ic-mekan/loft-yatak-odasi-deniz-render.jpg", alt: "Double-height loft bedroom with mezzanine and view", category: "interior" },
@@ -104,7 +103,6 @@ export const SHOWCASE: { id: string; big: boolean }[] = [
   { id: "int-kuvet-deniz", big: false },
   { id: "int-somine", big: false },
   { id: "ext2-bahce-patika", big: true },       // 2 — garden aerial
-  { id: "int-infinity-havuz", big: false },
   { id: "int-yesil-dus-manzara", big: false },
   { id: "ext3-pivot-kapi", big: true },          // 3 — entrance with pivot oak door
   { id: "int-loft-deniz", big: false },
