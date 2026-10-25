@@ -2,23 +2,23 @@
   "nav": { "home": "Startseite", "story": "Unsere Geschichte", "gallery": "Galerie", "experience": "Erlebnisse", "booking": "Buchung", "planner": "Investition" },
   "cookies": {
     "aria": "Cookie-Zustimmung",
-    "body": "Wir verwenden anonyme Analyse-Cookies, um zu verstehen, wie Besucher die Website nutzen. Vor Ihrer Zustimmung wird nichts erfasst.",
+    "body": "Wir zählen Besuche anonym und ohne Cookies. Mit Ihrer Zustimmung verwenden wir zusätzlich Analyse-Cookies, um zu verstehen, wie Besucher die Website nutzen.",
     "learnMore": "Mehr erfahren",
     "accept": "Annehmen",
     "reject": "Ablehnen",
     "title": "Cookie-Richtlinie",
     "intro": "VERDE Ulaşlı verwendet minimale Analysen, um die Nutzung der Website zu verstehen. Ihre Entscheidung können Sie jederzeit ändern.",
     "whatTitle": "Was wir verwenden",
-    "whatBody": "PostHog — ein datenschutzfreundliches Analysewerkzeug mit Hosting in der EU. Es erfasst anonyme Seitenaufrufe und Interaktionen; die IP-Adresse wird anonymisiert.",
+    "whatBody": "PostHog — ein datenschutzfreundliches Analysewerkzeug mit Hosting in der EU. Ohne Ihre Zustimmung zählt es nur Seitenaufrufe und deren Herkunft, ohne Cookies und ohne etwas auf Ihrem Gerät zu speichern; Besucher können nicht von einem Tag zum nächsten wiedererkannt werden. Mit Zustimmung verwendet es zusätzlich Cookies, um anonyme Interaktionen zu erfassen. Die IP-Adresse wird anonymisiert.",
     "choiceTitle": "Ihre Wahl",
-    "choiceBody": "Vor Ihrer Zustimmung wird nichts erfasst. Bei Ablehnung werden keine Analyse-Cookies oder Kennungen gesetzt. Sie können Ihre Entscheidung durch Leeren des Browser-Speichers ändern.",
+    "choiceBody": "Ohne Auswahl werden Besuche nur anonym und ohne Cookies gezählt. Bei Zustimmung werden Analyse-Cookies verwendet. Bei Ablehnung wird nichts erfasst. Sie können Ihre Entscheidung durch Leeren des Browser-Speichers ändern.",
     "contact": "Bei Datenschutzfragen schreiben Sie an privacy@verde-ulasli.com."
   },
   "privacy": {
     "title": "Datenschutzerklärung",
     "intro": "Diese Erklärung beschreibt, wie VERDE Ulaşlı personenbezogene Daten verarbeitet. Wir erfassen so wenig wie möglich und verkaufen Daten nie.",
     "dataTitle": "Was wir erfassen",
-    "dataBody": "Buchungsanfragen über das Kontaktformular oder WhatsApp — ausschließlich im Postfach Ihres E-Mail-Anbieters gespeichert. Anonyme Analysen — nur bei Zustimmung. Auf dieser Seite werden keine Zahlungsdaten verarbeitet.",
+    "dataBody": "Buchungsanfragen über das Kontaktformular oder WhatsApp — ausschließlich im Postfach Ihres E-Mail-Anbieters gespeichert. Anonyme Besuchsstatistik — ohne Cookies gezählt; Analyse-Cookies nur bei Zustimmung. Auf dieser Seite werden keine Zahlungsdaten verarbeitet.",
     "rightsTitle": "Ihre Rechte",
     "rightsBody": "Nach DSGVO, UK-DPA und KVKK können Sie jederzeit Auskunft, Berichtigung, Löschung oder Übertragbarkeit Ihrer Daten verlangen.",
     "contact": "Verantwortlicher: VERDE Ulaşlı · Ulaşlı, Kocaeli, Türkei · privacy@verde-ulasli.com"

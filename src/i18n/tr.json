@@ -2,23 +2,23 @@
   "nav": { "home": "Ana Sayfa", "story": "Hikâyemiz", "gallery": "Galeri", "experience": "Deneyimler", "booking": "Rezervasyon", "planner": "Yatırım" },
   "cookies": {
     "aria": "Çerez onayı",
-    "body": "Web sitesini nasıl kullandığınızı anlamak için anonim analitik çerezler kullanıyoruz. Onay vermeden hiçbir şey kaydedilmez.",
+    "body": "Ziyaretleri çerez kullanmadan, anonim olarak sayıyoruz. Onayınızla, sitenin nasıl deneyimlendiğini anlamak için analitik çerezler de kullanırız.",
     "learnMore": "Daha fazla",
     "accept": "Kabul et",
     "reject": "Reddet",
     "title": "Çerez politikası",
     "intro": "VERDE Ulaşlı, ziyaretçilerin siteyi nasıl kullandığını anlamak için minimum düzeyde analitik kullanır. Dilediğiniz zaman tercihinizi değiştirebilirsiniz.",
     "whatTitle": "Ne kullanıyoruz",
-    "whatBody": "PostHog — AB'de barındırılan gizliliğe saygılı bir analitik aracı. Yalnızca anonim sayfa görüntüleme ve etkileşim kaydeder; IP anonimleştirmesi etkindir.",
+    "whatBody": "PostHog — AB'de barındırılan gizliliğe saygılı bir analitik aracı. Onayınız olmadan yalnızca sayfa ziyaretlerini ve nereden gelindiğini, çerez kullanmadan ve cihazınıza hiçbir veri kaydetmeden sayar; ziyaretçiler günden güne tanınamaz. Onay verirseniz anonim etkileşimleri kaydetmek için çerez de kullanır. IP anonimleştirmesi etkindir.",
     "choiceTitle": "Tercihiniz",
-    "choiceBody": "Kabul etmeden önce hiçbir şey kaydedilmez. Reddederseniz analitik çerez veya tanımlayıcı oluşturulmaz. Tarayıcı deponuzu temizleyerek tercihinizi değiştirebilirsiniz.",
+    "choiceBody": "Bir seçim yapmazsanız ziyaretler yalnızca çerezsiz ve anonim olarak sayılır. Kabul ederseniz analitik çerezler kullanılır. Reddederseniz hiçbir şey kaydedilmez. Tarayıcı deponuzu temizleyerek tercihinizi değiştirebilirsiniz.",
     "contact": "Veri koruma soruları için privacy@verde-ulasli.com adresine yazın."
   },
   "privacy": {
     "title": "Gizlilik politikası",
     "intro": "Bu bildirim, VERDE Ulaşlı'nın kişisel verileri nasıl işlediğini açıklar. Mümkün olduğunca az veri toplarız ve hiçbir zaman satmayız.",
     "dataTitle": "Topladığımız veriler",
-    "dataBody": "İletişim formu veya WhatsApp üzerinden gönderdiğiniz rezervasyon talepleri — yalnızca e-posta kutunuzda saklanır. Anonim analitik — yalnızca çerezleri kabul ederseniz. Sitede ödeme verisi işlenmez.",
+    "dataBody": "İletişim formu veya WhatsApp üzerinden gönderdiğiniz rezervasyon talepleri — yalnızca e-posta kutunuzda saklanır. Anonim ziyaret istatistikleri — çerezsiz sayılır; analitik çerezler yalnızca kabul ederseniz kullanılır. Sitede ödeme verisi işlenmez.",
     "rightsTitle": "Haklarınız",
     "rightsBody": "KVKK, GDPR ve UK-DPA kapsamında verilerinize erişim, düzeltme, silme veya taşınabilirlik talep edebilirsiniz.",
     "contact": "Veri sorumlusu: VERDE Ulaşlı · Ulaşlı, Kocaeli, Türkiye · privacy@verde-ulasli.com"

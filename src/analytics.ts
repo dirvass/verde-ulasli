@@ -1,7 +1,12 @@
 /**
- * Analytics bootstrap. PostHog is only initialised after the user grants
- * consent through the CookieBanner. This keeps us compliant with GDPR /
- * UK-DPA / KVKK for EU, UK and Turkish visitors.
+ * Analytics bootstrap, driven by the CookieBanner choice:
+ *   - accepted  → PostHog with cookies (full anonymous analytics)
+ *   - no choice → PostHog cookieless mode: pageviews and referrer only,
+ *                 nothing stored on the device, so no consent is needed
+ *                 under ePrivacy / GDPR / KVKK (disclosed on /cookies)
+ *   - rejected  → nothing is loaded or sent
+ * Cookieless mode needs "Cookieless server hash mode" enabled in the
+ * PostHog project settings, otherwise those events are dropped.
  */
 
 const POSTHOG_KEY = "phc_DUxeh6ycnhpwzWq5YJfAdy8Q8Wixe7Px9nAlpTTPm9K";
@@ -68,9 +73,20 @@ const PRIVACY_BLACKLIST = [
   "$geoip_subdivision_2_name",
 ];
 
+/** Last line of defence: never send anything once the visitor has rejected. */
+function dropIfRejected<T>(event: T): T | null {
+  return readConsent() === "rejected" ? null : event;
+}
+
+/**
+ * Loads PostHog once per page load. A visitor without a choice gets
+ * cookieless counting; if they accept later, cookie mode starts on their
+ * next page load (the SDK mode cannot be switched mid-page).
+ */
 export function initAnalytics() {
   if (loaded) return;
-  if (readConsent() !== "accepted") return;
+  const consent = readConsent();
+  if (consent === "rejected") return;
   loaded = true;
 
   // Load the PostHog snippet on demand, then init.
@@ -88,23 +104,39 @@ export function initAnalytics() {
   `.trim();
   document.head.appendChild(snippet);
 
-  w.posthog?.init?.(POSTHOG_KEY, {
+  const shared = {
     api_host: POSTHOG_HOST,
-    person_profiles: "identified_only",
-    capture_exceptions: true,
-    autocapture: true,
-    persistence: "localStorage+cookie",
     disable_session_recording: true,
 
     // Privacy hardening
     respect_dnt: true,
-    secure_cookie: true,
-    cross_subdomain_cookie: false,
     property_blacklist: PRIVACY_BLACKLIST,
     sanitize_properties: sanitizeProperties,
+    before_send: dropIfRejected,
     mask_all_text: true,
     mask_all_element_attributes: true,
-  });
+  };
+
+  w.posthog?.init?.(
+    POSTHOG_KEY,
+    consent === "accepted"
+      ? {
+          ...shared,
+          person_profiles: "identified_only",
+          capture_exceptions: true,
+          autocapture: true,
+          persistence: "localStorage+cookie",
+          secure_cookie: true,
+          cross_subdomain_cookie: false,
+        }
+      : {
+          ...shared,
+          cookieless_mode: "always",
+          person_profiles: "never",
+          capture_exceptions: false,
+          autocapture: false,
+        },
+  );
 }
 
 export function stopAnalytics() {
@@ -118,8 +150,8 @@ export function stopAnalytics() {
   } catch { /* swallow */ }
 }
 
-// On initial page load, if the user has already accepted, boot analytics.
+// On initial page load, boot analytics in the mode the stored choice allows.
 if (typeof window !== "undefined") {
   // Defer to next tick so the bundle isn't blocked.
-  setTimeout(() => { if (readConsent() === "accepted") initAnalytics(); }, 0);
+  setTimeout(initAnalytics, 0);
 }

@@ -2,23 +2,23 @@
   "nav": { "home": "Home", "story": "Our Story", "gallery": "Gallery", "experience": "Experiences", "booking": "Booking", "planner": "Investment" },
   "cookies": {
     "aria": "Cookie consent",
-    "body": "We use analytics cookies to understand how visitors experience the resort. Nothing is tracked before you agree.",
+    "body": "We count visits anonymously, without cookies. With your consent we also use analytics cookies to understand how visitors experience the resort.",
     "learnMore": "Learn more",
     "accept": "Accept",
     "reject": "Reject",
     "title": "Cookie policy",
     "intro": "VERDE Ulaşlı uses a minimal analytics setup to understand how visitors use the website. You can accept or reject this at any time.",
     "whatTitle": "What we use",
-    "whatBody": "PostHog — a privacy-respecting analytics tool hosted in the EU. It records page views and anonymous interactions, with IP anonymisation enabled.",
+    "whatBody": "PostHog — a privacy-respecting analytics tool hosted in the EU. Without your consent it only counts page visits and where they came from, without cookies and without storing anything on your device; visitors cannot be recognised from one day to the next. With your consent it also uses cookies to record anonymous interactions. IP anonymisation is enabled.",
     "choiceTitle": "Your choice",
-    "choiceBody": "Nothing is recorded before you click Accept. If you reject, no analytics cookies or identifiers are created. You can change your choice by clearing your browser storage.",
+    "choiceBody": "If you make no choice, visits are only counted anonymously, without cookies. If you accept, analytics cookies are used. If you reject, nothing is recorded. You can change your choice by clearing your browser storage.",
     "contact": "For any data-protection question, write to privacy@verde-ulasli.com."
   },
   "privacy": {
     "title": "Privacy policy",
     "intro": "This notice explains how VERDE Ulaşlı handles personal data. We collect as little as possible and never sell it.",
     "dataTitle": "What we collect",
-    "dataBody": "Booking enquiries you send via the contact form or WhatsApp link — stored only in your email provider's inbox. Anonymous analytics — only if you accept cookies. No payment data is processed on this site.",
+    "dataBody": "Booking enquiries you send via the contact form or WhatsApp link — stored only in your email provider's inbox. Anonymous visit statistics — counted without cookies; analytics cookies only if you accept. No payment data is processed on this site.",
     "rightsTitle": "Your rights",
     "rightsBody": "Under GDPR, UK-DPA and KVKK you may request access, correction, deletion, or portability of your data at any time.",
     "contact": "Controller: VERDE Ulaşlı · Ulaşlı, Kocaeli, Turkey · privacy@verde-ulasli.com"
