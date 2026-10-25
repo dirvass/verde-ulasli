@@ -253,13 +253,15 @@
    =======================================================*/
 .cookie-banner{
   position:fixed; left:16px; right:16px; bottom:16px; z-index:9999;
-  max-width:560px; margin-left:auto;
-  padding:16px 18px;
-  background:var(--verde-deep); color:var(--mist);
+  /* Compact corner card so it never covers the centred hero copy */
+  max-width:360px; margin-left:auto;
+  padding:14px 16px;
+  background:rgba(14,26,22,.94); color:var(--mist);
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
   border:1px solid rgba(195,165,100,.25);
   border-radius:var(--radius-md);
   box-shadow:var(--shadow-4);
-  font-size:.82rem; line-height:1.5;
+  font-size:.78rem; line-height:1.5;
   opacity:0; transform:translateY(12px);
   transition:opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
 }
@@ -280,6 +282,7 @@
   display:flex; flex-wrap:wrap; gap:10px; margin-top:14px;
 }
 .cookie-banner__btn{
+  flex:1;
   padding:9px 18px; border-radius:var(--radius-sm);
   font-size:11px; letter-spacing:2px; text-transform:uppercase;
   font-weight:600; cursor:pointer;

@@ -9,6 +9,8 @@
   display:flex; align-items:flex-end; justify-content:center;
   padding-bottom:clamp(96px, 14vh, 140px);
   overflow:hidden; color:#fff;
+  /* Deep green behind the photo so a slow image load never shows the light page background */
+  background:var(--verde-deep);
 }
 
 /* Background image with slow Ken Burns zoom */

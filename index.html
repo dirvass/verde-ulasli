@@ -5,6 +5,10 @@
     <!-- Marks a JS-capable browser before first paint, so the prerendered
          crawler shell (scripts/prerender.mjs) never flashes before React mounts. -->
     <script>document.documentElement.classList.add("js")</script>
+    <!-- The home page opens on a dark photo: paint deep green until the app has
+         mounted instead of the light page background (Home.tsx removes the class). -->
+    <script>if (location.pathname === "/") document.documentElement.classList.add("boot-dark")</script>
+    <style>html.boot-dark, html.boot-dark body { background: #0E1A16 }</style>
 
     <!-- Mobile & PWA-friendly -->
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />

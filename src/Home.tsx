@@ -28,6 +28,9 @@ export default function Home() {
   const { t } = useLanguage();
 
   useEffect(() => {
+    // The dark hero now covers the screen, so the boot-time dark page background
+    // (index.html) can go; other pages keep their light background.
+    document.documentElement.classList.remove("boot-dark");
     const timer = setTimeout(() => setVisible(true), 100);
     const onScroll = () => {
       const y = window.scrollY;
