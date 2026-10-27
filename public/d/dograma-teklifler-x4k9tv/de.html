@@ -71,6 +71,14 @@ code { font-family: var(--f-mono); font-size: .82rem; }
 .matrix td.spec { color: var(--muted); }
 .matrix tbody th.group { background: var(--bg); color: var(--gold); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; position: static; }
 @media (max-width: 560px) { .row, .axis { grid-template-columns: 96px 1fr 80px; gap: 8px; } h1 { font-size: 1.7rem; } }
+details.more { border: 1px solid var(--line); border-radius: 6px; background: var(--surface); min-width: 0; }
+details.more > summary { cursor: pointer; padding: 14px 18px; font-family: var(--f-display); font-weight: 600; font-size: 1.2rem; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+details.more > summary::-webkit-details-marker { display: none; }
+details.more > summary::after { content: "+"; font: 700 1rem var(--f-mono); color: var(--gold); }
+details.more[open] > summary::after { content: "\2212"; }
+details.more > section { padding: 0 18px 18px; }
+details.more .tablebox, details.more .card { border-color: var(--line); }
+.wrap { gap: 28px; }
 
 .lang { display: flex; gap: 6px; flex-wrap: wrap; font-size: .78rem; }
 .lang a { color: var(--muted); text-decoration: none; border: 1px solid var(--line); border-radius: 99px; padding: 2px 10px; }
@@ -86,44 +94,12 @@ code { font-family: var(--f-mono); font-size: .82rem; }
   <nav class="lang" aria-label="Language"><a href="./">Türkçe</a><a href="de" aria-current="page">Deutsch</a><a href="en">English</a></nav>
   <div class="eyebrow">Verde Ulaşlı · Wohnprojekt Gölcük · Aluminiumfenster und -türen</div>
   <h1>Vergleich der Fensterangebote</h1>
-  <p class="meta">8 Anbieter, jeweils das neueste Angebot, Zeile für Zeile gelesen und mit den veröffentlichten Daten der Systemhersteller abgeglichen. Erstellt am 27. Oktober 2026, am selben Tag um Altunoğlu ergänzt. Grundlage: technisches Leistungsverzeichnis (Teknik Şartname) Rev. 2 vom 13. Okt. plus Ahmeds Rev.-3-Notizen vom 19. Okt. Alle Preise ohne KDV (türkische Mehrwertsteuer).</p>
+  <p class="meta">8 Anbieter, jeweils das neueste Angebot, mit den Herstellerdaten abgeglichen. 27. Oktober 2026. Preise ohne KDV.</p>
 </header>
-
-<section class="verdict">
-  <div class="eyebrow">Fazit aus Sicht eines Luxusbaus</div>
-  <ul>
-    <li><b>Bestes Produkt für dieses Haus: das Alumil-Paket (Bornes oder Altunoğlu).</b> Es ist das einzige System am Tisch, dessen Schiebetür für den 400-kg-Salonflügel mit Reserve ausgelegt ist (bis 600 kg mit Alumils Hebeeinheit), mit 24 mm thermischer Trennung bei Fenster und Tür und einem veröffentlichten Uw von 1,1 an der Tür. Altunoğlus R3-Zeichnungen sind die einzigen Lieferantenzeichnungen, die Ihrem Layout vom 19. Okt. bereits exakt folgen; Bornes hat auf dem früheren R1-Satz kalkuliert, mit Ihren Rev.-3-Ansichten als Referenz.</li>
-    <li><b>Bester Preis: Vemsa (ca. 81 T€ vergleichbar).</b> Gutes türkisches System (Asaş), schönes einspuriges Detail an den Schiebetüren, aber der genannte Hebe-Schiebe-Beschlag ist eine 300-kg-Klasse, und das Türprofil hat nur 14,8 mm thermische Trennung. Behebbar, gegen Aufpreis.</li>
-    <li><b>Bornes (ca. 90 T€) ist die Preis-Leistungs-Wahl.</b> Etwa 9 T€ über Vemsa für eine klar bessere Schiebetür. Altunoğlu bietet dieselben Alumil-Systeme direkt zu ca. 99 T€ vergleichbar an, mit einem helleren eisenarmen Glas, aber ohne Jalousie, und mit einer Randnotiz, die eine teilweise inoffizielle Zahlung vorschlägt, die Sie ablehnen sollten.</li>
-    <li><b>Delta (ca. 86 T€)</b> bietet ein Burak-System auf dem alten Layout mit 300-kg-Beschlag an. <b>Asimetri (ca. 91 T€)</b> hat inzwischen Zeichnungen geschickt: Sie zeigen das alte Layout mit 28 Elementen und ein Schiebesystem mit der Beschriftung „Standard 300 kg". <b>Referans (ca. 129 T€)</b> liegt 50 % darüber und teilt Ihre großen Scheiben. <b>Fatihpen und Haser</b> sind nicht vergleichbar.</li>
-    <li><b>Niemand ist unterschriftsreif.</b> Kein Anbieter nennt eine Seaside-Vorbehandlung der Beschichtung, Garantien, Lieferzeit oder die maximale Größe der Jalousien im Scheibenzwischenraum. Die Jalousien an P07 und P13 sind in diesen Größen vermutlich nur kippbar, und die obere Scheibe von P13 liegt möglicherweise über dem Limit.</li>
-    <li><b>Entscheidung für Sie:</b> Das Glas des Leistungsverzeichnisses (50/33) ist ein dunkleres, stärker spiegelndes Glas vom Bürotyp. Altunoğlus 62/44 eisenarm ist heller und neutraler, bei etwas mehr Sommerwärme. Für ein Haus mit Aussicht würde ich wechseln und alle bitten, es anzubieten.</li>
-  </ul>
-</section>
-
-<section>
-  <h2>Rangfolge</h2>
-  <p>Die Noten sind meine Lesart jedes Angebots und der veröffentlichten Herstellerdaten. A: passt wie angeboten zu einer Luxusvilla. B: passt mit benannten Nachbesserungen. C: eine echte Schwäche.</p>
-  <div class="tablebox">
-  <table>
-    <thead><tr><th>Anbieter</th><th>Schiebetür</th><th>Fenster</th><th>Glas</th><th>Zeichnungen, Layout</th><th>Kaufmännisch</th><th>Gesamt</th></tr></thead>
-    <tbody>
-      <tr><th scope="row">Bornes (Alumil)</th><td><span class="grade ok">A</span></td><td><span class="grade ok">A</span></td><td><span class="grade ok">A</span></td><td><span class="grade wn">B</span></td><td><span class="grade wn">B</span></td><td><b>1.</b> Preis auf Rev. 3 mit neuen Elementzeichnungen bestätigen, Beschlagtraglast, Kran, Körkasa.</td></tr>
-      <tr><th scope="row">Vemsa (Asaş)</th><td><span class="grade no">C</span></td><td><span class="grade ok">A</span></td><td><span class="grade wn">B</span></td><td><span class="grade ok">A</span></td><td><span class="grade wn">B</span></td><td><b>2.</b> Am günstigsten. Braucht 400-kg-Beschlag, EPDM, Baustellenlogistik und eine neue Gültigkeit.</td></tr>
-      <tr><th scope="row">Altunoğlu (Alumil)</th><td><span class="grade ok">A</span></td><td><span class="grade ok">A</span></td><td><span class="grade ok">A</span></td><td><span class="grade ok">A</span></td><td><span class="grade no">C</span></td><td><b>3.</b> Gleiches Produkt wie Bornes, ca. 9 T€ mehr, keine Jalousie, Hinweis auf inoffizielle Zahlung.</td></tr>
-      <tr><th scope="row">Delta (Burak)</th><td><span class="grade no">C</span></td><td><span class="grade wn">B</span></td><td><span class="grade ok">A</span></td><td><span class="grade no">C</span></td><td><span class="grade wn">B</span></td><td><b>4.</b> Altes Layout, 300-kg-Beschlag, Glas überzählt. Nur mit Neukalkulation auf Rev. 3 interessant.</td></tr>
-      <tr><th scope="row">Asimetri (Linea Rossa)</th><td><span class="grade no">C</span></td><td><span class="grade wn">B</span></td><td><span class="grade wn">B</span></td><td><span class="grade wn">B</span></td><td><span class="grade wn">B</span></td><td><b>5.</b> Zeichnungen erhalten: altes Layout, 300-kg-Schiebetür, zwei bewegliche Flügel. Einzeiliger Preis ohne Leistungsliste.</td></tr>
-      <tr><th scope="row">Referans (Çuhadaroğlu)</th><td><span class="grade no">C</span></td><td><span class="grade wn">B</span></td><td><span class="grade no">C</span></td><td><span class="grade wn">B</span></td><td><span class="grade no">C</span></td><td><b>Absagen.</b> 50 % darüber, Türsystem auf Flügel von 3,0 × 3,3 m begrenzt, teilt die Aussichtsscheiben.</td></tr>
-      <tr><th scope="row">Haser (Asaş)</th><td colspan="5" class="meta">Deckt etwa eine Villa ab, niedrigere Glasspezifikation. Seit 13. Okt. nicht aktualisiert.</td><td><b>Absagen.</b></td></tr>
-      <tr><th scope="row">Fatihpen</th><td colspan="5" class="meta">PVC-Optionen plus eine 55-mm-Aluminiumserie, kalkuliert, bevor das Leistungsverzeichnis existierte.</td><td><b>Absagen.</b></td></tr>
-    </tbody>
-  </table>
-  </div>
-</section>
 
 <section>
   <h2>Preis, zwei Sichtweisen</h2>
-  <p><b>Vergleichbar</b> ist der Umfang des Leistungsverzeichnisses: Rahmen, Glas, Beschläge, Jalousie, Kran, EPDM-Folie. Körkasa (Stahl-Blindrahmen) und Gerüst bleiben bei Ihnen. <b>Gesamtpaket</b> ergänzt den Stahl-Blindrahmen und zeigt, was die Fenster Sie wirklich kosten. Fehlende Positionen sind zu den Preisen eingesetzt, die andere Anbieter dafür genannt haben. USD zu 1,15 je Euro.</p>
+  <p><b>Vergleichbar</b> = Umfang des Leistungsverzeichnisses (Rahmen, Glas, Beschläge, Jalousie, Kran, EPDM). <b>Gesamtpaket</b> ergänzt den Stahl-Blindrahmen (Körkasa). Fehlende Positionen zu den Preisen anderer Anbieter ergänzt. USD zu 1,15.</p>
   <div class="chart" role="img" aria-label="Gesamtpaketpreis je Anbieter in Tausend Euro">
     <div class="row"><div class="lbl">Vemsa<small>Asaş RWT64 + RST116</small></div><div class="track"><div class="fill" style="width:64.9%"></div></div><div class="val">89,6 T€</div></div>
     <div class="row"><div class="lbl">Delta Cephe<small>Burak BM66 + S4000</small></div><div class="track"><div class="fill" style="width:68.3%"></div></div><div class="val">94,2 T€</div></div>
@@ -153,9 +129,53 @@ code { font-family: var(--f-mono); font-size: .82rem; }
   <p class="note">Ergänzungspreise: Kran 2.157 € (Delta, 2 Tage), EPDM 5.510 € (Delta, 352 m), Körkasa 8.635 € (Delta, zwei- und einreihiger Stahl), Jalousie 7.500 € (Bornes, 50 m²). €/m² bezieht sich auf die 293 m² Rahmenfläche des Leistungsverzeichnisses. Die Rangfolge ändert sich bei keinem USD-Kurs zwischen 1,10 und 1,20.</p>
 </section>
 
+<section class="verdict">
+  <div class="eyebrow">Fazit aus Sicht eines Luxusbaus</div>
+  <ul>
+    <li><b>Bestes Produkt: Alumil (Bornes oder Altunoğlu).</b> Einzige Schiebetür, die für den 400-kg-Salonflügel ausgelegt ist, 24 mm thermische Trennung, Uw 1,1.</li>
+    <li><b>Am günstigsten: Vemsa (ca. 81 T€).</b> Gutes Asaş-System, aber 300-kg-Beschlag und ein schwächeres Türprofil.</li>
+    <li><b>Preis-Leistung: Bornes (ca. 90 T€).</b> 9 T€ über Vemsa für eine klar bessere Tür. Altunoğlu ist dasselbe Produkt zu ca. 99 T€, ohne Jalousie, mit einem abzulehnenden Hinweis auf inoffizielle Zahlung.</li>
+    <li><b>Delta, Asimetri:</b> altes Layout, 300-kg-Beschlag. <b>Referans:</b> 50 % darüber, teilt die großen Scheiben. <b>Fatihpen, Haser:</b> nicht vergleichbar.</li>
+    <li><b>Niemand ist unterschriftsreif:</b> von keinem Anbieter Seaside-Beschichtung, Garantien, Lieferzeit oder Größengrenzen der Jalousien.</li>
+  </ul>
+</section>
+
 <section>
-  <h2>Punkt für Punkt, alle acht Angebote</h2>
-  <p>Jede Position, die das Leistungsverzeichnis verlangt, aus jedem Angebot so abgelesen, wie es geschrieben steht. „Nicht erwähnt" heißt, das Angebot schweigt dazu, was bei einem Unternehmer in der Regel „nicht enthalten" bedeutet. Seitlich scrollen; die erste Spalte bleibt stehen.</p>
+  <h2>Rangfolge</h2>
+  <p>A: passt wie angeboten zu einer Luxusvilla. B: passt mit benannten Nachbesserungen. C: eine echte Schwäche.</p>
+  <div class="tablebox">
+  <table>
+    <thead><tr><th>Anbieter</th><th>Schiebetür</th><th>Fenster</th><th>Glas</th><th>Zeichnungen, Layout</th><th>Kaufmännisch</th><th>Gesamt</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Bornes (Alumil)</th><td><span class="grade ok">A</span></td><td><span class="grade ok">A</span></td><td><span class="grade ok">A</span></td><td><span class="grade wn">B</span></td><td><span class="grade wn">B</span></td><td><b>1.</b> Preis auf Rev. 3 mit neuen Elementzeichnungen bestätigen, Beschlagtraglast, Kran, Körkasa.</td></tr>
+      <tr><th scope="row">Vemsa (Asaş)</th><td><span class="grade no">C</span></td><td><span class="grade ok">A</span></td><td><span class="grade wn">B</span></td><td><span class="grade ok">A</span></td><td><span class="grade wn">B</span></td><td><b>2.</b> Am günstigsten. Braucht 400-kg-Beschlag, EPDM, Baustellenlogistik und eine neue Gültigkeit.</td></tr>
+      <tr><th scope="row">Altunoğlu (Alumil)</th><td><span class="grade ok">A</span></td><td><span class="grade ok">A</span></td><td><span class="grade ok">A</span></td><td><span class="grade ok">A</span></td><td><span class="grade no">C</span></td><td><b>3.</b> Gleiches Produkt wie Bornes, ca. 9 T€ mehr, keine Jalousie, Hinweis auf inoffizielle Zahlung.</td></tr>
+      <tr><th scope="row">Delta (Burak)</th><td><span class="grade no">C</span></td><td><span class="grade wn">B</span></td><td><span class="grade ok">A</span></td><td><span class="grade no">C</span></td><td><span class="grade wn">B</span></td><td><b>4.</b> Altes Layout, 300-kg-Beschlag, Glas überzählt. Nur mit Neukalkulation auf Rev. 3 interessant.</td></tr>
+      <tr><th scope="row">Asimetri (Linea Rossa)</th><td><span class="grade no">C</span></td><td><span class="grade wn">B</span></td><td><span class="grade wn">B</span></td><td><span class="grade wn">B</span></td><td><span class="grade wn">B</span></td><td><b>5.</b> Zeichnungen erhalten: altes Layout, 300-kg-Schiebetür, zwei bewegliche Flügel. Einzeiliger Preis ohne Leistungsliste.</td></tr>
+      <tr><th scope="row">Referans (Çuhadaroğlu)</th><td><span class="grade no">C</span></td><td><span class="grade wn">B</span></td><td><span class="grade no">C</span></td><td><span class="grade wn">B</span></td><td><span class="grade no">C</span></td><td><b>Absagen.</b> 50 % darüber, Türsystem auf Flügel von 3,0 × 3,3 m begrenzt, teilt die Aussichtsscheiben.</td></tr>
+      <tr><th scope="row">Haser (Asaş)</th><td colspan="5" class="meta">Deckt etwa eine Villa ab, niedrigere Glasspezifikation. Seit 13. Okt. nicht aktualisiert.</td><td><b>Absagen.</b></td></tr>
+      <tr><th scope="row">Fatihpen</th><td colspan="5" class="meta">PVC-Optionen plus eine 55-mm-Aluminiumserie, kalkuliert, bevor das Leistungsverzeichnis existierte.</td><td><b>Absagen.</b></td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>Empfehlung</h2>
+  <div class="card">
+    <ul class="list">
+      <li><b>Letzte Runde mit Bornes, Vemsa und Delta</b> auf Rev. 3, 62/44 eisenarmes Glas, 400 kg+ Beschlag, Seaside-Beschichtung, Kran und EPDM drin, Körkasa draußen.</li>
+      <li><b>Ziel: Bornes bei 85-88 T€</b> vergleichbar, mit Vemsas 81 T€ als Hebel.</li>
+      <li><b>Altunoğlu:</b> erst klären, wie es zu Bornes steht, bevor man 9 T€ mehr für den Direktweg zahlt.</li>
+      <li><b>Vor der Unterschrift:</b> eine fertige Villa mit 3-m-Hebe-Schiebe-Tür besichtigen und ein Eckmuster in Anthrazit ansehen.</li>
+      <li><b>Absagen</b> an Referans, Haser und Fatihpen.</li>
+    </ul>
+  </div>
+</section>
+
+<details class="more"><summary>Punkt für Punkt, alle acht Angebote</summary>
+<section>
+  <p>Jede Position des Leistungsverzeichnisses, aus jedem Angebot abgelesen. Seitlich scrollen; die erste Spalte bleibt stehen.</p>
   <div class="tablebox matrix">
   <table>
     <thead><tr><th>Punkt</th><th>Leistungsverzeichnis verlangt</th><th>Bornes</th><th>Altunoğlu</th><th>Vemsa</th><th>Delta Cephe</th><th>Asimetri</th><th>Referans</th><th>Haser</th><th>Fatihpen</th></tr></thead>
@@ -208,9 +228,10 @@ code { font-family: var(--f-mono); font-size: .82rem; }
   </div>
   <p class="note">Körkasa in einem Satz: Nur Altunoğlu schließt ihn ein. Bornes schließt ihn schriftlich aus und bietet ihn separat an. Delta bepreist ihn in zwei Zeilen und erklärt ihn dann in der Fußnote für ausgeschlossen, dazu braucht es ein klares Ja oder Nein. Die anderen fünf erwähnen ihn nicht, also davon ausgehen, dass er bei Ihnen liegt, wie im Leistungsverzeichnis vorgesehen.</p>
 </section>
+</details>
 
+<details class="more"><summary>Was hinter jedem System steckt</summary>
 <section>
-  <h2>Was hinter jedem System steckt</h2>
   <p>Veröffentlichte Herstellerdaten, abgeglichen mit dem, was jedes Angebot behauptet. Das Leistungsverzeichnis verlangt 61-66 mm Rahmen, 24 mm thermische Trennung und Hebe-Schiebe-Beschläge für mehr als 400 kg.</p>
   <div class="tablebox">
   <table>
@@ -247,9 +268,10 @@ code { font-family: var(--f-mono); font-size: .82rem; }
   </table>
   </div>
 </section>
+</details>
 
+<details class="more"><summary>Kleingedrucktes, Anbieter für Anbieter</summary>
 <section>
-  <h2>Kleingedrucktes, Anbieter für Anbieter</h2>
   <div class="grid2">
     <div class="card flag"><h3>Altunoğlu Cephe (Alumil), 27. Okt., 97.500 €</h3>
       <ul>
@@ -301,9 +323,10 @@ code { font-family: var(--f-mono); font-size: .82rem; }
       </ul></div>
   </div>
 </section>
+</details>
 
+<details class="more"><summary>Die Glasentscheidung</summary>
 <section>
-  <h2>Die Glasentscheidung</h2>
   <div class="grid2">
     <div class="card"><h3>Leistungsverzeichnis: Şişecam Ecosol T 50 (50/33)</h3>
       <ul>
@@ -320,9 +343,10 @@ code { font-family: var(--f-mono); font-size: .82rem; }
   </div>
   <p>Meine Sicht für Verde: Die Aussicht und das Raumgefühl sind das Produkt. Die Spezifikation auf 62/44 mit eisenarmem Verbundglas umstellen und jeden Anbieter der engeren Wahl bitten, es anzubieten. Mit 10-20 €/m² mehr als bei 50/33 rechnen.</p>
 </section>
+</details>
 
+<details class="more"><summary>Lücken, die alle Angebote teilen</summary>
 <section>
-  <h2>Lücken, die alle Angebote teilen</h2>
   <div class="tablebox">
   <table>
     <thead><tr><th>Position</th><th>Warum es hier zählt</th><th>Status</th></tr></thead>
@@ -339,22 +363,10 @@ code { font-family: var(--f-mono); font-size: .82rem; }
   </table>
   </div>
 </section>
+</details>
 
+<details class="more"><summary>Fragen zum Versenden</summary>
 <section>
-  <h2>Empfehlung</h2>
-  <div class="card">
-    <ul class="list">
-      <li><b>Eine letzte Runde mit Bornes, Vemsa und Delta fahren</b>, alle auf Rev. 3, 62/44 eisenarmes Glas, 400 kg+ Beschlag namentlich, Seaside-Beschichtung, Kran und EPDM drin, Körkasa draußen, schwellenlose Schiene als Option. Asimetri nur im Rennen lassen, wenn es mit einer 400 kg+ Schiebetür und einer Leistungsliste zurückkommt.</li>
-      <li><b>Ziel: Bornes bei etwa 85-88 T€</b> vergleichbar. Vemsas 81 T€ sind der Hebel; Bornes' Euro-Preis und bessere Tür sind die Gründe, etwas mehr zu zahlen.</li>
-      <li><b>Altunoğlu:</b> zuerst fragen, in welchem Verhältnis es zu Bornes steht. Fertigt es für Bornes, lohnt es sich nicht, ca. 9 T€ mehr für den Direktweg zu zahlen. Ist es ein eigenständiger Alumil-Verarbeiter, nach einem voll fakturierten Preis mit Jalousie fragen, dann wird es zum zweiten Alumil-Bieter gegen Bornes.</li>
-      <li><b>Vor jeder Unterschrift:</b> eine fertige Villa des Anbieters mit einer 3-m-Hebe-Schiebe-Tür besichtigen und ein Eckmuster in Anthrazit ansehen. Eckverbindungen und der Mittelstoß sind die Stellen, an denen billige Arbeit sichtbar wird.</li>
-      <li><b>Absagen</b> an Referans, Haser und Fatihpen, mit Dank.</li>
-    </ul>
-  </div>
-</section>
-
-<section>
-  <h2>Fragen zum Versenden</h2>
   <div class="grid2">
     <div class="card"><h3>An jeden Anbieter der engeren Wahl</h3>
       <ul>
@@ -377,12 +389,14 @@ code { font-family: var(--f-mono); font-size: .82rem; }
       </ul></div>
   </div>
 </section>
+</details>
 
+<details class="more"><summary>Dateien und Annahmen</summary>
 <section>
-  <h2>Dateien und Annahmen</h2>
   <p>Alle Angebote sind nach Anbieter in <code>Aluminyum Dograma Teklifleri</code> abgelegt, Ordner 01 bis 08. Heute hinzugefügt: <code>06 Asimetri (Linea Rossa)</code>, <code>07 Referans (Cuhadaroglu)</code>, <code>08 Altunoglu Cephe (Alumil)</code>. Die R3-Elementzeichnungen liegen bei Altunoğlu, der R1-Satz bei Bornes, Asimetris Zeichnungen im eigenen Ordner und Ihre Rev.-3-Ansichten in <code>00 Teknik Sartname TR</code>. Die Originale bleiben in Downloads.</p>
   <p class="note">Kurse: 1 EUR = 1,15 USD und 55 TL, aus Notierungen von Anfang Oktober. Vor der Unterschrift prüfen. Systemdaten stammen von den veröffentlichten Seiten der Hersteller und Händler; wo Quellen abwichen, ist der schwächere Wert gezeigt. „Vergleichbar" und „Gesamtpaket" sind Schätzungen zum Vergleich, keine Angebote.</p>
 </section>
+</details>
 
 </div>
 </body>

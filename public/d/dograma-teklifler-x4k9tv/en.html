@@ -71,6 +71,14 @@ code { font-family: var(--f-mono); font-size: .82rem; }
 .matrix td.spec { color: var(--muted); }
 .matrix tbody th.group { background: var(--bg); color: var(--gold); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; position: static; }
 @media (max-width: 560px) { .row, .axis { grid-template-columns: 96px 1fr 74px; gap: 8px; } h1 { font-size: 1.7rem; } }
+details.more { border: 1px solid var(--line); border-radius: 6px; background: var(--surface); min-width: 0; }
+details.more > summary { cursor: pointer; padding: 14px 18px; font-family: var(--f-display); font-weight: 600; font-size: 1.2rem; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+details.more > summary::-webkit-details-marker { display: none; }
+details.more > summary::after { content: "+"; font: 700 1rem var(--f-mono); color: var(--gold); }
+details.more[open] > summary::after { content: "\2212"; }
+details.more > section { padding: 0 18px 18px; }
+details.more .tablebox, details.more .card { border-color: var(--line); }
+.wrap { gap: 28px; }
 
 .lang { display: flex; gap: 6px; flex-wrap: wrap; font-size: .78rem; }
 .lang a { color: var(--muted); text-decoration: none; border: 1px solid var(--line); border-radius: 99px; padding: 2px 10px; }
@@ -86,44 +94,12 @@ code { font-family: var(--f-mono); font-size: .82rem; }
   <nav class="lang" aria-label="Language"><a href="./">Türkçe</a><a href="de">Deutsch</a><a href="en" aria-current="page">English</a></nav>
   <div class="eyebrow">Verde Ulaşlı · Gölcük konut projesi · alüminyum doğrama</div>
   <h1>Window offers comparison</h1>
-  <p class="meta">8 suppliers, latest offer from each, read line by line and checked against the system makers' published data. Prepared 27 October 2026, updated the same day with Altunoğlu. Reference: Teknik Şartname Rev. 2 (13 Oct) plus Ahmed's Rev. 3 notes (19 Oct). All prices excluding KDV.</p>
+  <p class="meta">8 suppliers, latest offer each, checked against the makers' published data. 27 October 2026. Prices excl. KDV.</p>
 </header>
-
-<section class="verdict">
-  <div class="eyebrow">Bottom line, from a luxury-build point of view</div>
-  <ul>
-    <li><b>Best product for this house: the Alumil package (Bornes or Altunoğlu).</b> It is the only system on the table whose sliding door is rated for the 400 kg salon panel with margin (up to 600 kg with Alumil's lift unit), with a 24 mm thermal break on both window and door and a published Uw of 1.1 on the door. Altunoğlu's R3 drawings are the only supplier drawings that already follow your 19 Oct layout exactly; Bornes priced on the earlier R1 set with your Rev. 3 elevations as reference.</li>
-    <li><b>Best price: Vemsa (~€81K like-for-like).</b> Good Turkish system (Asaş), nice single-track detail on the sliders, but the lift-slide hardware it names is a 300 kg class, and the door profile has a 14.8 mm thermal break. Fixable, at a cost.</li>
-    <li><b>Bornes (~€90K) is the value pick.</b> About €9K over Vemsa for a clearly better sliding door. Altunoğlu quotes the same Alumil systems directly at ~€99K like-for-like, with a brighter low-iron glass but no jalousie, and with a side note proposing a part-unofficial payment that you should decline.</li>
-    <li><b>Delta (~€86K)</b> quotes a Burak system on the old layout with 300 kg hardware. <b>Asimetri (~€91K)</b> has now sent drawings: they show the old 28-unit layout and a sliding system labelled "standard 300 kg". <b>Referans (~€129K)</b> is 50% over and splits your big panes. <b>Fatihpen and Haser</b> are not comparable.</li>
-    <li><b>Nobody is ready to sign.</b> No supplier gives seaside paint treatment, warranties, lead time, or the maximum size of the between-glass blinds. The blinds at P07 and P13 are likely tilt-only at those sizes, and P13's top pane may be over the limit.</li>
-    <li><b>Decision for you:</b> the spec's glass (50/33) is a darker, more reflective office-type glass. Altunoğlu's 62/44 low-iron is brighter and more neutral, at a small cost in summer heat. For a view house I would switch and ask everyone to quote it.</li>
-  </ul>
-</section>
-
-<section>
-  <h2>Ranking</h2>
-  <p>Grades are my reading of each offer and the makers' published data. A: fits a luxury villa as quoted. B: fits with named fixes. C: a real weakness.</p>
-  <div class="tablebox">
-  <table>
-    <thead><tr><th>Supplier</th><th>Sliding door</th><th>Windows</th><th>Glass</th><th>Drawings, layout</th><th>Commercial</th><th>Overall</th></tr></thead>
-    <tbody>
-      <tr><th scope="row">Bornes (Alumil)</th><td><span class="grade ok">A</span></td><td><span class="grade ok">A</span></td><td><span class="grade ok">A</span></td><td><span class="grade wn">B</span></td><td><span class="grade wn">B</span></td><td><b>1st.</b> Confirm the price on Rev. 3 with new unit drawings, hardware rating, crane, körkasa.</td></tr>
-      <tr><th scope="row">Vemsa (Asaş)</th><td><span class="grade no">C</span></td><td><span class="grade ok">A</span></td><td><span class="grade wn">B</span></td><td><span class="grade ok">A</span></td><td><span class="grade wn">B</span></td><td><b>2nd.</b> Cheapest. Needs 400 kg hardware, EPDM, site handling, and a fresh validity.</td></tr>
-      <tr><th scope="row">Altunoğlu (Alumil)</th><td><span class="grade ok">A</span></td><td><span class="grade ok">A</span></td><td><span class="grade ok">A</span></td><td><span class="grade ok">A</span></td><td><span class="grade no">C</span></td><td><b>3rd.</b> Same product as Bornes, ~€9K more, no jalousie, unofficial-payment note.</td></tr>
-      <tr><th scope="row">Delta (Burak)</th><td><span class="grade no">C</span></td><td><span class="grade wn">B</span></td><td><span class="grade ok">A</span></td><td><span class="grade no">C</span></td><td><span class="grade wn">B</span></td><td><b>4th.</b> Old layout, 300 kg hardware, glass over-counted. Only worth a Rev. 3 reprice.</td></tr>
-      <tr><th scope="row">Asimetri (Linea Rossa)</th><td><span class="grade no">C</span></td><td><span class="grade wn">B</span></td><td><span class="grade wn">B</span></td><td><span class="grade wn">B</span></td><td><span class="grade wn">B</span></td><td><b>5th.</b> Drawings received: old layout, 300 kg slider, two moving panels. One-line price with no inclusion list.</td></tr>
-      <tr><th scope="row">Referans (Çuhadaroğlu)</th><td><span class="grade no">C</span></td><td><span class="grade wn">B</span></td><td><span class="grade no">C</span></td><td><span class="grade wn">B</span></td><td><span class="grade no">C</span></td><td><b>Close.</b> 50% over, door system limited to 3.0 × 3.3 m sashes, splits the view panes.</td></tr>
-      <tr><th scope="row">Haser (Asaş)</th><td colspan="5" class="meta">Covers about one villa, lower glass spec. Not updated since 13 Oct.</td><td><b>Close.</b></td></tr>
-      <tr><th scope="row">Fatihpen</th><td colspan="5" class="meta">PVC options plus a 55 mm aluminium series, priced before the spec existed.</td><td><b>Close.</b></td></tr>
-    </tbody>
-  </table>
-  </div>
-</section>
 
 <section>
   <h2>Price, two ways</h2>
-  <p><b>Like-for-like</b> is the spec's scope: frames, glass, hardware, jalousie, crane, EPDM membrane. Körkasa and scaffolding stay with you. <b>Full package</b> adds the steel körkasa, so it shows what the windows really cost you. Missing items are filled in at the prices other suppliers quoted for them. USD at 1.15 per euro.</p>
+  <p><b>Like-for-like</b> = the spec's scope (frames, glass, hardware, jalousie, crane, EPDM). <b>Full package</b> adds the steel körkasa. Missing items are filled in at other suppliers' prices. USD at 1.15.</p>
   <div class="chart" role="img" aria-label="Full package price per supplier, in thousand euros">
     <div class="row"><div class="lbl">Vemsa<small>Asaş RWT64 + RST116</small></div><div class="track"><div class="fill" style="width:64.9%"></div></div><div class="val">€89.6K</div></div>
     <div class="row"><div class="lbl">Delta Cephe<small>Burak BM66 + S4000</small></div><div class="track"><div class="fill" style="width:68.3%"></div></div><div class="val">€94.2K</div></div>
@@ -153,9 +129,53 @@ code { font-family: var(--f-mono); font-size: .82rem; }
   <p class="note">Fill-in prices: crane €2,157 (Delta, 2 days), EPDM €5,510 (Delta, 352 m), körkasa €8,635 (Delta, double and single row steel), jalousie €7,500 (Bornes, 50 m²). €/m² uses the spec's 293 m² frame area. The ranking does not move at any USD rate between 1.10 and 1.20.</p>
 </section>
 
+<section class="verdict">
+  <div class="eyebrow">Bottom line, from a luxury-build point of view</div>
+  <ul>
+    <li><b>Best product: Alumil (Bornes or Altunoğlu).</b> The only sliding door rated for the 400 kg salon panel, 24 mm thermal break, Uw 1.1.</li>
+    <li><b>Cheapest: Vemsa (~€81K).</b> Good Asaş system, but 300 kg hardware and a weaker door profile.</li>
+    <li><b>Value pick: Bornes (~€90K).</b> €9K over Vemsa for a clearly better door. Altunoğlu is the same product at ~€99K, no jalousie, plus an unofficial-payment note to decline.</li>
+    <li><b>Delta, Asimetri:</b> old layout, 300 kg hardware. <b>Referans:</b> 50% over, splits the big panes. <b>Fatihpen, Haser:</b> not comparable.</li>
+    <li><b>Nobody is ready to sign:</b> no seaside coating, warranties, lead time or blind size limits from anyone.</li>
+  </ul>
+</section>
+
 <section>
-  <h2>Point by point, all eight offers</h2>
-  <p>Every item the spec asks for, read off each offer as written. "Not mentioned" means the offer is silent, which for a contractor usually means excluded. Scroll sideways; the first column stays put.</p>
+  <h2>Ranking</h2>
+  <p>A: fits a luxury villa as quoted. B: fits with named fixes. C: a real weakness.</p>
+  <div class="tablebox">
+  <table>
+    <thead><tr><th>Supplier</th><th>Sliding door</th><th>Windows</th><th>Glass</th><th>Drawings, layout</th><th>Commercial</th><th>Overall</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Bornes (Alumil)</th><td><span class="grade ok">A</span></td><td><span class="grade ok">A</span></td><td><span class="grade ok">A</span></td><td><span class="grade wn">B</span></td><td><span class="grade wn">B</span></td><td><b>1st.</b> Confirm the price on Rev. 3 with new unit drawings, hardware rating, crane, körkasa.</td></tr>
+      <tr><th scope="row">Vemsa (Asaş)</th><td><span class="grade no">C</span></td><td><span class="grade ok">A</span></td><td><span class="grade wn">B</span></td><td><span class="grade ok">A</span></td><td><span class="grade wn">B</span></td><td><b>2nd.</b> Cheapest. Needs 400 kg hardware, EPDM, site handling, and a fresh validity.</td></tr>
+      <tr><th scope="row">Altunoğlu (Alumil)</th><td><span class="grade ok">A</span></td><td><span class="grade ok">A</span></td><td><span class="grade ok">A</span></td><td><span class="grade ok">A</span></td><td><span class="grade no">C</span></td><td><b>3rd.</b> Same product as Bornes, ~€9K more, no jalousie, unofficial-payment note.</td></tr>
+      <tr><th scope="row">Delta (Burak)</th><td><span class="grade no">C</span></td><td><span class="grade wn">B</span></td><td><span class="grade ok">A</span></td><td><span class="grade no">C</span></td><td><span class="grade wn">B</span></td><td><b>4th.</b> Old layout, 300 kg hardware, glass over-counted. Only worth a Rev. 3 reprice.</td></tr>
+      <tr><th scope="row">Asimetri (Linea Rossa)</th><td><span class="grade no">C</span></td><td><span class="grade wn">B</span></td><td><span class="grade wn">B</span></td><td><span class="grade wn">B</span></td><td><span class="grade wn">B</span></td><td><b>5th.</b> Drawings received: old layout, 300 kg slider, two moving panels. One-line price with no inclusion list.</td></tr>
+      <tr><th scope="row">Referans (Çuhadaroğlu)</th><td><span class="grade no">C</span></td><td><span class="grade wn">B</span></td><td><span class="grade no">C</span></td><td><span class="grade wn">B</span></td><td><span class="grade no">C</span></td><td><b>Close.</b> 50% over, door system limited to 3.0 × 3.3 m sashes, splits the view panes.</td></tr>
+      <tr><th scope="row">Haser (Asaş)</th><td colspan="5" class="meta">Covers about one villa, lower glass spec. Not updated since 13 Oct.</td><td><b>Close.</b></td></tr>
+      <tr><th scope="row">Fatihpen</th><td colspan="5" class="meta">PVC options plus a 55 mm aluminium series, priced before the spec existed.</td><td><b>Close.</b></td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>Recommendation</h2>
+  <div class="card">
+    <ul class="list">
+      <li><b>Final round with Bornes, Vemsa and Delta</b> on Rev. 3, 62/44 low-iron glass, 400 kg+ hardware, seaside coating, crane and EPDM in, körkasa out.</li>
+      <li><b>Target: Bornes at €85-88K</b> like-for-like, with Vemsa's €81K as the lever.</li>
+      <li><b>Altunoğlu:</b> ask how it relates to Bornes before paying €9K more to go direct.</li>
+      <li><b>Before signing:</b> visit a finished villa with a 3 m lift-slide door and see a corner sample in anthracite.</li>
+      <li><b>Close</b> Referans, Haser and Fatihpen.</li>
+    </ul>
+  </div>
+</section>
+
+<details class="more"><summary>Point by point, all eight offers</summary>
+<section>
+  <p>Every spec item, read off each offer as written. Scroll sideways; the first column stays put.</p>
   <div class="tablebox matrix">
   <table>
     <thead><tr><th>Point</th><th>Spec asks</th><th>Bornes</th><th>Altunoğlu</th><th>Vemsa</th><th>Delta Cephe</th><th>Asimetri</th><th>Referans</th><th>Haser</th><th>Fatihpen</th></tr></thead>
@@ -208,9 +228,10 @@ code { font-family: var(--f-mono); font-size: .82rem; }
   </div>
   <p class="note">Körkasa in one line: only Altunoğlu includes it. Bornes excludes it in writing and is quoting it separately. Delta prices it in two lines and then says it is excluded in the footnote, which needs a yes or no from them. The other five do not mention it, so assume it is yours, as the spec says.</p>
 </section>
+</details>
 
+<details class="more"><summary>What is behind each system</summary>
 <section>
-  <h2>What is behind each system</h2>
   <p>Published maker data, checked against what each offer claims. The spec asks for a 61-66 mm frame, a 24 mm thermal break, and lift-slide hardware carrying more than 400 kg.</p>
   <div class="tablebox">
   <table>
@@ -247,9 +268,10 @@ code { font-family: var(--f-mono); font-size: .82rem; }
   </table>
   </div>
 </section>
+</details>
 
+<details class="more"><summary>Fine print, supplier by supplier</summary>
 <section>
-  <h2>Fine print, supplier by supplier</h2>
   <div class="grid2">
     <div class="card flag"><h3>Altunoğlu Cephe (Alumil), 27 Oct, €97,500</h3>
       <ul>
@@ -301,9 +323,10 @@ code { font-family: var(--f-mono); font-size: .82rem; }
       </ul></div>
   </div>
 </section>
+</details>
 
+<details class="more"><summary>The glass decision</summary>
 <section>
-  <h2>The glass decision</h2>
   <div class="grid2">
     <div class="card"><h3>Spec: Şişecam Ecosol T 50 (50/33)</h3>
       <ul>
@@ -320,9 +343,10 @@ code { font-family: var(--f-mono); font-size: .82rem; }
   </div>
   <p>My view for Verde: the view and the feel of the rooms are the product. Switch the spec to 62/44 with a low-iron laminate and ask every shortlisted supplier to price it. Expect €10-20/m² more than 50/33.</p>
 </section>
+</details>
 
+<details class="more"><summary>Gaps every offer shares</summary>
 <section>
-  <h2>Gaps every offer shares</h2>
   <div class="tablebox">
   <table>
     <thead><tr><th>Item</th><th>Why it matters here</th><th>Status</th></tr></thead>
@@ -339,22 +363,10 @@ code { font-family: var(--f-mono); font-size: .82rem; }
   </table>
   </div>
 </section>
+</details>
 
+<details class="more"><summary>Questions to send</summary>
 <section>
-  <h2>Recommendation</h2>
-  <div class="card">
-    <ul class="list">
-      <li><b>Run a final round with Bornes, Vemsa and Delta</b>, all on Rev. 3, 62/44 low-iron glass, 400 kg+ hardware named, seaside coating, crane and EPDM in, körkasa out, flush threshold as an option. Keep Asimetri in only if it comes back with a 400 kg+ slider and an inclusion list.</li>
-      <li><b>Target: Bornes at about €85-88K</b> like-for-like. Vemsa's €81K is the lever; Bornes's euro price and better door are the reasons to pay a little more.</li>
-      <li><b>Altunoğlu:</b> ask first how it relates to Bornes. If it fabricates for Bornes, there is no point paying ~€9K more to go direct. If it is a separate Alumil fabricator, ask for a fully invoiced price with jalousie, and it becomes a second Alumil bidder against Bornes.</li>
-      <li><b>Before signing anyone:</b> visit one finished villa of theirs with a 3 m lift-slide door, and see a corner sample in anthracite. Corner joints and the meeting stile are where cheap work shows.</li>
-      <li><b>Close</b> Referans, Haser and Fatihpen with thanks.</li>
-    </ul>
-  </div>
-</section>
-
-<section>
-  <h2>Questions to send</h2>
   <div class="grid2">
     <div class="card"><h3>To every shortlisted supplier</h3>
       <ul>
@@ -377,12 +389,14 @@ code { font-family: var(--f-mono); font-size: .82rem; }
       </ul></div>
   </div>
 </section>
+</details>
 
+<details class="more"><summary>Files and assumptions</summary>
 <section>
-  <h2>Files and assumptions</h2>
   <p>All offers are filed by supplier in <code>Aluminyum Dograma Teklifleri</code>, folders 01 to 08. Added today: <code>06 Asimetri (Linea Rossa)</code>, <code>07 Referans (Cuhadaroglu)</code>, <code>08 Altunoglu Cephe (Alumil)</code>. The R3 unit drawings sit with Altunoğlu, the R1 set with Bornes, Asimetri's drawings in its own folder, and your Rev. 3 elevations in <code>00 Teknik Sartname TR</code>. Originals remain in Downloads.</p>
   <p class="note">Rates: 1 EUR = 1.15 USD and 55 TL, from early-October quotes. Check before signing. System data comes from the makers' and dealers' published pages; where sources disagreed, the weaker figure is shown. "Like-for-like" and "full package" are estimates for comparison, not quotes.</p>
 </section>
+</details>
 
 </div>
 </body>
