@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Verde Ulaşlı — Doğrama Teklif Karşılaştırması</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: single reading column, wide tables scroll in their own frame. Verde palette. */
+:root {
+  --bg: #F4F3EF; --surface: #FFFFFF; --fg: #16231E; --muted: #5C6B64; --line: #D9D6CC;
+  --accent: #2D5040; --gold: #9A7B34; --good: #2E6B45; --warn: #9A6A12; --bad: #A23B2E;
+  --good-bg: #E3EFE6; --warn-bg: #F6EBD3; --bad-bg: #F5E0DC; --bar: #2D5040; --bar2: #C3A564;
+  --f-display: "Newsreader", Georgia, serif; --f-body: "Manrope", system-ui, sans-serif; --f-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0E1A16; --surface: #15241F; --fg: #EBE8E1; --muted: #A3AEA8; --line: #2A3B34;
+  --accent: #8FBFA6; --gold: #C3A564; --good: #8FCFA3; --warn: #E2B85E; --bad: #EB8B7D;
+  --good-bg: #1C3528; --warn-bg: #3A2F17; --bad-bg: #3D211D; --bar: #5E9479; --bar2: #C3A564; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0E1A16; --surface: #15241F; --fg: #EBE8E1; --muted: #A3AEA8; --line: #2A3B34;
+  --accent: #8FBFA6; --gold: #C3A564; --good: #8FCFA3; --warn: #E2B85E; --bad: #EB8B7D;
+  --good-bg: #1C3528; --warn-bg: #3A2F17; --bad-bg: #3D211D; --bar: #5E9479; --bar2: #C3A564; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font: 15px/1.6 var(--f-body); }
+.wrap { max-width: 1100px; margin: 0 auto; padding-block: 40px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 44px; }
+h1, h2 { font-family: var(--f-display); font-weight: 600; text-wrap: balance; margin: 0; line-height: 1.15; }
+h1 { font-size: 2.1rem; }
+h2 { font-size: 1.45rem; }
+h3 { font-size: 1rem; margin: 0; }
+p { margin: 0; max-width: 70ch; }
+section { display: grid; gap: 14px; min-width: 0; }
+.eyebrow { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+.meta { color: var(--muted); font-size: .9rem; }
+.verdict { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 6px; padding: 20px 22px; display: grid; gap: 10px; }
+.verdict ul, .card ul, .list { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.tablebox { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: .88rem; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+thead th { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); background: var(--bg); white-space: nowrap; }
+tbody tr:last-child td { border-bottom: 0; }
+td.n, th.n { text-align: right; white-space: nowrap; font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+th[scope="row"] { font-weight: 700; white-space: nowrap; }
+.pill { display: inline-block; font-size: .72rem; font-weight: 700; padding: 1px 8px; border-radius: 99px; white-space: nowrap; }
+.ok { background: var(--good-bg); color: var(--good); }
+.wn { background: var(--warn-bg); color: var(--warn); }
+.no { background: var(--bad-bg); color: var(--bad); }
+.grade { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 6px; font: 700 .85rem var(--f-mono); }
+.chart { display: grid; gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 18px 20px; }
+.row { display: grid; grid-template-columns: 150px 1fr 100px; gap: 12px; align-items: center; }
+.row .lbl { font-weight: 700; font-size: .9rem; }
+.row .lbl small { display: block; font-weight: 400; color: var(--muted); font-size: .75rem; }
+.track { position: relative; height: 18px; background: var(--bg); border-radius: 3px; }
+.fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--bar); border-radius: 3px; }
+.range { position: absolute; top: 0; bottom: 0; background: repeating-linear-gradient(90deg, var(--bar2) 0 4px, transparent 4px 7px); border-radius: 0 3px 3px 0; }
+.row .val { font-family: var(--f-mono); font-variant-numeric: tabular-nums; text-align: right; font-size: .9rem; }
+.axis { display: grid; grid-template-columns: 150px 1fr 100px; gap: 12px; color: var(--muted); font: .72rem var(--f-mono); }
+.axis .ticks { display: flex; justify-content: space-between; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 16px 18px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.card.flag { border-left: 4px solid var(--bad); }
+.note { font-size: .82rem; color: var(--muted); }
+code { font-family: var(--f-mono); font-size: .82rem; }
+.matrix table { min-width: 1850px; }
+.matrix td, .matrix th { font-size: .8rem; line-height: 1.45; }
+.matrix th[scope="row"] { position: sticky; left: 0; background: var(--surface); z-index: 1; white-space: normal; min-width: 150px; max-width: 170px; }
+.matrix thead th:first-child { position: sticky; left: 0; z-index: 2; }
+.matrix td { min-width: 170px; }
+.matrix td.spec { color: var(--muted); }
+.matrix tbody th.group { background: var(--bg); color: var(--gold); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; position: static; }
+@media (max-width: 560px) { .row, .axis { grid-template-columns: 96px 1fr 80px; gap: 8px; } h1 { font-size: 1.7rem; } }
+
+.lang { display: flex; gap: 6px; flex-wrap: wrap; font-size: .78rem; }
+.lang a { color: var(--muted); text-decoration: none; border: 1px solid var(--line); border-radius: 99px; padding: 2px 10px; }
+.lang a[aria-current] { color: var(--fg); border-color: var(--gold); font-weight: 700; }
+.lang a:hover { color: var(--fg); }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header style="display:grid;gap:10px">
+  <nav class="lang" aria-label="Language"><a href="./" aria-current="page">Türkçe</a><a href="de.html">Deutsch</a><a href="en.html">English</a></nav>
+  <div class="eyebrow">Verde Ulaşlı · Gölcük konut projesi · alüminyum doğrama</div>
+  <h1>Doğrama tekliflerinin karşılaştırması</h1>
+  <p class="meta">8 tedarikçi, her birinin en güncel teklifi, satır satır okundu ve sistem üreticilerinin yayımladığı verilerle kontrol edildi. 27 Ekim 2026'da hazırlandı, aynı gün Altunoğlu eklendi. Referans: Teknik Şartname Rev. 2 (13 Ekim) ve Ahmed'in Rev. 3 notları (19 Ekim). Tüm fiyatlar KDV hariç.</p>
+</header>
+
+<section class="verdict">
+  <div class="eyebrow">Özet, lüks bir yapı gözüyle</div>
+  <ul>
+    <li><b>Bu ev için en iyi ürün: Alumil paketi (Bornes veya Altunoğlu).</b> Masadaki tek sistem ki sürme kapısı 400 kg'lık salon kanadını payla taşıyacak şekilde sınıflandırılmış (Alumil kaldırma ünitesiyle 600 kg'a kadar), hem pencerede hem kapıda 24 mm ısı bariyeri var ve kapıda yayımlanmış Uw değeri 1,1. Altunoğlu'nun R3 çizimleri, 19 Ekim tarihli yerleşiminizi birebir takip eden tek tedarikçi çizimi; Bornes ise fiyatını önceki R1 setine göre verdi, Rev. 3 görünüşleriniz referans olarak elinde.</li>
+    <li><b>En iyi fiyat: Vemsa (eşit kapsamda ~81 bin €).</b> İyi bir Türk sistemi (Asaş), sürmelerde güzel tek ray detayı, ama adını verdiği kaldır-sür aksesuarı 300 kg sınıfı ve kapı profilinin ısı bariyeri 14,8 mm. Düzeltilebilir, ek maliyetle.</li>
+    <li><b>Bornes (~90 bin €) fiyat-performans tercihi.</b> Vemsa'dan yaklaşık 9 bin € fazla, karşılığında açıkça daha iyi bir sürme kapı. Altunoğlu aynı Alumil sistemlerini doğrudan ~99 bin € eşit kapsamla sunuyor, daha aydınlık düşük demirli cam var ama jaluzi yok, ayrıca kısmen gayri resmi ödeme öneren bir not var; reddetmelisiniz.</li>
+    <li><b>Delta (~86 bin €)</b> eski yerleşim üzerinden, 300 kg aksesuarla Burak sistemi teklif ediyor. <b>Asimetri (~91 bin €)</b> çizim gönderdi: eski 28 birimlik yerleşim ve "standart 300 kg" etiketli bir sürme sistemi. <b>Referans (~129 bin €)</b> %50 pahalı ve büyük camlarınızı bölüyor. <b>Fatihpen ve Haser</b> karşılaştırılabilir değil.</li>
+    <li><b>Kimse imzaya hazır değil.</b> Hiçbir tedarikçi deniz kenarı (seaside) boya ön işlemi, garanti, teslim süresi veya cam arası jaluzinin azami boyutunu vermiyor. P07 ve P13'teki jaluziler bu boyutlarda muhtemelen sadece açı ayarlı olur, P13'ün üst camı sınırın üzerinde olabilir.</li>
+    <li><b>Sizin kararınız:</b> şartnamenin camı (50/33) daha koyu, daha yansıtıcı, ofis tipi bir cam. Altunoğlu'nun 62/44 düşük demirli camı daha aydınlık ve daha nötr, yazın biraz daha fazla ısı kazancı pahasına. Manzara evi için ben değiştirir ve herkesten bunu fiyatlamasını isterdim.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Sıralama</h2>
+  <p>Notlar her teklifi ve üreticilerin yayımladığı verileri benim okuyuşum. A: teklif edildiği haliyle lüks villaya uygun. B: belirli düzeltmelerle uygun. C: gerçek bir zayıflık.</p>
+  <div class="tablebox">
+  <table>
+    <thead><tr><th>Tedarikçi</th><th>Sürme kapı</th><th>Pencereler</th><th>Cam</th><th>Çizim, yerleşim</th><th>Ticari</th><th>Genel</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Bornes (Alumil)</th><td><span class="grade ok">A</span></td><td><span class="grade ok">A</span></td><td><span class="grade ok">A</span></td><td><span class="grade wn">B</span></td><td><span class="grade wn">B</span></td><td><b>1.</b> Rev. 3 fiyatını yeni ünite çizimleriyle, aksesuar taşıma kapasitesi, vinç ve kör kasayla teyit ettirin.</td></tr>
+      <tr><th scope="row">Vemsa (Asaş)</th><td><span class="grade no">C</span></td><td><span class="grade ok">A</span></td><td><span class="grade wn">B</span></td><td><span class="grade ok">A</span></td><td><span class="grade wn">B</span></td><td><b>2.</b> En ucuz. 400 kg aksesuar, EPDM, şantiye içi taşıma ve yeni geçerlilik gerekiyor.</td></tr>
+      <tr><th scope="row">Altunoğlu (Alumil)</th><td><span class="grade ok">A</span></td><td><span class="grade ok">A</span></td><td><span class="grade ok">A</span></td><td><span class="grade ok">A</span></td><td><span class="grade no">C</span></td><td><b>3.</b> Bornes ile aynı ürün, ~9 bin € daha pahalı, jaluzi yok, gayri resmi ödeme notu var.</td></tr>
+      <tr><th scope="row">Delta (Burak)</th><td><span class="grade no">C</span></td><td><span class="grade wn">B</span></td><td><span class="grade ok">A</span></td><td><span class="grade no">C</span></td><td><span class="grade wn">B</span></td><td><b>4.</b> Eski yerleşim, 300 kg aksesuar, cam fazla sayılmış. Ancak Rev. 3 ile yeniden fiyatlarsa değer.</td></tr>
+      <tr><th scope="row">Asimetri (Linea Rossa)</th><td><span class="grade no">C</span></td><td><span class="grade wn">B</span></td><td><span class="grade wn">B</span></td><td><span class="grade wn">B</span></td><td><span class="grade wn">B</span></td><td><b>5.</b> Çizimler geldi: eski yerleşim, 300 kg sürme, iki hareketli kanat. Kapsam listesi olmayan tek satırlık fiyat.</td></tr>
+      <tr><th scope="row">Referans (Çuhadaroğlu)</th><td><span class="grade no">C</span></td><td><span class="grade wn">B</span></td><td><span class="grade no">C</span></td><td><span class="grade wn">B</span></td><td><span class="grade no">C</span></td><td><b>Kapatın.</b> %50 pahalı, kapı sistemi 3,0 × 3,3 m kanatla sınırlı, manzara camlarını bölüyor.</td></tr>
+      <tr><th scope="row">Haser (Asaş)</th><td colspan="5" class="meta">Yaklaşık bir villayı kapsıyor, daha düşük cam spesifikasyonu. 13 Ekim'den beri güncellenmedi.</td><td><b>Kapatın.</b></td></tr>
+      <tr><th scope="row">Fatihpen</th><td colspan="5" class="meta">PVC seçenekleri ve 55 mm'lik bir alüminyum seri, şartname yokken fiyatlanmış.</td><td><b>Kapatın.</b></td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>Fiyat, iki açıdan</h2>
+  <p><b>Eşit kapsam</b> şartnamenin kapsamıdır: profil, cam, aksesuar, jaluzi, vinç, EPDM membran. Kör kasa ve iskele sizde kalır. <b>Tam paket</b> çelik kör kasayı ekler, yani doğramanın size gerçekte neye mal olduğunu gösterir. Eksik kalemler, diğer tedarikçilerin o kalem için verdiği fiyatlarla tamamlandı. USD, euro başına 1,15 alındı.</p>
+  <div class="chart" role="img" aria-label="Tedarikçi başına tam paket fiyatı, bin euro">
+    <div class="row"><div class="lbl">Vemsa<small>Asaş RWT64 + RST116</small></div><div class="track"><div class="fill" style="width:64.9%"></div></div><div class="val">89,6 bin €</div></div>
+    <div class="row"><div class="lbl">Delta Cephe<small>Burak BM66 + S4000</small></div><div class="track"><div class="fill" style="width:68.3%"></div></div><div class="val">94,2 bin €</div></div>
+    <div class="row"><div class="lbl">Bornes<small>Alumil S61 + S700</small></div><div class="track"><div class="fill" style="width:71.4%"></div></div><div class="val">98,5 bin €</div></div>
+    <div class="row"><div class="lbl">Altunoğlu<small>Alumil S61 + S700</small></div><div class="track"><div class="fill" style="width:77.7%"></div></div><div class="val">107,2 bin €</div></div>
+    <div class="row"><div class="lbl">Asimetri<small>Linea Rossa LR-5100</small></div><div class="track"><div class="fill" style="width:65.9%"></div><div class="range" style="left:65.9%;width:11.8%"></div></div><div class="val">90,9-107,2 bin €</div></div>
+    <div class="row"><div class="lbl">Referans<small>ST70 + Çuhadaroğlu S50</small></div><div class="track"><div class="fill" style="width:100%"></div></div><div class="val">138,1 bin €</div></div>
+    <div class="axis"><span></span><div class="ticks"><span>0 €</span><span>69 bin €</span><span>138 bin €</span></div><span></span></div>
+    <p class="note">Asimetri çubuğunun çizgili kısmı: vinç, EPDM ve kör kasa; tek satırlık teklif bunları ne dahil ediyor ne de hariç tutuyor.</p>
+  </div>
+
+  <div class="tablebox">
+  <table>
+    <thead><tr><th>Tedarikçi</th><th>Tarih</th><th class="n">Teklif edilen</th><th>Düzeltmeler</th><th class="n">Eşit kapsam</th><th class="n">Tam paket</th><th class="n">€/m² tam</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Vemsa</th><td>19 Ekim</td><td class="n">86.750 $</td><td>+ EPDM 5,5 bin € (belirtilmemiş). + kör kasa 8,6 bin €. Şantiye içi taşıma ve jeneratör bizde, fiyatlanmadı.</td><td class="n">80.944 €</td><td class="n">89.579 €</td><td class="n">306</td></tr>
+      <tr><th scope="row">Delta Cephe</th><td>7 Ekim</td><td class="n">109.785 $</td><td>− 4 kaldır-sür aksesuar takımı 1.460 $ (1 hareketli kanat). Kör kasa 9.930 $ teklifin içinde, yani tam paket = teklif; eşit kapsam bunu çıkarır.</td><td class="n">85.561 €</td><td class="n">94.196 €</td><td class="n">321</td></tr>
+      <tr><th scope="row">Bornes Yapı</th><td>15 Ekim</td><td class="n">89.750 €</td><td>− 4 kaldır-sür takımı 2.000 €. + vinç 2,2 bin € (belirtilmemiş). + kör kasa 8,6 bin € geçici değer: Bornes'in kendi kör kasa teklifi istendi, bekleniyor.</td><td class="n">89.907 €</td><td class="n">98.541 €</td><td class="n">336</td></tr>
+      <tr><th scope="row">Altunoğlu</th><td>27 Ekim</td><td class="n">97.500 €</td><td>+ jaluzi 7,5 bin € (teklifte yok). + vinç 2,2 bin €. Kör kasa ve EPDM dahil; eşit kapsam kör kasayı çıkarır.</td><td class="n">98.522 €</td><td class="n">107.157 €</td><td class="n">366</td></tr>
+      <tr><th scope="row">Asimetri</th><td>16 Ekim</td><td class="n">90.900 €</td><td>+ vinç, EPDM, kör kasa yalnızca dahil değilse. Hiçbiri belirtilmemiş.</td><td class="n">90.900-98.566 €</td><td class="n">90.900-107.201 €</td><td class="n">310-366</td></tr>
+      <tr><th scope="row">Referans</th><td>27 Ekim</td><td class="n">135.541 $</td><td>1 hareketli kanat seçeneği (−1.530 $). + vinç 6.000 $. + P07 ve P13'te jaluzi ~8,9 bin $ (fiyatlanmamış). + kör kasa 8,6 bin €.</td><td class="n">129.468 €</td><td class="n">138.103 €</td><td class="n">471</td></tr>
+      <tr><th scope="row">Fatihpen</th><td>29 Eylül</td><td class="n">4.850.000 TL</td><td>55 TL kurla ~88 bin €. 28 birim, şartname öncesi, farklı cam, KDV durumu belirsiz.</td><td class="n">yok</td><td class="n">yok</td><td class="n">yok</td></tr>
+      <tr><th scope="row">Haser Yapı</th><td>13 Ekim</td><td class="n">34.746 €</td><td>122 m² cam ve 2 kaldır-sür takımı: yaklaşık bir villa.</td><td class="n">yok</td><td class="n">yok</td><td class="n">yok</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">Tamamlama fiyatları: vinç 2.157 € (Delta, 2 gün), EPDM 5.510 € (Delta, 352 m), kör kasa 8.635 € (Delta, çift ve tek sıra çelik), jaluzi 7.500 € (Bornes, 50 m²). €/m² şartnamedeki 293 m² doğrama alanına göre. Sıralama 1,10 ile 1,20 arasındaki hiçbir USD kurunda değişmiyor.</p>
+</section>
+
+<section>
+  <h2>Madde madde, sekiz teklifin tamamı</h2>
+  <p>Şartnamenin istediği her kalem, her teklifte yazıldığı haliyle okundu. "Belirtilmemiş" teklifin sessiz kaldığı anlamına gelir; bir yüklenici için bu genellikle hariç demektir. Yana kaydırın; ilk sütun sabit kalır.</p>
+  <div class="tablebox matrix">
+  <table>
+    <thead><tr><th>Madde</th><th>Şartname istiyor</th><th>Bornes</th><th>Altunoğlu</th><th>Vemsa</th><th>Delta Cephe</th><th>Asimetri</th><th>Referans</th><th>Haser</th><th>Fatihpen</th></tr></thead>
+    <tbody>
+      <tr><th class="group" colspan="10">Teklif</th></tr>
+      <tr><th scope="row">Tarih, revizyon</th><td class="spec">13 Ekim Rev. 2, 19 Ekim Rev. 3 notları</td><td>Belgede 13 Ekim, 15 Ekim'de gönderildi. 4. sürüm.</td><td>27 Ekim, REV işaretli</td><td>19 Ekim, 2. sürüm</td><td>7 Ekim, 2. sürüm</td><td>16 Ekim</td><td>27 Ekim, rev 00</td><td>13 Ekim, rev 00</td><td>29 Eylül</td></tr>
+      <tr><th scope="row">Para birimi</th><td class="spec">EUR</td><td><span class="pill ok">EUR</span></td><td><span class="pill ok">EUR</span></td><td>USD, TCMB döviz satış kuruyla TL ödeme</td><td>USD</td><td><span class="pill ok">EUR</span></td><td>USD</td><td><span class="pill ok">EUR</span></td><td>TL</td></tr>
+      <tr><th scope="row">KDV hariç toplam</th><td class="spec">Sabit toplam tercih edilir</td><td>89.750 €</td><td>107.262 € üzerinden %9 iskonto sonrası 97.500 €</td><td>86.750 $</td><td>109.785 $</td><td>90.900 €</td><td>135.541 $</td><td>34.746 €</td><td>4.850.000 TL (alüminyum seçeneği); KDV durumu belirtilmemiş</td></tr>
+      <tr><th scope="row">Fiyat esası</th><td class="spec">Sabit toplam; metraj ise birim fiyat ve miktarlar</td><td>Profil metresi ve cam m² üzerinden metraj; birim fiyatlar bağlayıcı</td><td>Pozisyon bazlı; montaj sonrası metraj, hakedişle ödeme</td><td><span class="pill ok">Götürü</span>, ilave işler için birim fiyat</td><td>Metraj; "miktarlar tahminidir"</td><td><span class="pill ok">Götürü</span></td><td>Pozisyon bazlı; metraj, şekilli parçalar dikdörtgen sayılır</td><td>Metre ve m² birim fiyatları</td><td>Seçenek başına götürü</td></tr>
+      <tr><th scope="row">Fiyatlanan yerleşim</th><td class="spec">Rev. 3: P08 var, P01 yok, P07 revize, sürmeler 1 hareketli + 1 sabit, aynalı</td><td><span class="pill wn">Rev. 2 miktarları</span>, R1 ünite çizimleri üzerinden; Rev. 3 görünüşleriniz referans olarak gönderildi, yeni ünite çizimi veya fiyat henüz yok</td><td><span class="pill ok">Rev. 3</span>, kendi R3 ünite çizimlerine göre 26 birim</td><td><span class="pill ok">Rev. 3</span>, 26 birim, tek hareketli kanat çizilmiş</td><td><span class="pill no">Şartname öncesi</span>: 24 pencere, 8 hareketli kanat</td><td><span class="pill no">Rev. 2 öncesi</span>: villa başına 14 pozisyon, P01 ve P08 ikisi de var, 28 birim, villa başına 147,7 m²; iki hareketli kanat; P07 eski Ek-2 halinde</td><td><span class="pill wn">Rev. 2</span>: P01 ve P14 var, P08 yok</td><td><span class="pill no">Kısmi</span>: yaklaşık bir villa</td><td><span class="pill no">Şartname öncesi</span>: 28 birim</td></tr>
+      <tr><th scope="row">Verilen çizimler</th><td class="spec">Onay için imalat çizimleri</td><td><span class="pill ok">R1</span> ünite çizimleri ve detaylar, Altunoğlu çizmiş (AL_41233_R1)</td><td><span class="pill ok">R3</span> ünite çizimleri, 19 Ekim (AL_41233_R3), Rev. 3 yerleşimi üzerinden</td><td><span class="pill ok">Ünite çizimleri</span> 6 Ekim ve 19 Ekim</td><td><span class="pill wn">Word dosyaları</span>, BM66 çizimleri</td><td><span class="pill ok">Ünite çizimleri</span> 16 Ekim, bir villa, 3 sayfa</td><td><span class="pill no">Yok</span></td><td><span class="pill no">Yok</span></td><td>Çizim PDF'i, şartname öncesi</td></tr>
+      <tr><th class="group" colspan="10">Sistemler ve aksesuar</th></tr>
+      <tr><th scope="row">Pencere sistemi</th><td class="spec">61-66 mm kasa, 24 mm poliamid ısı bariyeri, CE</td><td>Alumil Smartia S61: 61 mm, 24 mm bariyer</td><td>Alumil Smartia S61</td><td>Asaş RWT64: 64 mm, 24 mm bariyer</td><td>Burak BM66: 66 mm</td><td>Linea Rossa LR-5100: 65 mm, 24 mm bariyer</td><td>ST70: 70 mm, 24 mm bariyer, hava sınıf 4, su 9A</td><td>Asaş RWT75</td><td>PVC 80-84 mm veya alüminyum RWT55 <span class="pill no">şartname altı</span></td></tr>
+      <tr><th scope="row">Kaldır-sür sistemi</th><td class="spec">Isı yalıtımlı; 3,3 × 3,4 m kanada izin vermeli</td><td>Alumil Supreme S700, standart eşik rayı</td><td>Alumil Supreme S700</td><td>Asaş RST116 tek ray (T116A09), 14,8 mm bariyer</td><td>Burak S4000, Uf 4,53</td><td>LR-3500 HBSB; çizimler "Standart - 300 Kg" diyor <span class="pill no">300 kg sınıfı</span></td><td>Çuhadaroğlu S50: 121 mm, 14,8 mm bariyer, Uf 4,75; üretici azami kanat 3,0 × 3,3 m <span class="pill no">çok küçük</span></td><td>Asaş RST116</td><td>PVC HS76</td></tr>
+      <tr><th scope="row">Kaldır-sür aksesuarı</th><td class="spec">Avrupa markası, model, gerçek kanat ağırlığının üzerinde kapasite, en az 400 kg</td><td>"Alumil marka, mega kol takımı", hareketli kanat başına 500 €. <span class="pill wn">Model yok, kg yok</span></td><td>"Sistem aksesuarı". <span class="pill wn">Marka yok, kg yok</span></td><td>Siegenia HS-300 <span class="pill no">300 kg</span></td><td>Siegenia HS-300, kanat başına 365 $ <span class="pill no">300 kg</span></td><td>Marka yok; çizim 300 kg diyor <span class="pill no">300 kg</span></td><td>Siegenia, model yok <span class="pill wn">kg yok</span></td><td>"HBSB kanat aksesuarı", kanat başına 240 €, 2 kanat</td><td>Belirtilmemiş</td></tr>
+      <tr><th scope="row">Pencere aksesuarı</th><td class="spec">Tip başına marka ve model (örn. Siegenia, Roto, GU)</td><td>Alumil marka çift açılım 120 €, tek kapı takımı 150 €</td><td>"Sistem aksesuarı"</td><td>Siegenia-Roto</td><td>Siegenia Giesse, takım başına 94 $, 10 takım</td><td>Belirtilmemiş</td><td>Belirtilmemiş</td><td>Çift açılım takım başına 70 €, 5 takım</td><td>Belirtilmemiş</td></tr>
+      <tr><th scope="row">Köşe birleşimleri</th><td class="spec">45°, preslenmiş, epoksi dolgulu</td><td>Belirtilmemiş</td><td>Belirtilmemiş</td><td><span class="pill ok">45° epoksi</span></td><td><span class="pill ok">Presli, epoksi</span></td><td>Belirtilmemiş</td><td>Belirtilmemiş</td><td>Belirtilmemiş</td><td>Belirtilmemiş</td></tr>
+      <tr><th class="group" colspan="10">Cam</th></tr>
+      <tr><th scope="row">Cam yapısı</th><td class="spec">6 mm Ecosol T50 temperli, kenar işlemeli + 20 mm argon, siyah sıcak kenar + 44.2 lamine; rüzgar yükü gerektirirse dış 8 mm</td><td>6 Ecosol T50 + 20 HB + 4+4 temperli lamine, siyah sıcak kenar. <span class="pill wn">Argon belirtilmemiş</span></td><td>6 mm 62/44 solar low-e temperli + 20 argon + 44.2 <b>düşük demirli</b>. <span class="pill wn">Farklı cam</span>, daha aydınlık</td><td>6 Ecosol 50/33 temperli + 20 argon + 44.2. Çizimler 8/20/6 diyor. <span class="pill wn">Tutarsız</span></td><td>6 Ecosol 50/33 temperli, kenar işlemeli + 20 argon, ithal siyah ara çıta + 44.2 <span class="pill ok">Şartnameye uygun</span></td><td>6 mm temperli 50/33 + HB + 44.2. <span class="pill wn">Argon, ara çıta belirtilmemiş</span></td><td>6 mm 50/33 temperli + 20 sıcak kenar + silikon + 44.2. <span class="pill wn">Argon belirtilmemiş</span></td><td>6 mm 50/33 low-e + 16 argon + 6 temperli. <span class="pill no">Lamine değil</span></td><td>8 mm low-e + 4+4 şeffaf lamine, argon</td></tr>
+      <tr><th scope="row">Cam miktarı ve birim fiyat</th><td class="spec">~263 m²</td><td>265 m², 140 €</td><td>Pozisyon fiyatlarının içinde</td><td>Götürünün içinde</td><td>246 + 51 = 297 m², 136 $ ve 217 $. <span class="pill wn">~34 m² fazla</span></td><td>Götürünün içinde</td><td>264 m², 182,74 $</td><td>122 + 25 m², 150 € ve 250 €</td><td>Götürünün içinde</td></tr>
+      <tr><th scope="row">Büyük camlar 3,0-3,4 m</th><td class="spec">Üretilebilirliği teyit edin, tesisi belirtin</td><td>Tam boy çizilmiş, tesis belirtilmemiş</td><td>Tam boy çizilmiş, tesis belirtilmemiş</td><td>Tam boy çizilmiş, tesis belirtilmemiş</td><td>Ele alınmamış</td><td>Ele alınmamış</td><td><span class="pill no">Kayıtla bölünmüş</span>: P03, P04, P10, P11</td><td>Ele alınmamış</td><td>Ele alınmamış</td></tr>
+      <tr><th scope="row">Cam değerleri Ug, LT, g</th><td class="spec">Belirtilmeli</td><td>Yok</td><td>Yok</td><td>Yok</td><td>Yok</td><td>Yok</td><td>Yok</td><td>Yok</td><td>Yok</td></tr>
+      <tr><th class="group" colspan="10">Jaluzi ve seçenekler</th></tr>
+      <tr><th scope="row">Jaluzi, 8 birim</th><td class="spec">P07 sağ sabit, P13 yan ve üst, P08 ve P14 tamamı; marka, kumanda, azami boyut; ayrı fiyat</td><td>50 m², +150 €/m²; pozisyonlar listelenmemiş</td><td><span class="pill no">Yok</span></td><td>Dahil; pozisyonlar listelenmemiş</td><td>51 m², 217 $/m² (tam cam fiyatı), manuel zincir</td><td>"Şartname pozisyonları" dahil</td><td><span class="pill no">Sadece P01 ve P14</span>, 1,5 m², 380 $</td><td>25 m², 250 €/m²</td><td>28 birimin 12'si</td></tr>
+      <tr><th scope="row">Jaluzi markası, azami boyut</th><td class="spec">Zorunlu</td><td>Yok</td><td>yok</td><td>Yok</td><td>Yok</td><td>Yok</td><td>Yok</td><td>Yok</td><td>Yok</td></tr>
+      <tr><th scope="row">Akıllı cam seçeneği</th><td class="spec">P08 ve P14 alternatifi, ayrı fiyat</td><td>400 €/m², Siemens adaptör</td><td>Teklif edilmemiş</td><td>Teklif edilmemiş</td><td>Teklif edilmemiş</td><td>Jaluzi üzerine +500 €/m²</td><td>0 $ olarak listelenmiş, fiyatlanmamış</td><td>Teklif edilmemiş</td><td>Teklif edilmemiş</td></tr>
+      <tr><th scope="row">1 hareketli + 1 sabit seçeneği</th><td class="spec">Ayrı fiyatlanmalı</td><td>Dolaylı: hareketsiz kanat başına 500 € eksik</td><td>Tek hareketli kanatla çizilmiş; ayrı gösterilmemiş</td><td><span class="pill ok">Çizilmiş ve fiyatlanmış</span></td><td>Dolaylı: kanat başına 365 $ eksik</td><td>İki hareketli kanat çizilmiş; teklif edilmemiş</td><td><span class="pill ok">Fiyatlanmış</span>: −1.530 $, ayrıca yoğuşma kanallı versiyon</td><td>yok</td><td>yok</td></tr>
+      <tr><th scope="row">P07 kanat seçenekleri</th><td class="spec">Tek kanat ile 650 + 350 çift, ayrı fiyat</td><td>Tek versiyon çizilmiş</td><td>Tek versiyon çizilmiş</td><td>Tek versiyon çizilmiş</td><td>Ele alınmamış</td><td>Eski Ek-2 versiyonu çizilmiş (1000 kanat + 2000 sabit)</td><td>Ele alınmamış</td><td>yok</td><td>yok</td></tr>
+      <tr><th scope="row">Gömme eşik seçeneği</th><td class="spec">Standart ray fiyatta, gömme ray seçenek olarak</td><td>Sadece standart ray</td><td>Sadece standart ray</td><td>Teklif edilmemiş</td><td>Teklif edilmemiş</td><td>Teklif edilmemiş</td><td>Teklif edilmemiş</td><td>yok</td><td>yok</td></tr>
+      <tr><th class="group" colspan="10">Yüzey ve performans</th></tr>
+      <tr><th scope="row">Boya</th><td class="spec">Elektrostatik toz boya, içte ve dışta antrasit, Qualicoat tipi sertifika, RAL teyit edilecek</td><td>"Her renk", sertifika yok</td><td>"Standart renkler", sertifika yok</td><td>Antrasit, sertifika yok</td><td>"RAL kodu", sertifika yok</td><td>"Müşteri onayına göre renk"</td><td>"RAL kodu", sertifika yok</td><td>"RAL renkleri"</td><td>Antrasit</td></tr>
+      <tr><th scope="row">Seaside ön işlem, boya garantisi</th><td class="spec">Dahil, sahil için geçerli yazılı garanti</td><td><span class="pill no">Yok</span></td><td><span class="pill no">Yok</span></td><td><span class="pill no">Yok</span></td><td><span class="pill no">Yok</span></td><td><span class="pill no">Yok</span></td><td><span class="pill no">Yok</span></td><td><span class="pill no">Yok</span></td><td><span class="pill no">Yok</span></td></tr>
+      <tr><th scope="row">Uw değerleri</th><td class="spec">Sabit, çift açılım, kaldır-sür</td><td>Yok</td><td>Yok</td><td>Yok</td><td>Yok</td><td>Yok</td><td><span class="pill ok">Pencere 2,1, kapı 1,4</span> (kapı değeri şüpheli, üretici ≤ 2,58 diyor)</td><td>Yok</td><td>Yok</td></tr>
+      <tr><th scope="row">Rüzgar yükü, statik</th><td class="spec">Açık yamaç için statik, yük belirtilmiş</td><td>"Statik ve projeye göre"</td><td>Belirtilmemiş</td><td>Belirtilmemiş</td><td>Belirtilmemiş</td><td>Belirtilmemiş</td><td>Belirtilmemiş</td><td>Belirtilmemiş</td><td>Belirtilmemiş</td></tr>
+      <tr><th class="group" colspan="10">Şantiye kapsamı</th></tr>
+      <tr><th scope="row">Kör kasa (çelik)</th><td class="spec">İşveren kapsamı</td><td><span class="pill no">Hariç</span>, yazılı. Teklif istendi, bekleniyor</td><td><span class="pill ok">Dahil</span>: 40×30×2 galvaniz, sürmelerde çift sıra</td><td><span class="pill wn">Belirtilmemiş</span></td><td><span class="pill wn">Çelişki</span>: 9-10. satırlar fiyatlıyor (9.930 $), dipnot hariç diyor</td><td><span class="pill wn">Belirtilmemiş</span></td><td><span class="pill wn">Belirtilmemiş</span></td><td><span class="pill wn">Belirtilmemiş</span></td><td><span class="pill wn">Belirtilmemiş</span></td></tr>
+      <tr><th scope="row">Duvar birleşim yalıtımı</th><td class="spec">0,5 mm EPDM membran + şişen bant, ~341 m, yüklenici</td><td><span class="pill wn">Sadece bant</span>: Illbruck, 420 m, 11 €, azami 25 cm</td><td><span class="pill ok">EPDM membran dahil</span></td><td><span class="pill wn">Belirtilmemiş</span></td><td><span class="pill ok">0,5 mm ithal EPDM</span>, 352 m, 18 $</td><td><span class="pill wn">Belirtilmemiş</span></td><td><span class="pill ok">Şişen bant + 0,5 mm EPDM</span>, 341 m, 19,27 $</td><td><span class="pill wn">Belirtilmemiş</span></td><td><span class="pill wn">Belirtilmemiş</span></td></tr>
+      <tr><th scope="row">Vakumlu vinç</th><td class="spec">Yüklenici</td><td><span class="pill wn">Belirtilmemiş</span></td><td><span class="pill wn">Belirtilmemiş</span></td><td><span class="pill ok">Dahil</span></td><td><span class="pill ok">2 gün, 1.240 $</span></td><td><span class="pill wn">Belirtilmemiş</span></td><td><span class="pill no">Ekstra</span>: haftalık 6.000 $</td><td><span class="pill wn">Belirtilmemiş</span></td><td><span class="pill wn">Belirtilmemiş</span></td></tr>
+      <tr><th scope="row">Şantiyede yatay, düşey taşıma</th><td class="spec">Yüklenici</td><td><span class="pill ok">Dahil</span>, her satırda</td><td>Nakliye ve montaj dahil; taşıma açıkça yazılmamış</td><td><span class="pill no">İşveren</span>, yazılı</td><td>Nakliye ve montaj dahil; taşıma açıkça yazılmamış</td><td>Belirtilmemiş</td><td>Nakliye ve montaj dahil</td><td>Nakliye ve montaj dahil</td><td>Belirtilmemiş</td></tr>
+      <tr><th scope="row">İskele, manlift</th><td class="spec">İşveren</td><td>Belirtilmemiş</td><td>Hariç, yazılı</td><td>İşveren, yazılı</td><td>Hariç, yazılı</td><td>Belirtilmemiş</td><td>Hariç, yazılı</td><td>Belirtilmemiş</td><td>Belirtilmemiş</td></tr>
+      <tr><th scope="row">Şantiye elektriği, su</th><td class="spec">İşveren</td><td>Belirtilmemiş</td><td>İşveren, ayrıca depo ve WC</td><td>İşveren, jeneratör dahil</td><td>Belirtilmemiş</td><td>Belirtilmemiş</td><td>Belirtilmemiş</td><td>Belirtilmemiş</td><td>Belirtilmemiş</td></tr>
+      <tr><th scope="row">Diğer hariç tutulanlar</th><td class="spec">Sıva, boya, denizlik: işveren</td><td>Listelenmemiş</td><td>Parapetlerde ağır çelik; kapı kapatıcı, elektronik kilit, sınırlayıcı; tüm inşaat işleri</td><td>İlave işler ayrı fiyatlanır</td><td>Ağır çelik, sıva, boya, iç bitişler, inşaat işleri, denizlikler</td><td>Sineklik</td><td>Listelenmemiş</td><td>Listelenmemiş</td><td>Listelenmemiş</td></tr>
+      <tr><th class="group" colspan="10">Şartlar</th></tr>
+      <tr><th scope="row">Teslim süresi</th><td class="spec">Çizim onayından itibaren</td><td>Yok</td><td>Yok</td><td>"Şantiye programına göre"</td><td>Yok</td><td>Yok</td><td>Yok</td><td>Yok</td><td>Yok</td></tr>
+      <tr><th scope="row">Garanti</th><td class="spec">Profil, boya, aksesuar, cam, jaluzi, işçilik, her biri ayrı</td><td>Yok</td><td>Yok</td><td>Yok</td><td>Yok</td><td>Yok</td><td>Yok</td><td>Yok</td><td>Yok</td></tr>
+      <tr><th scope="row">Ödeme</th><td class="spec">Şartlar belirtilmeli</td><td>Yok</td><td>Not: 65 bin € faturalı + 32,5 bin € gayri resmi öneriyor <span class="pill no">reddedin</span></td><td>Günün TCMB kuruyla TL</td><td>Siparişte %50 çek veya senet karşılığı, kalan %50 30/60/90/120 gün vadeli çeklerle, KDV dahil toplam üzerinden</td><td>Yok</td><td>Yok</td><td>Yok</td><td>Yok</td></tr>
+      <tr><th scope="row">Geçerlilik</th><td class="spec">Belirtilmeli</td><td>Yok</td><td>10 gün, 6 Kasım'a kadar</td><td>3 iş günü <span class="pill no">22 Ekim'de doldu</span></td><td>Yok</td><td>Yok</td><td>1 hafta, 3 Kasım'a kadar</td><td>Yok</td><td>Yok</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">Kör kasa tek cümleyle: yalnızca Altunoğlu dahil ediyor. Bornes yazılı olarak hariç tutuyor ve ayrıca fiyatlıyor. Delta iki satırda fiyatlayıp dipnotta hariç diyor; onlardan net bir evet ya da hayır gerekiyor. Diğer beşi hiç söz etmiyor, şartnamede yazdığı gibi sizde kabul edin.</p>
+</section>
+
+<section>
+  <h2>Her sistemin arkasında ne var</h2>
+  <p>Üreticilerin yayımladığı veriler, her teklifin iddialarıyla karşılaştırıldı. Şartname 61-66 mm kasa, 24 mm ısı bariyeri ve 400 kg üzeri taşıyan kaldır-sür aksesuarı istiyor.</p>
+  <div class="tablebox">
+  <table>
+    <thead><tr><th>Tedarikçi</th><th>Pencere sistemi</th><th>Kaldır-sür sistemi</th><th>Belirtilen aksesuar</th><th>Kim bunlar</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Bornes, Altunoğlu</th>
+        <td><b>Alumil Smartia S61.</b> 61 mm kasa, 69 mm kanat, köpüklü 24 mm poliamid bariyer. Avrupalı sistem evi (Yunanistan). <span class="pill ok">Şartnameyi karşılıyor</span></td>
+        <td><b>Alumil Supreme S700.</b> 70 mm kanat, yayımlanmış Uw 1,1, kanat standart 400 kg'a, Alumil kaldırma ünitesiyle 600 kg'a kadar. Görünen yüz 91 mm. <span class="pill ok">Masadaki en iyisi</span></td>
+        <td>"Alumil marka" kaldır-sür takımları, model ve kg verilmemiş. P11 için 600 kg kaldırma ünitesini yazılı isteyin.</td>
+        <td>Bornes: İstanbul, 1998'den beri, kendi imalatı ve taahhüt işleri var. Altunoğlu: Maltepe, İstanbul, Alumil imalatçısı. <b>İki teklifin de çizimleri Altunoğlu tarafından tek iş numarasıyla (AL_41233) yapılmış</b>: Bornes R1, Altunoğlu R3. Yani bağlantılılar. Nasıl olduğunu sorun.</td></tr>
+      <tr><th scope="row">Vemsa, Haser</th>
+        <td><b>Asaş RWT64.</b> 64 mm kasa, 74 mm kanat, 24 mm bariyer, 44 mm'ye kadar cam. Türkiye'nin en büyük ekstrüzyoncusu. <span class="pill ok">Şartnameyi karşılıyor</span></td>
+        <td><b>Asaş RST116.</b> 116 mm kasa ama sadece 14,8 mm bariyer ve Uf ~4,0, yani pencerelerden daha soğuk bir kapı. Bayi sayfaları kanat başına 300-400 kg diyor, resmi rakam bulunamadı. <span class="pill wn">Isıl olarak zayıf</span></td>
+        <td><b>Siegenia HS-300:</b> kanat başına azami 300 kg. P11 için HS-400 (400 kg) gerekir. <span class="pill no">Yetersiz</span></td>
+        <td>Vemsa: Kartal, İstanbul, 2012'de Antalya'da Vindosa adıyla başladı, alüminyum ve çelik. Haser: daha fazla araştırılmadı, kısmi teklif.</td></tr>
+      <tr><th scope="row">Delta Cephe</th>
+        <td><b>Burak BM66.</b> Kırklareli'deki ekstrüzyoncu Burak'ın 66 mm ısı yalıtımlı serisi. Bayi sayfası Uf 2,34 veriyor. <span class="pill ok">Şartnameyi karşılıyor</span></td>
+        <td><b>Burak S4000.</b> Kaldır-sür, 130-206 mm kasa, 58 mm kanat, Uf 4,53 (bayi verisi). <span class="pill wn">Isıl olarak zayıf</span></td>
+        <td><b>Siegenia HS-300</b>, 300 kg. <span class="pill no">Yetersiz</span> Giesse çift açılım takımları.</td>
+        <td>Delta Cephe: kamuya açık iz bulunamadı. Çizimler Word dosyası olarak verildi.</td></tr>
+      <tr><th scope="row">Asimetri</th>
+        <td><b>Linea Rossa LR-5100.</b> 65 mm kasa, 24 mm bariyer, Uf 2,3, kanat kapasitesi 120-200 kg. Türk sistem evi. <span class="pill ok">Şartnameyi karşılıyor</span></td>
+        <td><b>LR-3500 HBSB.</b> Yayımlanmış veri bulunamadı. Asimetri'nin kendi çizimleri "Sürme Sistem Standart - 300 Kg" diyor. <span class="pill no">300 kg sınıfı</span></td>
+        <td>Belirtilmemiş. Çizimdeki 300 kg etiketi önemli olan değer.</td>
+        <td>Asimetri: kamuya açık iz bulunamadı. Teklif Şişecam ve Linea Rossa logolu tek satır; çizimler Tuğba Doğan, 16 Ekim.</td></tr>
+      <tr><th scope="row">Referans</th>
+        <td><b>ST70.</b> 70 mm kasa, 24 mm bariyer, teklifte Uw 2,1. Hava sınıf 4, su 9A. <span class="pill ok">Şartnameyi karşılıyor</span></td>
+        <td><b>Çuhadaroğlu S50.</b> 121 mm kasa, 14,8 mm bariyer, kendi teklifinde Uf 4,75, üretici kataloğunda Uw ≤ 2,58 (teklif 1,4 iddia ediyor). Üreticiye göre azami kanat 3,0 × 3,3 m. P11 kanadı 3,3 × 3,4 m. <span class="pill no">P11 için çok küçük</span></td>
+        <td>Siegenia, model yok.</td>
+        <td>Referans: kamuya açık iz bulunamadı. Büyük camların bölünmesi gerektiği notu yukarıdaki sistem sınırıdır, cam sınırı değil.</td></tr>
+      <tr><th scope="row">Fatihpen</th>
+        <td>Winsa veya Egepen PVC ya da 55 mm alüminyum seri. <span class="pill no">Şartname altı</span></td><td>PVC HS76.</td><td>Belirtilmemiş.</td><td>Gölcük'te yerel PVC ve cam balkon bayisi.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>İnce ayrıntılar, tedarikçi tedarikçi</h2>
+  <div class="grid2">
+    <div class="card flag"><h3>Altunoğlu Cephe (Alumil), 27 Ekim, 97.500 €</h3>
+      <ul>
+        <li><b>Teklifteki ödeme notu:</b> 65.000 € faturalı, 32.500 € "gayri resmi", toplam 110.500 € nakit; tam KDV'li 117.000 € yerine. Kabul etmeyin. Faturasız kısmın garantisi ve hukuki dayanağı yok, kayıtlı bir inşaat işletmesinde KDV zaten normalde indirilebilir (muhasebecinizle teyit edin) ve bu sizin için vergi riski yaratır.</li>
+        <li>Kendi R3 ünite çizimleri (19 Ekim) üzerinden pozisyon bazlı fiyatlanmış, yerleşiminizle uyumlu: 2A/2B, 7A/7B, 8A/8B, 13A/13B, 14A/14B aynalı, her sürmede tek ok, 26 birim, 293 m². 22 pencere birimi 59.181 €, 4 sürme kapı 48.081 €, sonra %9 iskonto.</li>
+        <li>Sürmeler "sürekli kanat profili, standart eşik rayı" ile çizilmiş: sabit yarı doğrudan camlanmamış, kanat olarak çerçevelenmiş. Vemsa'nın tek ray detayından biraz daha ağır bir görünüm.</li>
+        <li>Çift sıra galvaniz kör kasa ve EPDM membran dahil. Vinç (belirtilmemiş), iskele, parapetlerde ağır çelik, kapı kapatıcı veya elektronik kilit gibi özel aksesuar hariç.</li>
+        <li>Cam şartnamedeki cam <b>değil</b>: 62/44 solar low-e artı düşük demirli (ekstra şeffaf) lamine. Daha iyi görünür, cam bölümüne bakın. "Camdaki her değişiklik fiyatı değiştirir."</li>
+        <li>Teklifin hiçbir yerinde jaluzi yok. Akıllı cam yok. "Standart renkler": antrasit RAL 7016'nın bunlardan biri olduğunu teyit ettirin.</li>
+        <li>Montaj sonrası metraj. 10 gün geçerli (6 Kasım'a kadar).</li>
+      </ul></div>
+    <div class="card"><h3>Bornes Yapı (Alumil), 15 Ekim, 89.750 €</h3>
+      <ul>
+        <li>Metre bazlı: S700 220 m, 85 €; S61 450 m, 35 €; cam 265 m², 140 € (siyah sıcak kenar 15 Ekim'den beri dahil); kaldır-sür takımı 8 × 500 €; jaluzi 50 m², 150 €; akıllı cam 400 €/m²; Illbruck bant 420 m, 11 €.</li>
+        <li>Cam satırı şartnamenin istediği argonu belirtmiyor. Kaldır-sür aksesuar satırının başlığı "RST 116", bir Asaş sistem adı, Alumil teklifinde: kopyalanmış şablon satırı. İkisi de kolay düzelir, ama sorun.</li>
+        <li>Fiyat geçmişi: 72,6 bin € (8 Ekim) → 85,2 bin € (13 Ekim, jaluzi ve yalıtım eklendi) → 83,6 bin € (Rev. 2) → 89,75 bin € (15 Ekim, sıcak kenar, daha fazla yalıtım, 2 kapı takımı daha).</li>
+        <li>Fiyat esası: R1 ünite çizimleri ve detaylar (Altunoğlu çizmiş) artı referans olarak gönderilen 19 Ekim tarihli Rev. 3 görünüşleriniz. Rev. 3 üzerinden ünite çizimi henüz yok, yani fiyat hâlâ Rev. 2 miktarları. İkisini de yazılı alın.</li>
+        <li>Her sürmenin sabit yarısının doğrudan mı camlandığını yoksa kanat olarak mı çerçevelendiğini ve gömme eşik seçeneğinin fiyatını sorun.</li>
+        <li>Vinç satırı yok. EPDM membran yok, sadece bant. Kör kasa hariç; Ahmed Bornes'ten teklif istedi. Gelene kadar tam paket rakamında Delta'nın 8,6 bin €'su kullanılıyor. Altunoğlu'nun fiyatına çift sıra galvaniz kör kasa zaten dahil; Bornes'in rakamı gelince adil karşılaştırma bu olur.</li>
+      </ul></div>
+    <div class="card"><h3>Vemsa (Asaş), 19 Ekim, 86.750 $</h3>
+      <ul>
+        <li>Götürü, vinç dahil, jaluzi dahil (pozisyonlar listelenmemiş), Siegenia ve Roto aksesuar belirtilmiş.</li>
+        <li>Çizimler Rev. 3 yerleşiminiz üzerinde. Sürmeler "tek ray": hareketli kanat, doğrudan camlanmış sabit camın önünde. Sabit yarıda tüm tekliflerin en temiz görünümü. Kanatlar eşit değil çizilmiş (P09: 2753 + 2656; P11: 3178 + 2962).</li>
+        <li>Çizimler her camı "8/20/6" olarak etiketliyor, metin ise 6 + 20 + 44.2 diyor. Biri yanlış. Hesapladıkları 8 mm dış cam ise bu şartnamenin rüzgar yükü yükseltmesidir ve bunu söylemeliler.</li>
+        <li>Teklif <b>tüm yatay ve düşey malzeme taşımayı, iskeleyi, manlifti ve jeneratörü</b> size yüklüyor. Şartname taşımayı ve vinci yükleniciye veriyor. Bunu fiyatlatın ya da geri çevirin.</li>
+        <li>Günün TCMB satış kuruyla TL ödeme. 3 iş günü geçerli, yani 22 Ekim'de doldu. Fiyat Rev. 3 yerleşimiyle 95.600 $'dan 86.750 $'a indi (−%9).</li>
+      </ul></div>
+    <div class="card"><h3>Delta Cephe (Burak), 7 Ekim, 109.785 $</h3>
+      <ul>
+        <li>Şartname yokken fiyatlanmış: 24 pencere ve 8 sürme kanadı, kapı başına iki hareketli kanat.</li>
+        <li>Cam 246 + 51 = 297 m² sayılmış, şartnamede yaklaşık 263 m². Metrajda lehinize yaklaşık 4,6 bin $ hava var, ama metrajın gevşek olduğunu gösteriyor.</li>
+        <li>1 Ekim teklifinden tek fark 9-10. satırlardaki 9.930 $'lık çelik kör kasa. Dipnot hâlâ kör kasanın hariç olduğunu söylüyor, 1 Ekim sürümünden kopyalanmış. Hangisinin doğru olduğunu sorun. Vinç (2 gün) ve EPDM (352 m) dahil her şey değişmemiş ve net listelenmiş. Sekiz teklifin en şeffaf metraj listesi.</li>
+        <li>Ödeme: siparişte %50 teminat çeki veya senet karşılığı, kalan %50 30/60/90/120 gün vadeli çeklerle.</li>
+      </ul></div>
+    <div class="card"><h3>Asimetri (Linea Rossa), 16 Ekim, 90.900 €</h3>
+      <ul>
+        <li>Tek satır: pencereler LR-5100, sürmeler LR-3500 HBSB, cam şartnameye göre, 4 taraf pervaz, sineklik yok, şartname pozisyonlarında jaluzi, akıllı cam jaluzi üzerine +500 €/m².</li>
+        <li>Ünite çizimleri (16 Ekim, 3 sayfa) bir villayı kapsıyor: P01 ve P08 ikisi de dahil 14 pozisyon, 147,7 m², yani fiyat eski 28 birimlik yerleşim üzerinden. P02, P03, P04, P05, P10, P12, P13 şartname ölçüleriyle uyumlu. P07 eski Ek-2 versiyonu, sizin revizyonunuz değil.</li>
+        <li>P09 ve P11 sürmeleri "LR-3500 Sürme Sistem Standart - 300 Kg" etiketli, her biri iki hareketli kanatlı. P11 kanadı yaklaşık 400 kg, yani yetersiz; Vemsa ve Delta ile aynı sorun.</li>
+        <li>Aksesuar, vinç, yalıtım, kör kasa, ödeme veya geçerlilik hakkında hiçbir şey yok. 4 taraf pervaz kabul etmeden önce görülmesi gereken bir detay; lüks bir söve genelde alüminyum kapak pervaz değil, sıvalı dönüş ister.</li>
+      </ul></div>
+    <div class="card"><h3>Referans (Çuhadaroğlu), 27 Ekim, 135.541 $</h3>
+      <ul>
+        <li>Pozisyon başına fiyat veren tek teklif ve Uw değeri veren tek teklif. Kıyas için faydalı: P11 her şey dahil burada ≈ 10,9 bin €, Altunoğlu'da 13,2 bin €.</li>
+        <li>Pencereler ST70, adet 1.161-3.574 $; cam ayrı 182,74 $/m² (hepsinin en yükseği); jaluzi sadece P01 ve P14 için 380 $/m²; vinç haftalık 6.000 $; EPDM 19,27 $/m.</li>
+        <li>P03, P04, P10 ve P11'i "cam üretim sınırları nedeniyle" ek kayıtlarla bölüyor. Gerçek sınır S50 kapıları (3,0 × 3,3 m kanat). Manzara cephesi için kabul edilemez.</li>
+        <li>Üç sürme seçeneği fiyatlanmış: 2 hareketli kanat, 1 hareketli kanat, yoğuşma kanallı 1 hareketli. 1 hafta geçerli (3 Kasım'a kadar).</li>
+      </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Cam kararı</h2>
+  <div class="grid2">
+    <div class="card"><h3>Şartname: Şişecam Ecosol T 50 (50/33)</h3>
+      <ul>
+        <li>Temperlenebilir güneş kontrollü low-e. Yaklaşık %49 gün ışığı, g 0,33, 16 mm argonla U 1,1.</li>
+        <li>Yaz sıcağını en çok kesen. İçeriden daha gri, dışarıdan daha ayna gibi görünür. Şişecam ofis, otel ve hastane için listeliyor.</li>
+        <li>Vemsa, Delta, Bornes, Asimetri, Referans bunu teklif etti.</li>
+      </ul></div>
+    <div class="card"><h3>Altunoğlu: Şişecam 62/44 low-e, düşük demirli lamine</h3>
+      <ul>
+        <li>Aynı aile, yaklaşık %62 gün ışığı, g 0,44, U yaklaşık 1,1. Şişecam konut için listeliyor.</li>
+        <li>Daha aydınlık odalar, daha gerçek renkler, daha az yansıma. Düşük demirli iç lamine yeşil kenar tonunu kaldırır; 3 m'lik camlarda görülen bir detay.</li>
+        <li>50/33'e göre yaklaşık üçte bir daha fazla güneş kazancı. Güney ve batı camlarında temmuzda hissedilir; bunu cam arası jaluziler ve saçak kontrol eder.</li>
+      </ul></div>
+  </div>
+  <p>Verde için görüşüm: manzara ve odaların hissi üründür. Şartnameyi düşük demirli lamineli 62/44'e çevirin ve kısa listedeki her tedarikçiden fiyatlamasını isteyin. 50/33'e göre 10-20 €/m² fazla bekleyin.</p>
+</section>
+
+<section>
+  <h2>Tüm tekliflerin ortak eksikleri</h2>
+  <div class="tablebox">
+  <table>
+    <thead><tr><th>Kalem</th><th>Burada neden önemli</th><th>Durum</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Seaside boya ön işlemi</th><td>Arsa denize 5 km'den yakın, Qualicoat'un kendi sahil tanımı. Seaside sınıfı boya öncesi dağlamayı iki katına çıkarır ve 10 yıllık boya garantisinin sahilde geçerli olmasını sağlayan şey budur.</td><td><span class="pill no">Kimse sunmuyor</span></td></tr>
+      <tr><th scope="row">Kaldır-sür aksesuar kapasitesi</th><td>P11'in hareketli kanadı yaklaşık 400 kg. Vemsa, Delta ve Asimetri 300 kg'da. Bornes, Altunoğlu ve Referans kapasite belirtmiyor.</td><td><span class="pill no">Kimse 400 kg+ teyit etmiyor</span></td></tr>
+      <tr><th scope="row">Jaluzi boyut sınırları</th><td>Cam arası jaluziler (Pellini ScreenLine tipi) kenar başına yaklaşık 2,0-3,0 m ve 2-3 m²'ye kadar gider. Üstünde sadece açı ayarlı olur, manzarayı açmak için toplanamaz. P07'nin sabit camı (2,0 × 2,4 m) ve P13'ün camları (üst 3,0 × 1,5 m, yan 2,1 × 2,2 m) sınırda veya üzerinde.</td><td><span class="pill no">Kimse marka veya sınır belirtmiyor</span></td></tr>
+      <tr><th scope="row">Büyük cam üretimi</th><td>3,0-3,4 m'lik camlar o genişlikte temper hattı ister. Referans hayır diyor; diğerleri tesis belirtmeden tam boy çizdi.</td><td><span class="pill wn">Teyitsiz</span></td></tr>
+      <tr><th scope="row">Uw değerleri</th><td>Şartname sabit, çift açılım ve kaldır-sür için Uw istiyor. Sadece Referans veriyor.</td><td><span class="pill no">Eksik</span></td></tr>
+      <tr><th scope="row">Teslim süresi, garantiler</th><td>Şartname ikisini de istiyor; profil, boya, aksesuar, cam, jaluzi ve işçilik için ayrı ayrı.</td><td><span class="pill no">Sekizinde de eksik</span></td></tr>
+      <tr><th scope="row">Gömme eşik seçeneği</th><td>Şartname sürmelerde gömme eşiği seçenek olarak istiyor.</td><td><span class="pill no">Kimse fiyatlamadı</span></td></tr>
+      <tr><th scope="row">Geçerlilik</th><td>Vemsa 22 Ekim'de doldu. Referans 3 Kasım'a kadar. Altunoğlu 6 Kasım'a kadar. Diğerleri belirtmiyor.</td><td><span class="pill wn">Kısa veya yok</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section>
+  <h2>Öneri</h2>
+  <div class="card">
+    <ul class="list">
+      <li><b>Bornes, Vemsa ve Delta ile son bir tur yapın</b>; hepsi Rev. 3, 62/44 düşük demirli cam, 400 kg+ aksesuar adıyla, seaside boya, vinç ve EPDM dahil, kör kasa hariç, gömme eşik seçenek olarak. Asimetri'yi ancak 400 kg+ sürme ve kapsam listesiyle dönerse içeride tutun.</li>
+      <li><b>Hedef: Bornes eşit kapsamda yaklaşık 85-88 bin €.</b> Vemsa'nın 81 bin €'su kaldıraç; Bornes'in euro fiyatı ve daha iyi kapısı biraz fazla ödemenin gerekçesi.</li>
+      <li><b>Altunoğlu:</b> önce Bornes ile ilişkisini sorun. Bornes için imalat yapıyorsa doğrudan gitmek için ~9 bin € fazla ödemenin anlamı yok. Ayrı bir Alumil imalatçısıysa jaluzili, tam faturalı fiyat isteyin; o zaman Bornes'e karşı ikinci Alumil teklifçisi olur.</li>
+      <li><b>Kimseyle imzalamadan önce:</b> 3 m'lik kaldır-sür kapılı bitmiş bir villalarını ziyaret edin ve antrasit köşe numunesi görün. Köşe birleşimleri ve kanat orta birleşimi ucuz işçiliğin kendini gösterdiği yerlerdir.</li>
+      <li>Referans, Haser ve Fatihpen'i teşekkürle <b>kapatın</b>.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Gönderilecek sorular</h2>
+  <div class="grid2">
+    <div class="card"><h3>Kısa listedeki her tedarikçiye</h3>
+      <ul>
+        <li>Rev. 3 üzerinden kesin fiyat: P08 var, P01 yok, P07 revize haliyle, P09 ve P11 1 hareketli + 1 sabit kanat, sağ villa aynalı.</li>
+        <li>Kaldır-sür aksesuar modeli ve kg kapasitesi yazılı. P11 kanadı ~400 kg; 300 kg takım kabul edilmez.</li>
+        <li>Cam: düşük demirli 44.2 lamineli 62/44 low-e fiyatı ve 3,0-3,4 m camları hangi tesisin temperleyip lamine edeceği.</li>
+        <li>Jaluzi markası, kumanda tipi ve azami cam boyutu. P07, P13, P08, P14'ten hangilerinin sadece açı ayarlı olacağı.</li>
+        <li>Qualicoat Seaside ön işlemi dahil, sahil için geçerli yazılı boya garantisi ve RAL kodu.</li>
+        <li>Vinç, EPDM membran ve şişen bant dahil. Gömme eşik ayrı seçenek olarak.</li>
+        <li>Eleman tipi başına Uw, çizim onayından itibaren teslim süresi, bileşen başına garanti, ödeme şartları, en az 30 gün geçerlilik.</li>
+      </ul></div>
+    <div class="card"><h3>Tedarikçiye özel</h3>
+      <ul>
+        <li><b>Bornes:</b> Rev. 3 (19 Ekim görünüşleriniz) fiyatını teyit edin ve buna göre ünite çizimi istetin. Kör kasa teklifi (istendi, bekleniyor). Camda argon. Sürmelerin sabit yarısı doğrudan mı camlı, çerçeveli kanat mı? P11'de Alumil kaldırma ünitesini teyit ettirin. Vinç.</li>
+        <li><b>Vemsa:</b> süresi dolan teklifi yeniden geçerli kılın. HS-400'e yükseltin. Şantiye içi taşımayı şartnameye göre üstlensin. 8/20/6 ile 6/20/44.2'yi netleştirin.</li>
+        <li><b>Altunoğlu:</b> Bornes ile ilişki. Tam faturalı fiyat. Jaluzi ekleyin. RAL 7016'nın standart renk olduğunu teyit ettirin.</li>
+        <li><b>Delta:</b> Rev. 3'e güncelleyin. Kör kasa dahil mi hariç mi (9-10. satırlar mı dipnot mu)? Seçenek olarak tutun. 297 m² camı düzeltin. HS-400'e yükseltin.</li>
+        <li><b>Vemsa, Asimetri, Referans:</b> kör kasanın hariç olduğunu teyit edin ve Bornes ve Altunoğlu ile karşılaştırılabilmesi için seçenek olarak fiyatlatın.</li>
+        <li><b>Asimetri:</b> Rev. 3 üzerinden yeniden fiyat (26 birim, P07 revize, tek hareketli kanat). Adıyla 400 kg+ sürme sistemi veya aksesuar. 90.900 €'nun neleri kapsadığını listeletin. 4 taraf pervaz detayını gösterin.</li>
+      </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>Dosyalar ve varsayımlar</h2>
+  <p>Tüm teklifler tedarikçi bazında <code>Aluminyum Dograma Teklifleri</code> altında 01-08 numaralı klasörlerde. Bugün eklenenler: <code>06 Asimetri (Linea Rossa)</code>, <code>07 Referans (Cuhadaroglu)</code>, <code>08 Altunoglu Cephe (Alumil)</code>. R3 ünite çizimleri Altunoğlu'da, R1 seti Bornes'te, Asimetri'nin çizimleri kendi klasöründe, Rev. 3 görünüşleriniz <code>00 Teknik Sartname TR</code> klasöründe. Orijinaller Downloads'ta duruyor.</p>
+  <p class="note">Kurlar: 1 EUR = 1,15 USD ve 55 TL, ekim başı kotasyonlarından. İmzadan önce kontrol edin. Sistem verileri üretici ve bayilerin yayımladığı sayfalardan; kaynaklar çeliştiğinde zayıf olan rakam gösterildi. "Eşit kapsam" ve "tam paket" karşılaştırma amaçlı tahminlerdir, teklif değildir.</p>
+</section>
+
+</div>
+</body>
+</html>
