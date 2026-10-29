@@ -62,6 +62,10 @@ th[scope="row"] { font-weight: 700; white-space: nowrap; }
 .card { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 16px 18px; display: grid; gap: 8px; align-content: start; min-width: 0; }
 .card.flag { border-left: 4px solid var(--bad); }
 .note { font-size: .82rem; color: var(--muted); }
+.legend { display: grid; gap: 4px; font-size: .82rem; color: var(--muted); }
+.legend span { display: flex; align-items: baseline; gap: 8px; }
+.sw { flex: none; width: 18px; height: 10px; border-radius: 2px; background: var(--bar); }
+.sw.st { background: repeating-linear-gradient(90deg, var(--bar2) 0 4px, transparent 4px 7px); }
 code { font-family: var(--f-mono); font-size: .82rem; }
 .matrix table { min-width: 2040px; }
 .matrix td, .matrix th { font-size: .8rem; line-height: 1.45; }
@@ -99,7 +103,7 @@ details.more .tablebox, details.more .card { border-color: var(--line); }
 
 <section>
   <h2>Fiyat, iki açıdan</h2>
-  <p><b>Eşit kapsam</b> = şartname kapsamı (profil, cam, aksesuar, vinç, EPDM). <b>Tam paket</b> çelik kör kasayı ekler. Eksik kalemler diğer tedarikçilerin fiyatlarıyla tamamlandı. USD teklifler 1,15 kurla çevrildi. WIRUS Almanya'dan yalnızca malzeme veriyor; nakliye ve montaj benim tahminim.</p>
+  <p>İki villa için toplam fiyat, kör kasa dahil.</p>
   <div class="chart" role="img" aria-label="Tedarikçi başına tam paket fiyatı, bin euro">
     <div class="row"><div class="lbl">Vemsa<small>Asaş RWT64 + RST116</small></div><div class="track"><div class="fill" style="width:41.0%"></div></div><div class="val">82,1 bin €</div></div>
     <div class="row"><div class="lbl">Bornes<small>Alumil S61 + S700</small></div><div class="track"><div class="fill" style="width:44.6%"></div></div><div class="val">89,2 bin €</div></div>
@@ -109,7 +113,7 @@ details.more .tablebox, details.more .card { border-color: var(--line); }
     <div class="row"><div class="lbl">Referans<small>ST70 + Çuhadaroğlu S50</small></div><div class="track"><div class="fill" style="width:64.9%"></div></div><div class="val">129,9 bin €</div></div>
     <div class="row"><div class="lbl">WIRUS<small>Almanya, HST 77, üçlü cam</small></div><div class="track"><div class="fill" style="width:69.7%"></div><div class="range" style="left:69.7%;width:26.1%"></div></div><div class="val">181-192 bin €</div></div>
     <div class="axis"><span></span><div class="ticks"><span>0 €</span><span>100 bin €</span><span>200 bin €</span></div><span></span></div>
-    <p class="note">Asimetri çubuğunun çizgili kısmı: vinç, EPDM ve kör kasa; tek satırlık teklif bunları ne dahil ediyor ne de hariç tutuyor. WIRUS: dolu kısım = teklif edilen malzeme, iki villaya göre; çizgili kısım = nakliye, montaj, vinç, EPDM ve kör kasa için benim tahminim.</p>
+    <div class="legend"><span><i class="sw"></i>Teklif fiyatı</span><span><i class="sw st"></i>Olası ek maliyet, benim tahminim. Asimetri: vinç, EPDM, kör kasa. WIRUS: nakliye, montaj, vinç, EPDM, kör kasa.</span></div>
   </div>
 
   <div class="tablebox">
